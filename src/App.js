@@ -5,15 +5,17 @@ import './App.css';
 class App extends Component {
     constructor(props) {
         super(props);
+	this.count = 0;
         this.state = {
             name: '',
             sigid: '', 
             major: '', 
-            units: ''
+            units: '',
+	showComponent:false,
         };
 	this.majorData = [
-    	{ value: 'USA', name: 'USA' },
-    	{ value: 'CANADA', name: 'CANADA' }            
+		{ value: 'USA', name: 'USA' },
+		{ value: 'CANADA', name: 'CANADA' }            
 ];
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,14 +44,14 @@ class App extends Component {
          defaultValue={this.state.selectValue} 
          onChange={this.handleChange} 
          >	
-	    <option value="-1"> Major </option>
+		<option value="-1"> Major </option>
             <option value="0">Aerospace</option>
             <option value="1">Biomedical</option>
             <option value="2">Bioengineering</option>
-	    <option value="3">Chemical</option>
+		<option value="3">Chemical</option>
             <option value="4">Civil</option>
             <option value="5">Computer</option>
-	    <option value="6">Electrical</option>
+		<option value="6">Electrical</option>
             <option value="7">Industrial</option>
             <option value="8">Mechanical</option>
             <option value="9">Software</option>
@@ -59,7 +61,7 @@ class App extends Component {
             Units Completed:
             <input id="units" type="text" name="units" onChange={this.handleChange}/>
         <br />
-            <input type="submit" value="Verify" />
+            <input type="submit" value="Generate" />
     </form>
         </header>
               </div>
@@ -70,10 +72,12 @@ class App extends Component {
     console.log(event.target.value);
     this.setState({
         [event.target.name]:event.target.value
-    });
+	});
   }
 
   handleSubmit(event) {
+	this.count += 1;	
+	console.log("this is count" + this.count);
     alert('A name was submitted: ' + this.state.name);
     console.log(this.state.name + "where is this");
     event.preventDefault();
