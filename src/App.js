@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
 import './App.css';
-
+import {Router, Route, Link, RouteHandler} from 'react-router-dom';
+import {firebaseApp} from "./firebase";
+import { Button} from 'react-bootstrap';
 class App extends Component {
-    constructor(props) {
+ 
+	constructor(props) {
         super(props);
 	this.count = 0;
         this.state = {
@@ -13,15 +16,21 @@ class App extends Component {
             units: '',
 	showComponent:false,
         };
-	this.majorData = [
-		{ value: 'USA', name: 'USA' },
-		{ value: 'CANADA', name: 'CANADA' }            
-];
+	
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }  
+    signOutUser(){
+      this.props.history.push('/login');
+      firebaseApp.auth().signOut().then(function() {
+          console.log('Signed Out');
+        }, function(error) {
+          console.error('Sign Out Error', error);
+        });
+      }
   render() {
     return (
+      
       <div className="App">
         <header className="App-header">
           <img src={logo} alt="Logo" />
@@ -38,20 +47,15 @@ class App extends Component {
             <input id="sigid"  type="text" name="sigid" onChange={this.handleChange}/>
         <br />
             Major:
-             <select
-	 id="major"
-	 name="major"
-         defaultValue={this.state.selectValue} 
-         onChange={this.handleChange} 
-         >	
-		<option value="-1"> Major </option>
+             <select id="major" name="major" defaultValue={this.state.selectValue} onChange={this.handleChange} >	
+		        <option value="-1"> Major </option>
             <option value="0">Aerospace</option>
             <option value="1">Biomedical</option>
             <option value="2">Bioengineering</option>
-		<option value="3">Chemical</option>
+		        <option value="3">Chemical</option>
             <option value="4">Civil</option>
             <option value="5">Computer</option>
-		<option value="6">Electrical</option>
+		        <option value="6">Electrical</option>
             <option value="7">Industrial</option>
             <option value="8">Mechanical</option>
             <option value="9">Software</option>
@@ -62,8 +66,10 @@ class App extends Component {
             <input id="units" type="text" name="units" onChange={this.handleChange}/>
         <br />
             <input type="submit" value="Generate" />
+           
     </form>
         </header>
+    <Button onClick={() => this.signOutUser()}> Logout</Button>
               </div>
     );
   }
@@ -83,5 +89,4 @@ class App extends Component {
     event.preventDefault();
   }
 }
-
 export default App;
