@@ -23,7 +23,7 @@ class RegisterForm extends Component {
                 this.setState({error})
 		alert(error)
 			});
-			this.props.history.push('/login');
+		//	this.props.history.push('/login');
 	}
 	
 	render() {

@@ -4,7 +4,7 @@ import './App.css';
 import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
-class App extends Component {
+class Create extends Component {
  
 	constructor(props) {
         super(props);
@@ -31,12 +31,12 @@ class App extends Component {
   render() {
     return (
       
-      <div className="App">
-        <header className="App-header">
+      <div className="Create">
+        <header className="Create-header">
           <img src={logo} alt="Logo" />
           <p>
-          	Home
-	  </p>
+            Issue and Verify digital certificates with Ethereum Smart Contracts
+          </p>
     <form onSubmit={this.handleSubmit}>
             <label>
                 Name:
@@ -89,4 +89,4 @@ class App extends Component {
     event.preventDefault();
   }
 }
-export default App;
+export default Create;
