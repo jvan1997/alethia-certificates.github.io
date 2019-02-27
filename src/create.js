@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
 import './App.css';
-import {Router, Route, Link, RouteHandler} from 'react-router-dom';
+import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 class Create extends Component {
@@ -20,19 +20,15 @@ class Create extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }  
-    signOutUser(){
-      this.props.history.push('/login');
-      firebaseApp.auth().signOut().then(function() {
-          console.log('Signed Out');
-        }, function(error) {
-          console.error('Sign Out Error', error);
-        });
-      }
+        backTrack(){
+     	this.props.history.goBack();
+     }
   render() {
     return (
       
-      <div className="Create">
-        <header className="Create-header">
+      <div className="App">
+        <header className="App-header">
+	  <h1> Create Certificate </h1>
           <img src={logo} alt="Logo" />
           <p>
             Issue and Verify digital certificates with Ethereum Smart Contracts
@@ -65,11 +61,12 @@ class Create extends Component {
             Units Completed:
             <input id="units" type="text" name="units" onChange={this.handleChange}/>
         <br />
+	    <Button onClick={() => this.backTrack()}> Cancel</Button>
             <input type="submit" value="Generate" />
            
     </form>
         </header>
-    <Button onClick={() => this.signOutUser()}> Logout</Button>
+
               </div>
     );
   }
@@ -89,4 +86,4 @@ class Create extends Component {
     event.preventDefault();
   }
 }
-export default Create;
+export default withRouter(Create);

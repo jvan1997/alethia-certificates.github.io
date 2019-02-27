@@ -25,7 +25,7 @@ class Login extends React.Component {
 		}
 	render() {
     	return (
-			<div>
+			<div className='App'>
 		<form onSubmit={this.handleSignIn.bind(this)}>
         	<h3>Sign In </h3>
         		<input type="text" ref="email" placeholder="enter your email" />

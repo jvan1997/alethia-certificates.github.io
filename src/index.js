@@ -10,6 +10,7 @@ import {firebaseApp} from "./firebase";
 import { createBrowserHistory } from 'history';
 import Error from "./Error";
 import Logout from "./logout";
+import createPage from "./createPage";
 const browserHistory = createBrowserHistory()
 firebaseApp.auth().onAuthStateChanged(user => {
     if(user){
@@ -29,6 +30,7 @@ ReactDOM.render(
     <Route exact path='/login' component={Login} />
     <Route exact path='/signUp' component={RegisterForm}/>
     <Route exact path='/logout' component={Logout}/>
+    <Route exact path='/create' component={createPage}/>
     <Route component={Error}/>
     </Switch>
     </Router>, document.getElementById('root')

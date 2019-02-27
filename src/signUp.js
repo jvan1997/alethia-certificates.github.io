@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {firebaseApp} from "./firebase";
+import { Button} from 'react-bootstrap';
 function user() {
     return firebaseApp.auth().currentUser;
 }
@@ -25,15 +26,24 @@ class RegisterForm extends Component {
 			});
 		//	this.props.history.push('/login');
 	}
-	
+	backTrack(){
+		this.props.history.goBack();
+	}
 	render() {
     		return (
+			<div className='App'>
 			<form onSubmit={this.SignUp.bind(this)}>
         		<h3>Sign Up</h3>
         		<input type="text" ref="email" placeholder="enter your email" />
+			<br></br>
         		<input type="password" ref="password" placeholder="enter password" />
-        		<input type="submit" value="Register" />
-      			</form>
+			<br></br>
+        		<Button onClick={() => this.backTrack()}> Cancel</Button>
+			<input type="submit" value="Register" />
+			
+      			</form>	
+
+			</div>
     );
   }
 

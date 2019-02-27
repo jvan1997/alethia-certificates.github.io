@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import {firebaseApp} from "./firebase";
 import {RegisterForm} from "./signUp";
 import { Button} from 'react-bootstrap';
-
-
+import './App.css';
+import { withRouter } from 'react-router-dom';
 class Logout extends React.Component {
 	constructor(props){
   		super(props);
@@ -20,10 +20,11 @@ class Logout extends React.Component {
     }
 	render() {
     	return (
-
-            <Button onClick={() => this.signOutUser()}> Logout</Button>
+		<div class="text-right">
+            <Button class="float-right" onClick={() => this.signOutUser()}> Logout</Button>
+		</div>
 		)	
 	}
 }
 
-export default Logout;
+export default withRouter(Logout);
