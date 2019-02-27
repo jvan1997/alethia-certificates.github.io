@@ -30,18 +30,9 @@ class App extends Component {
       }
   render() {
     return (
-      
-      <div className="App">
-
-	<Button class='btn btn-primary pull-right' onClick={() => this.signOutUser()}> Logout</Button>
-        <header className="App-header">
-
-          <h1 style={{'fontSize': '50px', 'vertical-align' : 'top'}}>
-          	Home
-	  </h1>
-          <img src={logo} alt="Logo" />
-            </header>
-                 </div>
+	<div class="text-right">
+		<Button class="float-right" onClick={() => this.signOutUser()}> Logout</Button>
+	</div>
     );
   }
   handleChange(event) {
