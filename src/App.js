@@ -32,45 +32,16 @@ class App extends Component {
     return (
       
       <div className="App">
-        <header className="App-header">
-          <img src={logo} alt="Logo" />
-          <p>
-          	Home
-	  </p>
-    <form onSubmit={this.handleSubmit}>
-            <label>
-                Name:
-                <input id="name" type="text" name="name" onChange={this.handleChange}/>
-            </label>
-        <br />
-            Signature ID:
-            <input id="sigid"  type="text" name="sigid" onChange={this.handleChange}/>
-        <br />
-            Major:
-             <select id="major" name="major" defaultValue={this.state.selectValue} onChange={this.handleChange} >	
-		        <option value="-1"> Major </option>
-            <option value="0">Aerospace</option>
-            <option value="1">Biomedical</option>
-            <option value="2">Bioengineering</option>
-		        <option value="3">Chemical</option>
-            <option value="4">Civil</option>
-            <option value="5">Computer</option>
-		        <option value="6">Electrical</option>
-            <option value="7">Industrial</option>
-            <option value="8">Mechanical</option>
-            <option value="9">Software</option>
 
-          </select>
-        <br />
-            Units Completed:
-            <input id="units" type="text" name="units" onChange={this.handleChange}/>
-        <br />
-            <input type="submit" value="Generate" />
-           
-    </form>
-        </header>
-    <Button onClick={() => this.signOutUser()}> Logout</Button>
-              </div>
+	<Button class='btn btn-primary pull-right' onClick={() => this.signOutUser()}> Logout</Button>
+        <header className="App-header">
+
+          <h1 style={{'fontSize': '50px', 'vertical-align' : 'top'}}>
+          	Home
+	  </h1>
+          <img src={logo} alt="Logo" />
+            </header>
+                 </div>
     );
   }
   handleChange(event) {
