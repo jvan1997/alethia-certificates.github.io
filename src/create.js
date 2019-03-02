@@ -4,17 +4,26 @@ import './App.css';
 import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
+function user() {
+//    console.log("What:" + auth.currentUser.email);
+    return firebaseApp.auth().currentUser;
+}
+function db() {
+    return firebaseApp.firestore().collection('users');
+}
+function entry() {
+    return db().doc(user().email);
+} 
+
 class Create extends Component {
- 
 	constructor(props) {
         super(props);
-	this.count = 0;
         this.state = {
             name: '',
+            surname:'',
             sigid: '', 
             major: '', 
             units: '',
-	showComponent:false,
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -35,8 +44,11 @@ class Create extends Component {
           </p>
     <form onSubmit={this.handleSubmit}>
             <label>
-                Name:
+                First Name:
                 <input id="name" type="text" name="name" onChange={this.handleChange}/>
+                <br />
+                Last Name:
+                <input id="surname" type="text" name="surname" onChange={this.handleChange}/>
             </label>
         <br />
             Signature ID:
@@ -45,16 +57,16 @@ class Create extends Component {
             Major:
              <select id="major" name="major" defaultValue={this.state.selectValue} onChange={this.handleChange} >	
 		        <option value="-1"> Major </option>
-            <option value="0">Aerospace</option>
-            <option value="1">Biomedical</option>
-            <option value="2">Bioengineering</option>
-		        <option value="3">Chemical</option>
-            <option value="4">Civil</option>
-            <option value="5">Computer</option>
-		        <option value="6">Electrical</option>
-            <option value="7">Industrial</option>
-            <option value="8">Mechanical</option>
-            <option value="9">Software</option>
+            <option value="Aerospace">Aerospace</option>
+            <option value="Biomedical">Biomedical</option>
+            <option value="Bioengineering">Bioengineering</option>
+		        <option value="Chemical">Chemical</option>
+            <option value="Civil">Civil</option>
+            <option value="Computer">Computer</option>
+		        <option value="Electrical">Electrical</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Software">Software</option>
 
           </select>
         <br />
@@ -79,11 +91,10 @@ class Create extends Component {
   }
 
   handleSubmit(event) {
-	this.count += 1;	
-//	console.log("this is count" + this.count);
-    alert('A name was submitted: ' + this.state.name);
-    console.log(this.state.name + "where is this");
     event.preventDefault();
+    entry().update({"certificate":this.state}).then(function() {
+		alert("Created certificate");
+  });
   }
 }
 export default withRouter(Create);

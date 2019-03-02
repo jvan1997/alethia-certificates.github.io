@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Create from './create';
-import Logout from './logout';
+import Bar from './bar';
 class createPage extends Component {
  
 	constructor(props) {
@@ -10,7 +10,7 @@ class createPage extends Component {
   render() {
     return (
 	<div>
-	<Logout />
+	<Bar />
 	<Create />
 	</div>
     );

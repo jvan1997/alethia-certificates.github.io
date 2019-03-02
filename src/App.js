@@ -5,7 +5,7 @@ import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import Home from './home';
-import Logout from './logout';
+import Bar from './bar';
 class App extends Component {
  
 	constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
 	<div>
-	<Logout />
+	<Bar />
 	<Home />
 	</div>
     );

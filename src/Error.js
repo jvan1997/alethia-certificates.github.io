@@ -1,6 +1,7 @@
 import React from 'react';
 import {firebaseApp} from "./firebase";
 import {RegisterForm} from "./signUp";
+import Bar from "./bar";
 class Error extends React.Component {
 	constructor(props){
   		super(props);
@@ -9,7 +10,8 @@ class Error extends React.Component {
 		
 	render() {
     	return (
-		<div>Error: Path does not exist.</div>
+		
+		<div>Error: Path does not exist. </div>
 		)	
 	}
 }

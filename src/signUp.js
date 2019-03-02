@@ -25,6 +25,19 @@ class RegisterForm extends Component {
 		alert(error)
 			});
 		//	this.props.history.push('/login');
+	let firstname = this.refs.firstname.value;
+	let surname = this.refs.surname.value;
+	let idNum = this.refs.idNum.value;
+	var information = {
+			name:firstname, lastname:surname, idNum:idNum
+		};
+	
+	var certificate = {};
+	
+	db().doc(email.toLowerCase()).set({
+            information,certificate
+        });
+		
 	}
 	backTrack(){
 		this.props.history.goBack();
@@ -38,6 +51,13 @@ class RegisterForm extends Component {
 			<br></br>
         		<input type="password" ref="password" placeholder="enter password" />
 			<br></br>
+			<input type="text" ref="firstname" placeholder="enter your first name" />
+			<br></br>
+			<input type="text" ref="surname" placeholder="enter your last  name" />
+			<br></br>
+			<input type="text" ref="idNum" placeholder="enter student id number" />
+			<br></br>
+
         		<Button onClick={() => this.backTrack()}> Cancel</Button>
 			<input type="submit" value="Register" />
 			

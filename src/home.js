@@ -4,8 +4,8 @@ import './App.css';
 import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
-import create from './create.png';
-import verify from './verify.png';
+import create from './Images/create.png';
+import verify from './Images/verify.png';
 import {withRouter} from "react-router-dom";
 class Home extends React.Component{
 	constructor(props) {
