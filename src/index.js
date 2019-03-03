@@ -34,7 +34,7 @@ ReactDOM.render(
     <Route exact path='/create' component={createPage}/>
 	<Route exact path='/profile' component={Profile}/>	
     <Route exact path='/verify' component={Verify}/>	
-    <Route exact path='/profile/edit' component={Edit}/>
+    <Route exact path='/profile/editCert' component={Edit}/>
     <Route component={Error}/>
     </Switch>
     </Router>, document.getElementById('root')
