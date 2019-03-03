@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.png';
 import './App.css';
 import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
