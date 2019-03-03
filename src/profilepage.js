@@ -32,6 +32,9 @@ onLoad = (e) => {
 offLoad = (e) => {
 	this.setState({data: null});
 }
+editCert = (e) => {
+	this.props.history.push("/profile/edit");
+}
 
 	render() {
 		
@@ -53,6 +56,7 @@ offLoad = (e) => {
 					  <div>
 					<h1>Profile</h1>
 					<button onClick={this.offLoad}>Close Certificate</button>
+					<button onClick={this.editCert}>Edit Certificate</button>
 					<div>
 						<p> Name: {fname} {lname}</p>
 						<p> Major: {major} </p>

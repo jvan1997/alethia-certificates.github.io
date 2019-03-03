@@ -12,6 +12,7 @@ import Error from "./Error";
 import createPage from "./createPage";
 import Profile from "./profilepage";
 import Verify from "./verifypage";
+import Edit from "./editPage";
 const browserHistory = createBrowserHistory()
 firebaseApp.auth().onAuthStateChanged(user => {
     if(user){
@@ -33,6 +34,7 @@ ReactDOM.render(
     <Route exact path='/create' component={createPage}/>
 	<Route exact path='/profile' component={Profile}/>	
     <Route exact path='/verify' component={Verify}/>	
+    <Route exact path='/profile/edit' component={Edit}/>
     <Route component={Error}/>
     </Switch>
     </Router>, document.getElementById('root')
