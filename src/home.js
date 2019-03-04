@@ -16,7 +16,8 @@ class Home extends React.Component{
 		this.props.history.push("/create");
 	}
 	
-	render() {	
+	render() {
+		
 			return (
 			<div className="App">
 				<header className="App-header">
@@ -24,9 +25,9 @@ class Home extends React.Component{
 					Home
 				</h1>
 
-				<div class="col-md-6">
-						<img src={create} onClick={() => this.createCert()} alt="create" />
-						<img src={verify} onClick={() => this.verifyCert()} alt="verify" />
+				<div class="col-md-6" >
+						<img style={{cursor:'pointer'}} src={create} onClick={() => this.createCert()} alt="create" />
+						<img style={{cursor:'pointer'}} src={verify} onClick={() => this.verifyCert()} alt="verify" />
 				</div>
 			</header>
 		</div>

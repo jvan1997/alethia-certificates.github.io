@@ -47,7 +47,7 @@ class Bar extends React.Component {
 		this.props.history.push('/profile');	
 	}
 	signOutUser(){
-        this.props.history.push('/login');
+		this.props.history.push('/');
         firebaseApp.auth().signOut().then(function() {
             console.log('Signed Out');
           }, function(error) {

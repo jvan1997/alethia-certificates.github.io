@@ -24,6 +24,9 @@ class Login extends React.Component {
 		signUpUser(){
 			this.props.history.push('/signUp');
 		}
+		backTrack(){
+			this.props.history.goBack();
+		}
 	render() {
     	return (
 			<div className='App'>
@@ -34,6 +37,7 @@ class Login extends React.Component {
         		<input type="password" ref="password" placeholder="enter password" />
 				<br></br>
         	<input type="submit" value="Login" />
+			<Button onClick={() => this.backTrack()}> Cancel</Button>
 			<Button onClick={() => this.signUpUser()}> Sign Up</Button>
       	</form>
 		 

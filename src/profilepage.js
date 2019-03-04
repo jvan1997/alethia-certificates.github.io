@@ -33,7 +33,7 @@ offLoad = (e) => {
 	this.setState({data: null});
 }
 editCert = (e) => {
-	this.props.history.push("/profile/edit");
+	this.props.history.push("/profile/editCert");
 }
 
 	render() {

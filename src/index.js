@@ -21,8 +21,8 @@ firebaseApp.auth().onAuthStateChanged(user => {
             browserHistory.push('/');
     } else{
         console.log('user has signed out or still needs to sign in');
-        if(window.location.pathname != "/signup")
-            browserHistory.replace('/login' );
+        if(window.location.pathname != "/signup" || window.location.pathname != "/login")
+            browserHistory.replace('/' );
     }
 })
 ReactDOM.render(
