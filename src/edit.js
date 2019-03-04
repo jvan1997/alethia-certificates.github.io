@@ -26,11 +26,11 @@ class Edit extends Component {
                     if (doc.exists) {
                         let data = doc.data()['certificate'];
                         this.setState({ certificate: data });
-                        console.log("Document data:", data);
+                      //  console.log("Document data:", data);
                     } else {
                         // doc.data() will be undefined in this case
                         this.setState({ data: null });
-                        console.log("No such document!");
+                     //   console.log("No such document!");
                     }
                 })
             } else{

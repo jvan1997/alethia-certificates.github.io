@@ -21,11 +21,11 @@ onLoad = (e) => {
         if (doc.exists) {
             let data = doc.data()['certificate'];
             this.setState({ data: data });
-            console.log("Document data:", data);
+      //      console.log("Document data:", data);
         } else {
             // doc.data() will be undefined in this case
             this.setState({ data: null });
-            console.log("No such document!");
+      //      console.log("No such document!");
         }
     })
 }
@@ -38,9 +38,9 @@ editCert = (e) => {
 
 	render() {
 		
-		console.log("This is the data", this.state.data);
+	//	console.log("This is the data", this.state.data);
 		let dataUI = this.state.data;
-		console.log(dataUI);
+	//	console.log(dataUI);
 		var keys = Object.keys(dataUI);
 		if(dataUI){
 			if(keys.length == 0){
@@ -61,7 +61,7 @@ editCert = (e) => {
 			let lname = dataUI["surname"];
 			let units = dataUI["units"];
 			let sigid = dataUI["sigid"]
-			console.log(fname);
+		//	console.log(fname);
 			return (
 				<div>
 					<Bar />

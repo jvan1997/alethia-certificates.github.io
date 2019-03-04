@@ -23,9 +23,9 @@ class App extends Component {
           this.setState({ logged: false });
         }})}
   render() {
-    console.log(this.state.logged);
+   // console.log(this.state.logged);
     if(this.state.logged){ 
-      console.log("I went here");    
+      //console.log("I went here");    
       return (
 	        <div>
 	        <Bar />
