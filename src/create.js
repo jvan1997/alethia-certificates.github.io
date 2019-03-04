@@ -55,7 +55,7 @@ class Create extends Component {
             <input id="sigid"  type="text" name="sigid" onChange={this.handleChange}/>
         <br />
             Major:
-             <select id="major" name="major" defaultValue={this.state.selectValue} onChange={this.handleChange} >	
+             <select id="major" name="major" onChange={this.handleChange} >	
 		        <option value="-1"> Major </option>
             <option value="Aerospace">Aerospace</option>
             <option value="Biomedical">Biomedical</option>
@@ -95,6 +95,7 @@ class Create extends Component {
     entry().update({"certificate":this.state}).then(function() {
 		alert("Created certificate");
   });
+  this.backTrack();
   }
 }
 export default withRouter(Create);

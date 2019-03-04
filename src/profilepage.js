@@ -30,7 +30,7 @@ onLoad = (e) => {
     })
 }
 offLoad = (e) => {
-	this.setState({data: null});
+	this.setState({data: ''});
 }
 editCert = (e) => {
 	this.props.history.push("/profile/editCert");
@@ -41,8 +41,20 @@ editCert = (e) => {
 		console.log("This is the data", this.state.data);
 		let dataUI = this.state.data;
 		console.log(dataUI);
-		
+		var keys = Object.keys(dataUI);
 		if(dataUI){
+			if(keys.length == 0){
+				return (
+					<div>
+						<Bar />
+						  <div>
+						<h1>Profile</h1>
+						<p> No Certificate has been established yet </p>
+						<button onClick={this.offLoad}>Close Certificate</button>
+					</div>
+					</div>
+				);
+			}
 			console.log("Inside", dataUI);
 			let major = dataUI["major"];
 			let fname = dataUI["name"];

@@ -10,7 +10,7 @@ class Edit extends Component {
 	constructor(props) {
         super(props);
         this.state = {
-            datas:[]
+            certificate:[]
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -25,7 +25,7 @@ class Edit extends Component {
                 entry().get().then((doc) => {
                     if (doc.exists) {
                         let data = doc.data()['certificate'];
-                        this.setState({ datas: data });
+                        this.setState({ certificate: data });
                         console.log("Document data:", data);
                     } else {
                         // doc.data() will be undefined in this case
@@ -40,11 +40,11 @@ class Edit extends Component {
         
     }
   render() {
-      var keys = Object.keys(this.state.datas);
+      var keys = Object.keys(this.state.certificate);
     if(keys.length){
-        console.log("yes");
-        var data = this.state.datas;
-        let major = data["major"];
+     //   console.log("yes");
+        var data = this.state.certificate;
+        let majors = data["major"];
         let fname = data["name"];
         let lname = data["surname"];
         let units = data["units"];
@@ -60,17 +60,17 @@ class Edit extends Component {
           <form onSubmit={this.handleSubmit}>
                   <label>
                       First Name:
-                      <input id="name" type="text" name="name" value={"Jonathan"} onChange={this.handleChange}/>
+                      <input id="name" type="text" name="name" defaultValue={fname} onChange={this.handleChange}/>
                       <br />
                       Last Name:
-                      <input id="surname" type="text" name="surname" value={lname} onChange={this.handleChange}/>
+                      <input id="surname" type="text" name="surname" defaultValue={lname} onChange={this.handleChange}/>
                   </label>
               <br />
                   Signature ID:
                   <input id="sigid"  type="text" name="sigid" value={sigid} onChange={this.handleChange}/>
               <br />
                   Major:
-                   <select id="major" name="major" defaultValue={this.state.selectValue} value={major} onChange={this.handleChange} >	
+                   <select id="major" name="major" value={this.state.certificate["major"]} onChange={this.handleChange} >	
                       <option value="-1"> Major </option>
                   <option value="Aerospace">Aerospace</option>
                   <option value="Biomedical">Biomedical</option>
@@ -86,7 +86,7 @@ class Edit extends Component {
                 </select>
               <br />
                   Units Completed:
-                  <input id="units" type="text" name="units" value={units} onChange={this.handleChange}/>
+                  <input id="units" type="text" name="units" defaultValue={units} onChange={this.handleChange}/>
               <br />
               <Button onClick={() => this.backTrack()}> Cancel</Button>
                   <input type="submit" value="Save" />
@@ -98,7 +98,6 @@ class Edit extends Component {
           );
     }
     else{
-        console.log("NO");
     return (
       <div className="App">
         <header className="App-header">
@@ -158,9 +157,10 @@ class Edit extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    entry().update({"certificate":this.state}).then(function() {
+    entry().update({"certificate":this.state.certificate}).then(function() {
 		alert("Edited certificate");
   });
+  this.backTrack();
   }
 }
 export default withRouter(Edit);
