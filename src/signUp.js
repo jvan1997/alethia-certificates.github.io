@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
+import {withRouter} from "react-router-dom";
 function user() {
     return firebaseApp.auth().currentUser;
 }
@@ -68,4 +69,4 @@ class RegisterForm extends Component {
   }
 
 }
-export default RegisterForm;
+export default withRouter(RegisterForm);

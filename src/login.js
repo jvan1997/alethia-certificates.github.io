@@ -1,7 +1,7 @@
 import React from 'react';
 import {firebaseApp} from "./firebase";
-import {RegisterForm} from "./signUp";
 import { Button} from 'react-bootstrap';
+import {withRouter} from "react-router-dom";
 class Login extends React.Component {
 	constructor(props){
   		super(props);
@@ -21,8 +21,9 @@ class Login extends React.Component {
 			})
 			
 		}
-		signUpUser(){
-			this.props.history.push('/signUp');
+		goTo(event){
+			var destination = event.target.value;
+			this.props.history.push(`/${destination}`)
 		}
 		backTrack(){
 			this.props.history.goBack();
@@ -38,7 +39,7 @@ class Login extends React.Component {
 				<br></br>
         	<input type="submit" value="Login" />
 			<Button onClick={() => this.backTrack()}> Cancel</Button>
-			<Button onClick={() => this.signUpUser()}> Sign Up</Button>
+			<Button value="signup" onClick={e => this.goTo(e)}> Sign Up</Button>
       	</form>
 		 
 		  </div>
@@ -46,4 +47,4 @@ class Login extends React.Component {
 	}
 }
 
-export default Login
+export default withRouter(Login);
