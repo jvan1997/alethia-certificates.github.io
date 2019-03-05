@@ -9,16 +9,15 @@ import RegisterForm from "./signUp";
 import {firebaseApp} from "./firebase";
 import { createBrowserHistory } from 'history';
 import Error from "./Error";
-<<<<<<< HEAD
-import Logout from "./logout";
+
 import CreateCert from "./CreateCert"
 
-=======
+
 import createPage from "./createPage";
 import Profile from "./profilepage";
 import Verify from "./verifypage";
 import Edit from "./editPage";
->>>>>>> jbranch
+
 const browserHistory = createBrowserHistory()
 firebaseApp.auth().onAuthStateChanged(user => {
     if(user){
@@ -37,15 +36,11 @@ ReactDOM.render(
     <Route exact path = '/' component ={App}  />
     <Route exact path='/login' component={Login} />
     <Route exact path='/signUp' component={RegisterForm}/>
-<<<<<<< HEAD
-    <Route exact path='/logout' component={Logout}/>
-    <Route exact path='/create' component={CreateCert} />
-=======
     <Route exact path='/create' component={createPage}/>
 	<Route exact path='/profile' component={Profile}/>	
     <Route exact path='/verify' component={Verify}/>	
     <Route exact path='/profile/editCert' component={Edit}/>
->>>>>>> jbranch
+
     <Route component={Error}/>
     </Switch>
     </Router>, document.getElementById('root')

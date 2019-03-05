@@ -44,9 +44,6 @@ class Bar extends React.Component {
 		var destination = event.target.value;
 		this.props.history.push(`/${destination}`);
 	}
-	goToProfile(){
-		this.props.history.push('/profile');	
-	}
 	signOutUser(){
 		this.props.history.push('/');
         firebaseApp.auth().signOut().then(function() {
