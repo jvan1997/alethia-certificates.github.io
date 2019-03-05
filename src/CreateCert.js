@@ -46,7 +46,7 @@ class CreateCert extends Component{
         <form onSubmit={this.handleSubmit}>
                 <label>
                     Name:
-                    <input id="name" type="text" name="name" onChange={this.handleChange}/>
+                    <input id="name" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
                 </label>
             <br />
                 Signature ID:
@@ -58,6 +58,7 @@ class CreateCert extends Component{
          name="major"
              defaultValue={this.state.selectValue} 
              onChange={this.handleChange} 
+             value={this.state.major}
              >	
             <option value="-1"> Major </option>
                 <option value="0">Aerospace</option>
@@ -69,7 +70,7 @@ class CreateCert extends Component{
             <option value="6">Electrical</option>
                 <option value="7">Industrial</option>
                 <option value="8">Mechanical</option>
-                <option value="9">Software</option>
+                <option value="BS Software Engineering">BS Software Engineering</option>
     
               </select>
             <br />
@@ -116,9 +117,9 @@ class CreateCert extends Component{
         console.log(pdf.numPages)
         for(var i=1;i<=pdf.numPages;i++){
             let page = await pdf.getPage(i)
-            console.log(page)
+            // console.log(page)
             let textContent = await page.getTextContent()
-            console.log(textContent)
+            // console.log(textContent)
 
             pdfText = textContent.items.reduce( (acc,curr) => acc + curr.str +"\n", pdfText )
             // for( var j=0; j<textContent.items.length;j++){
@@ -126,7 +127,7 @@ class CreateCert extends Component{
             // }
         }
 
-        console.log(pdfText)
+        // console.log(pdfText)
         
         return pdfText
     }
@@ -158,6 +159,28 @@ class CreateCert extends Component{
                    this.getPDFText(data)
                    .then( (text) =>{
                     console.log(`text is ${text}`)
+
+                    let strs = text.split("\n")
+                    console.log(strs)
+                    let name = ""
+                    let major = ""
+
+                    let nameToken = "STUDENT NAME:"
+                    let majorToken = "MAJOR:"
+
+                    for(var i=0;i<strs.length;i++){
+                        if( strs[i].includes(nameToken)){
+                            name = strs[i].split(nameToken)[1].trim()
+                            console.log(name)
+                            this.setState({name:name})
+                        }
+                        if( strs[i].includes(majorToken)){
+                            major = strs[i].split(majorToken)[1].trim()
+                            console.log(major)
+                            this.setState({major:major})
+                        }
+
+                    }
                    })
                     
                 
