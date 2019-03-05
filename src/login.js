@@ -41,7 +41,7 @@ class Login extends React.Component {
 			<Button onClick={() => this.backTrack()}> Cancel</Button>
 			<Button value="signup" onClick={e => this.goTo(e)}> Sign Up</Button>
       	</form>
-		 
+		  
 		  </div>
 		)	
 	}
