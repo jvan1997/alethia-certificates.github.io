@@ -9,13 +9,10 @@ class Home extends React.Component{
 	constructor(props) {
         	super(props);
 	}	
-	verifyCert(){
-		this.props.history.push("/verify");
+	goTo(event){
+		var destination = event.target.alt;
+		this.props.history.push(`/${destination}`);
 	}
-	createCert() {
-		this.props.history.push("/create");
-	}
-	
 	render() {
 		
 			return (
@@ -26,8 +23,8 @@ class Home extends React.Component{
 				</h1>
 
 				<div class="col-md-6" >
-						<img style={{cursor:'pointer'}} src={create} onClick={() => this.createCert()} alt="create" />
-						<img style={{cursor:'pointer'}} src={verify} onClick={() => this.verifyCert()} alt="verify" />
+						<img style={{cursor:'pointer'}} src={create} onClick={e => this.goTo(e)} alt="create" />
+						<img style={{cursor:'pointer'}} src={verify} onClick={e => this.goTo(e)} alt="verify" />
 				</div>
 			</header>
 		</div>

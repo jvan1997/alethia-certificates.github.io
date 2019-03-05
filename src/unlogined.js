@@ -19,12 +19,10 @@ class Unsigned extends Component {
 	constructor(props) {
         super(props);
     }
-    login(){
-        this.props.history.push('/login');
-    }
-    signUp(){
-        this.props.history.push('/signUp');
-    }
+    goTo(event){
+		var destination = event.target.value;
+		this.props.history.push(`/${destination}`);
+	}
   render() {
     return (
       
@@ -39,8 +37,8 @@ class Unsigned extends Component {
               Login or Signup to Continue
           </p>
           <div class="col-md-6" >
-          <Button onClick={() => this.signUp()}> Sign Up </Button>
-          <Button onClick={() => this.login()}> Login </Button>
+          <Button value="signup" onClick={e => this.goTo(e)}> Sign Up </Button>
+          <Button value="login" onClick={e => this.goTo(e)}> Login </Button>
           </div>
         </header>
               </div>

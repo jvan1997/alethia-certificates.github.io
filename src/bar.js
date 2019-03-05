@@ -40,8 +40,9 @@ class Bar extends React.Component {
 		  });
   		
  }
-	goToHome(){
-		this.props.history.push('/');
+	goTo(event){
+		var destination = event.target.value;
+		this.props.history.push(`/${destination}`);
 	}
 	goToProfile(){
 		this.props.history.push('/profile');	
@@ -59,8 +60,8 @@ class Bar extends React.Component {
     	return (
 		<div class="text-right">
 		Welcome {this.state.name}      
-		<Button class="float-right" onClick={() => this.goToHome()}> Home</Button>
-		<Button class="float-right" onClick={() => this.goToProfile()}> Profile</Button>
+		<Button value="" class="float-right" onClick={e => this.goTo(e)}> Home</Button>
+		<Button value="profile" class="float-right" onClick={e => this.goTo(e)}> Profile</Button>
         <Button class="float-right" onClick={() => this.signOutUser()}> Logout</Button>
 		</div>
 		)	
