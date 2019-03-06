@@ -58,17 +58,17 @@ class Create extends Component {
     <form onSubmit={this.handleSubmit}>
             <label>
                 First Name:
-                <input id="name" type="text" name="name" onChange={this.handleChange}/>
+                <input id="name" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
                 <br />
                 Last Name:
-                <input id="surname" type="text" name="surname" onChange={this.handleChange}/>
+                <input id="surname" type="text" name="surname" value={this.state.surname} onChange={this.handleChange}/>
             </label>
         <br />
             Signature ID:
-            <input id="sigid"  type="text" name="sigid" onChange={this.handleChange}/>
+            <input id="sigid"  type="text" name="sigid"  onChange={this.handleChange}/>
         <br />
             Major:
-             <select id="major" name="major" onChange={this.handleChange} >	
+             <select id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
 		        <option value="-1"> Major </option>
             <option value="Aerospace">Aerospace</option>
             <option value="Biomedical">Biomedical</option>
@@ -79,12 +79,12 @@ class Create extends Component {
 		        <option value="Electrical">Electrical</option>
             <option value="Industrial">Industrial</option>
             <option value="Mechanical">Mechanical</option>
-            <option value="Software">Software</option>
+            <option value="BS Software Engineering">BS Software Engineering</option>
 
           </select>
         <br />
             Units Completed:
-            <input id="units" type="text" name="units" onChange={this.handleChange}/>
+            <input id="units" type="text" name="units" value={this.state.units} onChange={this.handleChange}/>
         <br />
 	    <Button onClick={() => this.backTrack()}> Cancel</Button>
             <input type="submit" value="Generate" />
@@ -153,23 +153,34 @@ class Create extends Component {
                 console.log(strs)
                 let name = ""
                 let major = ""
+                let units = 0
 
                 let nameToken = "STUDENT NAME:"
                 let majorToken = "MAJOR:"
+                let unitsToken = "ALL COLLEGE:"
 
                 for(var i=0;i<strs.length;i++){
                     if( strs[i].includes(nameToken)){
                         name = strs[i].split(nameToken)[1].trim()
                         console.log(name)
-                        this.setState({name:name})
+                        let nameComponents = name.split(" ")
+                        let lastName = nameComponents[0].replace(",","")
+                        let firstName = nameComponents[1]
+                        this.setState({name:firstName, surname:lastName})
                     }
                     if( strs[i].includes(majorToken)){
                         major = strs[i].split(majorToken)[1].trim()
                         console.log(major)
                         this.setState({major:major})
                     }
+                    if( strs[i].includes(unitsToken)){
+                      units = strs[i].trim().split(/\s+/)
+                      console.log(units)  
+                  }
 
                 }
+                let totalUnits = units[4]
+                this.setState({units:totalUnits})
                })
                 
             
