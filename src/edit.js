@@ -149,14 +149,17 @@ class Edit extends Component {
 }
   handleChange(event) {
    // console.log("doing stuff");
-  //  console.log(event.target.value);
+    console.log(event.target.value);
+    var certificate = this.state.certificate;
+    certificate[event.target.name] = event.target.value;
     this.setState({
-        [event.target.name]:event.target.value
+        certificate
 	});
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.state);
     entry().update({"certificate":this.state.certificate}).then(function() {
 		alert("Edited certificate");
   });
