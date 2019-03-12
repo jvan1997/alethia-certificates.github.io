@@ -113,10 +113,48 @@ class Create extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    entry().update({"certificate":this.state}).then(function() {
-		alert("Created certificate");
-  });
-  this.backTrack();
+    console.log(event)
+    let relevantState = { 
+        "name": this.state.name,
+        "surname": this.state.surname,
+        "sigid": this.state.sigid,
+        "major": this.state.major,
+        "units": this.state.units
+    }
+
+    // https://stackoverflow.com/questions/49686694/uploading-a-file-using-fetch-in-reactjs
+    let url = 'http://localhost:8080/check'
+    let options = {
+        method: 'post',
+        headers: {},
+        
+    }
+    options.body = new FormData();
+    for (let key in relevantState) {
+    options.body.append(key, relevantState[key]);
+    }
+    // https://stackoverflow.com/questions/38794180/fetch-data-with-react
+    let check = ()=>{
+        return fetch(url, options)
+    }
+    check().then((response)=>{
+        console.log(response)
+        console.log("abc")
+      if (response.status == 200) {
+        entry().update({"certificate":relevantState}).then(function() {
+            alert("Created certificate");
+        });
+        this.backTrack();
+      }
+      if (response.status >= 400) {
+        alert("Invalid sigid")
+      }
+    })
+
+
+
+    
+
   }
 
   // PDF-related code

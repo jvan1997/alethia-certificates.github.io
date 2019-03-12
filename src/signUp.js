@@ -38,7 +38,7 @@ class RegisterForm extends Component {
 	db().doc(email.toLowerCase()).set({
             information,certificate
         });
-		
+	this.props.history.push('/');
 	}
 	backTrack(){
 		this.props.history.goBack();
