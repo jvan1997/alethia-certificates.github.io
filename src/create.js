@@ -16,7 +16,7 @@ function entry() {
 } 
 
 var fileSelect;
-var pdfjsLib
+var pdfjsLib;
 
 class Create extends Component {
   componentDidMount () {

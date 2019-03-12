@@ -2,6 +2,7 @@ import React from 'react';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
+import './css/tailwind.css';
 class Login extends React.Component {
 	constructor(props){
   		super(props);
@@ -11,6 +12,7 @@ class Login extends React.Component {
   		}
  }
 		handleSignIn(e) {
+			console.log(e);
 			e.preventDefault()
 			let email = this.refs.email.value
 			let password = this.refs.password.value
@@ -30,19 +32,32 @@ class Login extends React.Component {
 		}
 	render() {
     	return (
-			<div className='App'>
-		<form onSubmit={this.handleSignIn.bind(this)}>
-        	<h3>Sign In </h3>
-        		<input type="text" ref="email" placeholder="enter your email" />
-				<br />
-        		<input type="password" ref="password" placeholder="enter password" />
-				<br></br>
-        	<input type="submit" value="Login" />
-			<Button onClick={() => this.backTrack()}> Cancel</Button>
-			<Button value="signup" onClick={e => this.goTo(e)}> Sign Up</Button>
-      	</form>
-		 
-		  </div>
+<div class="flex items-center h-screen w-full">
+        <div class="w-screen bg-white rounded">
+        <h1 class="HotelHopperLogin w-full block text-purple-light text-center justify-center mb-6">
+        Sign in to Alethia
+        </h1>
+
+        <form onSubmit={this.handleSignIn.bind(this)} class="mb-4 items-center">
+        <div class="flex flex-col mb-4 items-center">
+            <input class="Rectangle shadow appearance-none border border-purple-light rounded w-1/3 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" 
+            id="email"  ref="email" type="text" placeholder="Enter Email"/>
+        </div>
+        <div class="flex flex-col mb-6 items-center">
+            <input class="Rectangle shadow appearance-none border border-purple-light rounded w-1/3 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+            id="password" ref="password"type="password" placeholder="******************"/>
+
+        </div>
+        <div class="flex items-center justify-center mb-6">
+			<button onClick={() => this.backTrack()} class="Rectangle bg-purple hover:purple-blue-dark text-white font-bold py-2 px-4 md:mr-2 rounded" type="button">Cancel</button>
+            <input class="Rectangle bg-purple hover:purple-blue-dark text-white font-bold py-2 px-4 md:ml-2 rounded" type="submit" value="Login" />
+        </div>
+		<div class="flex items-center justify-center">
+			<button onClick={e => this.goTo(e)} class="Rectangle bg-purple hover:purple-blue-dark text-white font-bold py-2 px-4 rounded" type="button" value="signup">Sign Up</button>
+        </div>
+        </form>
+        </div>     
+        </div>
 		)	
 	}
 }
