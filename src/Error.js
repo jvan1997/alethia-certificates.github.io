@@ -9,9 +9,10 @@ class Error extends React.Component {
  }
 		
 	render() {
-    	return (
-		
+    	return (<div>
+		<Bar />
 		<div>Error: Path does not exist. </div>
+		</div>
 		)	
 	}
 }
