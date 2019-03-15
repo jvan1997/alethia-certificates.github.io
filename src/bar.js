@@ -72,7 +72,7 @@ class Bar extends React.Component {
 	<nav class="flex items-center justify-between flex-wrap bg-purple-light p-2">
 	<div class="flex items-center flex-no-shrink text-white mr-6">
 	<img class="border rounded fill-current mr-2 " width="60" height="60" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={logo} />
-	<span class="font-bold text-xl tracking-tight hover:text-grey-light" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} >Alethia</span>
+	<button class="font-bold text-white text-xl tracking-tight hover:text-grey-light" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)} >Alethia</button>
 		</div>
 <div class="block lg:hidden">
 	<button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
@@ -103,7 +103,7 @@ else{
 	<nav class="flex items-center justify-between flex-wrap bg-purple-light p-2">
 	<div class="flex items-center flex-no-shrink text-white mr-6">
 	<img class="border rounded fill-current mr-2 " width="60" height="60" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={logo} />
-	<span class="font-bold text-xl tracking-tight hover:text-grey-light" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} >Alethia</span>
+	<button class="font-bold text-xl tracking-tight text-white hover:text-grey-light" value="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} >Alethia</button>
 		</div>
 <div class="block lg:hidden">
 	<button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
