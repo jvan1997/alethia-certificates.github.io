@@ -3,6 +3,7 @@ import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import './css/tailwind.css';
+import Bar from './bar';
 class Login extends React.Component {
 	constructor(props){
   		super(props);
@@ -31,6 +32,8 @@ class Login extends React.Component {
 		}
 	render() {
     	return (
+			<div>
+			<Bar />
 			<div class="flex items-center h-screen w-full">
         		<div class="w-screen bg-white rounded">
         			<h1 class="HotelHopperLogin w-full block text-purple-light text-center justify-center mb-6">
@@ -57,6 +60,7 @@ class Login extends React.Component {
         			</form>
         		</div>     
         	</div>
+			</div>
 		)	
 	}
 }

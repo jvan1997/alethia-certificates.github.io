@@ -4,6 +4,7 @@ import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import './css/tailwind.css';
+import Bar from './bar';
 function user() {
     return firebaseApp.auth().currentUser;
 }
@@ -46,6 +47,7 @@ class RegisterForm extends Component {
 	}
 	render() {
     		return (
+				<div><Bar /> 
 				<div class="flex items-center h-screen w-full">
         		<div class="w-screen bg-white rounded">
         			<h1 class="HotelHopperLogin w-full block text-purple-light text-center justify-center mb-6">
@@ -80,7 +82,7 @@ class RegisterForm extends Component {
         			</form>
         		</div>     
         	</div>
-		
+			</div>
     );
   }
 
