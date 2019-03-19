@@ -37,8 +37,6 @@ class Unsigned extends Component {
               Login or Signup to Continue
           </p>
           <div class="col-md-6" >
-          <Button value="signup" onClick={e => this.goTo(e)}> Sign Up </Button>
-          <Button value="login" onClick={e => this.goTo(e)}> Login </Button>
           </div>
         </header>
               </div>
