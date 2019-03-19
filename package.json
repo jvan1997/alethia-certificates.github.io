@@ -6,6 +6,7 @@
     "babel-helpers": "^6.24.1",
     "busboy": "^0.3.0",
     "firebase": "^5.8.2",
+    "pdfjs-dist": "^2.0.943",
     "react": "^16.8.1",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.1",

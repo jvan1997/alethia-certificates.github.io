@@ -36,6 +36,7 @@ class Create extends Component {
             sigid: '', 
             major: '', 
             units: '',
+            file: undefined,
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -119,7 +120,8 @@ class Create extends Component {
         "surname": this.state.surname,
         "sigid": this.state.sigid,
         "major": this.state.major,
-        "units": this.state.units
+        "units": this.state.units,
+        "file": this.state.file
     }
 
     // https://stackoverflow.com/questions/49686694/uploading-a-file-using-fetch-in-reactjs
