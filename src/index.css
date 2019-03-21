@@ -794,9 +794,7 @@ table {
 .bg-purple-darkest {
   background-color: #21183c;
 }
-.bg-smoke-light{
-  background-color: rgba(0, 0, 0, 0.4);
-}
+
 .bg-purple-darker {
   background-color: #382b5f;
 }
@@ -1511,7 +1509,7 @@ table {
 .bg-cover-image{
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('./wallpaper.jpeg');
+  background-image: url('./wallpaperdark.jpg');
 }
 .bg-contain {
   background-size: contain;

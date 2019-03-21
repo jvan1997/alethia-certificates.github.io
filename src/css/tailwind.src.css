@@ -1,6 +1,3 @@
 @tailwind preflight;
 @tailwind components;
 @tailwind utilities;
-.bg-cover-image {
-    background-image: url('../wallpaper.jpeg');
-  }
