@@ -25,21 +25,27 @@ class Unsigned extends Component {
 	}
   render() {
     return (
-      
-      <div className="App">
-        <header className="App-header">
-	  <h1> Alethia </h1>
-          <img src={logo} alt="Logo" />
-          <p>
+      <div class="flex items-center h-full " >
+				<div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
+
+				<p class="w-full block text-white font-mono text-5xl font-bold text-center justify-center mb-16">
+        		 Home
+        		</p>
+
+				<div class="w-full block text-white font-mono text-xl font-bold text-center justify-center mb-16" >
+						{/* <div>
+						<img class="mr-16 w-1/2" style={{cursor:'pointer'}} src={create} onClick={e => this.goTo(e)} alt="create" />
+						</div>
+						<img class="ml-16 w-1/3" style={{cursor:'pointer'}} src={verify} onClick={e => this.goTo(e)} alt="verify" /> */}
+			  <p class="mb-16">
             Issue and Verify digital certificates with Ethereum Smart Contracts
           </p>
           <p>
-              Login or Signup to Continue
+          Login or Signup to Begin
           </p>
-          <div class="col-md-6" >
-          </div>
-        </header>
-              </div>
+				</div>
+				</div>
+				</div>
     );
   }
 }

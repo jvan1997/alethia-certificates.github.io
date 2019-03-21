@@ -69,29 +69,19 @@ class Bar extends React.Component {
 	render() {
 		if(this.state.logged){
 	return(
-	<nav class="flex items-center justify-between flex-wrap bg-purple-light p-2">
-	<div class="flex items-center flex-no-shrink text-white mr-6">
+	<nav class="flex items-center justify-between flex-wrap bg-transparent p-2">
+	<div class="flex items-center flex-no-shrink text-white pl-6 mr-6">
 	<img class="border rounded fill-current mr-2 " width="60" height="60" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={logo} />
-	<button class="font-bold text-white text-xl tracking-tight hover:text-grey-light" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)} >Alethia</button>
+	<button class="font-bold font-mono text-white ml-2 text-3xl tracking-tight hover:text-grey-light" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)} >Alethia</button>
 		</div>
-<div class="block lg:hidden">
-	<button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
-		<svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-	</button>
-</div>
 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 	<div class="text-sm lg:flex-grow">
-		<button class="underline block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4" value="about" onClick={e => this.goTo(e)}>
-			About
-		</button>
-		<a href="https://github.com/jvan1997/AlethiaFrontEndEarly" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white">
-			GitHub
-		</a>
 	</div>
 	<div>
-	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-purple-dark hover:text-purple-dark mt-4 lg:mt-0" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Home</button>
-	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-purple-dark hover:text-purple-dark mt-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Profile</button>
-		<button class="inline-block px-4 py-2 ml-2 leading-none border rounded text-white border-white hover:border-purple-dark hover:text-purple-dark mt-4 lg:mt-0" style={{cursor:'pointer'}} onClick={() => this.signOutUser()}>Sign Out</button>
+	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Home</button>
+	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="about" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>About</button>
+<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Profile</button>
+		<button class="inline-block px-4 py-2 ml-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" style={{cursor:'pointer'}} onClick={() => this.signOutUser()}>Sign Out</button>
 	</div>
 </div>
 </nav>
@@ -100,10 +90,10 @@ class Bar extends React.Component {
 	}
 else{
 	return(
-	<nav class="flex items-center justify-between flex-wrap bg-purple-light p-2">
-	<div class="flex items-center flex-no-shrink text-white mr-6">
+		<nav class="flex items-center justify-between flex-wrap bg-transparent p-2">
+		<div class="flex items-center flex-no-shrink text-white pl-6 mr-6">
 	<img class="border rounded fill-current mr-2 " width="60" height="60" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={logo} />
-	<button class="font-bold text-xl tracking-tight text-white hover:text-grey-light" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)} >Alethia</button>
+	<button class="font-bold font-mono text-white ml-2 text-3xl tracking-tight hover:text-grey-light" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)} >Alethia</button>
 		</div>
 <div class="block lg:hidden">
 	<button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
@@ -112,17 +102,12 @@ else{
 </div>
 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 	<div class="text-sm lg:flex-grow">
-		<button class="underline block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4" value="about" onClick={e => this.goTo(e)}>
-			About
-		</button>
-		<a href="https://github.com/jvan1997/AlethiaFrontEndEarly" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white">
-			GitHub
-		</a>
+
 	</div>
 	<div>
-	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-purple-dark hover:text-purple-dark mt-4 lg:mt-0" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Home</button>
-	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-purple-dark hover:text-purple-dark mt-4 lg:mt-0" value="login" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Login</button>
-		<button class="inline-block px-4 py-2 ml-2 leading-none border rounded text-white border-white hover:border-purple-dark hover:text-purple-dark mt-4 lg:mt-0" value="signup" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Sign Up</button>
+	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Home</button>
+	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="login" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Login</button>
+		<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="signup" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Sign Up</button>
 	</div>
 </div>
 </nav>

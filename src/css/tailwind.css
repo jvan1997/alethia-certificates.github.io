@@ -4167,7 +4167,9 @@ table {
 .opacity-100 {
   opacity: 1;
 }
-
+.opacity-125 {
+  opacity: 1.25;
+}
 .outline-none {
   outline: 0;
 }

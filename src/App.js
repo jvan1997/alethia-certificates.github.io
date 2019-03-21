@@ -27,17 +27,21 @@ class App extends Component {
     if(this.state.logged){ 
       //console.log("I went here");    
       return (
-	        <div>
+	        <div class="bg-cover-image h-screen">
+          <div>
 	        <Bar />
 	        <Home />
 	        </div>
+          </div>
           );
       }
     else{
       return (
-      <div>
+      <div class="bg-cover-image opacity-100 h-screen">
+      <div class="opacity-100">
       <Bar />
       <Unsigned />
+      </div>
       </div>
     );
   }
