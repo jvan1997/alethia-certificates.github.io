@@ -106,6 +106,8 @@ else{
 	</div>
 	<div>
 	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Home</button>
+	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="about" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>About</button>
+
 	<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="login" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Login</button>
 		<button class="inline-block px-4 py-2 ml-2 mr-2 leading-none border rounded text-white border-white hover:border-grey-dark hover:text-grey-dark mt-4 lg:mt-0" value="signup" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Sign Up</button>
 	</div>

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import logo from './Images/logo.png';
 import './App.css';
+import './index.css';
 import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
+import Bar from './bar';
 function user() {
 //    console.log("What:" + auth.currentUser.email);
     return firebaseApp.auth().currentUser;
@@ -48,8 +50,9 @@ class Create extends Component {
   render() {
     return (
       
-      <div className="App">
-        <header className="App-header">
+        <div class="bg-cover-image  h-screen" >
+        <Bar />
+        <div class="flex items-center container-xl h-full mx-auto pt-24 bg-transparent rounded">
 	  <h1> Create Certificate </h1>
           <img src={logo} alt="Logo" />
           <p>
@@ -90,7 +93,6 @@ class Create extends Component {
             <input type="submit" value="Generate" />
            
     </form>
-        </header>
 
         <div>
             <form>
@@ -100,6 +102,7 @@ class Create extends Component {
             </form>
             </div>
 
+              </div>
               </div>
     );
   }

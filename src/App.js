@@ -27,6 +27,7 @@ class App extends Component {
     if(this.state.logged){ 
       //console.log("I went here");    
       return (
+
 	        <div class="bg-cover-image h-screen" >
           <div class="opacity-100">
 	        <Bar />
@@ -37,6 +38,7 @@ class App extends Component {
       }
     else{
       return (
+        
       <div class="bg-cover-image opacity-100 h-screen">
       <div class="opacity-100">
       <Bar />

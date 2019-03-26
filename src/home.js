@@ -28,8 +28,8 @@ class Home extends React.Component{
 						<img class="mr-16 w-1/2" style={{cursor:'pointer'}} src={create} onClick={e => this.goTo(e)} alt="create" />
 						</div>
 						<img class="ml-16 w-1/3" style={{cursor:'pointer'}} src={verify} onClick={e => this.goTo(e)} alt="verify" /> */}
-				<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-bold leading-none border rounded bg-transparent text-white border-white hover:border-black hover:text-black mt-4 mb-4 lg:mt-0" value="create" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Create Certificate</button>
-				<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 font-bold leading-none border rounded bg-transparent text-white border-white hover:border-black hover:text-black mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>View Certificate</button>
+				<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-bold leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-black mt-4 mb-4 lg:mt-0" value="create" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Create Certificate</button>
+				<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 font-bold leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-black mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>View Certificate</button>
 
 				</div>
 				</div>
