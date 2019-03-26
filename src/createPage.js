@@ -10,7 +10,6 @@ class createPage extends Component {
   render() {
     return (
 	<div>
-	<Bar />
 	<Create />
 	</div>
     );
