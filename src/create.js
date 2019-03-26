@@ -145,10 +145,18 @@ class Create extends Component {
     check().then((response)=>{
         console.log(response)
         console.log("abc")
+        delete relevantState.file
       if (response.status == 200) {
-        entry().update({"certificate":relevantState}).then(function() {
+          console.log("bcd")
+            entry().update({"certificate":relevantState}).then(
+            success => {
             alert("Created certificate");
-        });
+            },
+            err =>{
+                console.log(err)
+            }
+        
+        );
         this.backTrack();
       }
       if (response.status >= 400) {
