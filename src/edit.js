@@ -74,7 +74,7 @@ class Edit extends Component {
             <div class="flex justify-left pl-4 col-md-6 items-center ">
                 <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
                 
-                 <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" defaultValue={majors} onChange={this.handleChange} >	
+                 <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-grey-darker ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" defaultValue={majors} value={majors} onChange={this.handleChange} >	
                     <option value="-1"> Select </option>
                 <option value="Aerospace">Aerospace</option>
                 <option value="Biomedical">Biomedical</option>
@@ -124,7 +124,7 @@ class Edit extends Component {
         <div class="flex justify-left pl-4 col-md-6 items-center ">
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
             
-             <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
+             <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-grey-darker ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
 		        <option value="-1"> Select </option>
             <option value="Aerospace">Aerospace</option>
             <option value="Biomedical">Biomedical</option>
