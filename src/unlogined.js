@@ -28,11 +28,11 @@ class Unsigned extends Component {
       <div class="flex items-center h-full " >
 				<div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
 
-				<p class="w-full block text-white font-mono text-5xl font-bold text-center justify-center mb-16">
+				<p class="w-full block text-white text-5xl font-bold font-fancy text-center justify-center mb-16">
         		 Home
         		</p>
 
-				<div class="w-full block text-white font-mono text-xl font-bold text-center justify-center mb-16" >
+				<div class="w-full block text-white  text-xl font-bold text-center font-fancy justify-center mb-16" >
 						{/* <div>
 						<img class="mr-16 w-1/2" style={{cursor:'pointer'}} src={create} onClick={e => this.goTo(e)} alt="create" />
 						</div>

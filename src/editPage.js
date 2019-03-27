@@ -9,7 +9,7 @@ class createPage extends Component {
 
   render() {
     return (
-	<div>
+	<div class="bg-cover-image h-full">
 	<Bar />
 	<Edit />
 	</div>

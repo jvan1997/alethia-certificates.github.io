@@ -50,7 +50,7 @@ class RegisterForm extends Component {
 				<div class="bg-cover-image">
 				<Bar /> 
 				<div class="flex items-center h-screen w-full">
-        		<div class="h-full w-full rounded">
+        		<div class="h-full w-full rounded font-fancy font-bold">
         			<h1 class="HotelHopperLogin w-full block text-white text-center justify-center mb-6">
         				Sign up to Alethia
         			</h1>
@@ -77,8 +77,8 @@ class RegisterForm extends Component {
             			id="idNum" ref="idNum"type="text" placeholder="Student ID Number"/>
         			</div>
         			<div class="flex items-center justify-center mb-6">
-						<button onClick={() => this.backTrack()} class="Rectangle bg-purple hover:purple-blue-dark text-white font-bold py-2 px-4 md:mr-2 rounded" type="button">Cancel</button>
-            			<input class="Rectangle bg-purple hover:purple-blue-dark text-white font-bold py-2 px-4 md:ml-2 rounded" type="submit" value="Register" />
+						<button onClick={() => this.backTrack()} class="Rectangle bg-transparent border border-white text-white hover:border-grey hover:text-grey font-bold py-2 px-4 md:mr-2 rounded" type="button">Cancel</button>
+            			<input class="Rectangle cursor-pointer bg-transparent border border-white text-white hover:border-grey hover:text-grey font-bold py-2 px-4 md:ml-2 rounded" type="submit" value="Register" />
         			</div>
         			</form>
         		</div>     
