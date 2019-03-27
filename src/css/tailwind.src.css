@@ -1,3 +1,11 @@
 @tailwind preflight;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: freight-text-pro, serif;
+  
+    font-weight: 300;
+  
+    font-style: normal;
+  }

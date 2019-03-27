@@ -55,7 +55,7 @@ class Login extends React.Component {
             			<input class="Rectangle bg-transparent border border-white text-white hover:border-grey hover:text-grey font-bold py-2 px-4 md:ml-2 rounded" type="submit" value="Login" />
         			</div>
 					<div class="flex items-center justify-center">
-					<a class="flex flex-col text-left text-blue-light hover:text-blue text-s italic" onClick={() => this.goTo()} value="signup" style={{cursor: 'pointer'}}>Don't have an Account?</a>
+					<a class="flex flex-col text-left text-blue hover:text-blue-dark text-s font-bold italic" onClick={() => this.goTo()} value="signup" style={{cursor: 'pointer'}}>Don't have an Account?</a>
        			 	</div>
         			</form>
         		</div>     

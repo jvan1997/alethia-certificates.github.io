@@ -50,29 +50,27 @@ class Create extends Component {
   render() {
     return (
       
-        <div class="bg-cover-image  h-screen" >
-        <Bar />
-        <div class="flex items-center container-xl h-full mx-auto pt-24 bg-transparent rounded">
-	  <h1> Create Certificate </h1>
-          <img src={logo} alt="Logo" />
-          <p>
-            Issue and Verify digital certificates with Ethereum Smart Contracts
-          </p>
+        <div class="flex justify-center items-center h-screen" >
+        <div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
+	  <h1 class=" font-fancy font-bold text-lg text-white mb-4 pl-16 text-3xl "> Create Certificate </h1>
     <form onSubmit={this.handleSubmit}>
-            <label>
-                First Name:
-                <input id="name" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
-                <br />
-                Last Name:
-                <input id="surname" type="text" name="surname" value={this.state.surname} onChange={this.handleChange}/>
-            </label>
-        <br />
-            Signature ID:
-            <input id="sigid"  type="text" name="sigid"  onChange={this.handleChange}/>
-        <br />
-            Major:
-             <select id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
-		        <option value="-1"> Major </option>
+            <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">First Name:</p>
+                <input class="shadow ml-12 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
+                </div>
+                <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">Last Name:</p>
+                <input class="shadow ml-13 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="surname" type="text" name="surname" value={this.state.surname} onChange={this.handleChange}/>
+                </div>
+                <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">Signature ID:</p>
+                <input class="shadow ml-11 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="sigid"  type="text" name="sigid"  onChange={this.handleChange}/>
+                </div>
+        <div class="flex justify-left pl-4 col-md-6 items-center ">
+            <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
+            
+             <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
+		        <option value="-1"> Select </option>
             <option value="Aerospace">Aerospace</option>
             <option value="Biomedical">Biomedical</option>
             <option value="Bioengineering">Bioengineering</option>
@@ -82,22 +80,31 @@ class Create extends Component {
 		        <option value="Electrical">Electrical</option>
             <option value="Industrial">Industrial</option>
             <option value="Mechanical">Mechanical</option>
-            <option value="BS Software Engineering">BS Software Engineering</option>
+            <option value="BS Software Engineering">Software </option>
 
           </select>
-        <br />
-            Units Completed:
-            <input id="units" type="text" name="units" value={this.state.units} onChange={this.handleChange}/>
-        <br />
-	    <Button onClick={() => this.backTrack()}> Cancel</Button>
-            <input type="submit" value="Generate" />
-           
+          </div>
+        <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">Units Completed:</p>
+                <input class="shadow ml-2 mt-2 mb-2 appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="units" type="text" name="units" value={this.state.units} onChange={this.handleChange}/>
+                </div>
+        <div class="pl-4">
+        <button class="inline-block h-12 w-32 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 mr-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" onClick={() => this.backTrack()}> Cancel</button>
+        <input class="inline-block h-12 w-32 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 mr-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" type="submit" value="Generate" />
+        </div>
     </form>
 
         <div>
             <form>
-                <input type="file" name="file" onChange={this.handlePDFSubmit } />
-                <br />
+            <div class="flex items-center justify-center bg-transparent">
+    <label class="w-48 h-14 flex flex-col items-center bg-transparent rounded shadow-lg tracking-wide uppercase border-2 border-white cursor-pointer hover:border-4 ">
+        <svg class="w-8 h-8" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+        </svg>
+        <span class="mt-2 text-white font-fancy font-bold text-base leading-normal">Upload</span>
+        <input type='file' class="hidden" name="file" onChange={this.handlePDFSubmit } />
+    </label>
+</div>
                 
             </form>
             </div>
@@ -147,11 +154,12 @@ class Create extends Component {
         entry().update({"certificate":relevantState}).then(function() {
             alert("Created certificate");
         });
-        this.backTrack();
+        
       }
       if (response.status >= 400) {
         alert("Invalid sigid")
       }
+      this.backTrack();
     })
 
 

@@ -228,6 +228,9 @@ module.exports = {
       'Courier New',
       'monospace',
     ],
+    'fancy':[
+      'freight-text-pro'
+    ]
   },
 
 
@@ -707,7 +710,10 @@ module.exports = {
     '6': '1.5rem',
     '8': '2rem',
     '10': '2.5rem',
+    '11': '2.75rem',
     '12': '3rem',
+    '13': '3.25rem',
+    '14': '3.5rem',
     '16': '4rem',
     '20': '5rem',
     '24': '6rem',
