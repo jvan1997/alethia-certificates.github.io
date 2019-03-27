@@ -15,7 +15,7 @@ class About extends React.Component {
 	render() {
     	return (
 			<div class="flex items-center h-screen w-full">
-    			<div class="h-screen w-screen rounded pt-16 font-fancy font-bold">
+    			<div class="container-xl h-screen w-screen rounded pt-24 font-fancy font-bold">
 					<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> About </h1>
  					<p class="w-full text-xl font-fancy font-bold block text-white text-center justify-center mb-6">This is the temporary about page for Alethia that will explain what alethia is, etc etc. And context.</p>
 		
