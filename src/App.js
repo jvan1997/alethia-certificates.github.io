@@ -29,7 +29,7 @@ class App extends Component {
       return (
 
 	        <div class="bg-cover-image h-screen" >
-          <div class="opacity-100">
+          <div>
 	        <Bar />
 	        <Home />
 	        </div>
@@ -40,7 +40,7 @@ class App extends Component {
       return (
         
       <div class="bg-cover-image opacity-100 h-screen">
-      <div class="opacity-100">
+      <div >
       <Bar />
       <Unsigned />
       </div>

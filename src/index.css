@@ -3657,7 +3657,21 @@ table {
 .ml-16 {
   margin-left: 4rem;
 }
+.mt-18 {
+  margin-top: 4.5rem;
+}
 
+.mr-18 {
+  margin-right: 4.5rem;
+}
+
+.mb-18 {
+  margin-bottom: 4.5rem;
+}
+
+.ml-18 {
+  margin-left: 4.5rem;
+}
 .mt-20 {
   margin-top: 5rem;
 }

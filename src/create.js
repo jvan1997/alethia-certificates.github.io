@@ -89,7 +89,7 @@ class Create extends Component {
                 <input class="shadow ml-2 mt-2 mb-2 appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="units" type="text" name="units" value={this.state.units} onChange={this.handleChange}/>
                 </div>
         <div class="pl-4">
-        <button class="inline-block h-12 w-32 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 mr-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" onClick={() => this.backTrack()}> Cancel</button>
+        <button class="inline-block h-12 w-32 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 mr-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" type="button" onClick={() => this.backTrack()}> Cancel</button>
         <input class="inline-block h-12 w-32 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 mr-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" type="submit" value="Generate" />
         </div>
     </form>
@@ -131,7 +131,11 @@ class Create extends Component {
         "major": this.state.major,
         "units": this.state.units
     }
-
+    entry().update({"certificate":relevantState}).then(function() {
+        alert("Created certificate");
+    });
+        this.backTrack();
+        return;
     // https://stackoverflow.com/questions/49686694/uploading-a-file-using-fetch-in-reactjs
     let url = 'http://localhost:8080/check'
     let options = {
