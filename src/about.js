@@ -6,7 +6,7 @@ import { Button} from 'react-bootstrap';
 import './App.css';
 import { withRouter } from 'react-router-dom';
 import Bar from './bar';
-class AboutPage extends React.Component {
+class About extends React.Component {
 	constructor(props){
   		super(props);
   		
@@ -14,12 +14,15 @@ class AboutPage extends React.Component {
 
 	render() {
     	return (
-	<div>
-		<Bar />
-        This is the temporary about page for Alethia that will explain what alethia is, etc etc. And context.
-	</div>
+			<div class="flex items-center h-screen w-full">
+    			<div class="h-screen w-screen rounded pt-16 font-fancy font-bold">
+					<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> About </h1>
+ 					<p class="w-full text-xl font-fancy font-bold block text-white text-center justify-center mb-6">This is the temporary about page for Alethia that will explain what alethia is, etc etc. And context.</p>
+		
+				</div>
+			</div>
 	)	
 	}
 }
 
-export default withRouter(AboutPage);
+export default withRouter(About);

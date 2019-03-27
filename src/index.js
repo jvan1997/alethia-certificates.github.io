@@ -11,7 +11,7 @@ import { createBrowserHistory } from 'history';
 import Error from "./Error";
 
 import CreateCert from "./CreateCert";
-import About from "./about";
+import AboutPage from "./aboutPage";
 
 import createPage from "./createPage";
 import Profile from "./profilepage";
@@ -40,7 +40,7 @@ ReactDOM.render(
 	<Route exact path='/profile' component={Profile}/>	
     <Route exact path='/verify' component={Verify}/>	
     <Route exact path='/profile/editCert' component={Edit}/>
-    <Route exact path='/about' component={About}/>
+    <Route exact path='/about' component={AboutPage}/>
     <Route component={Error}/>
     </Switch>
     </Router>, document.getElementById('root')
