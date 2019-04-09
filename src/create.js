@@ -38,6 +38,7 @@ class Create extends Component {
             sigid: '', 
             major: '', 
             units: '',
+            file: undefined,
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -129,13 +130,10 @@ class Create extends Component {
         "surname": this.state.surname,
         "sigid": this.state.sigid,
         "major": this.state.major,
-        "units": this.state.units
+        "units": this.state.units,
+        "file": this.state.file
     }
-    entry().update({"certificate":relevantState}).then(function() {
-        alert("Created certificate");
-    });
-        this.backTrack();
-        return;
+    
     // https://stackoverflow.com/questions/49686694/uploading-a-file-using-fetch-in-reactjs
     let url = 'http://localhost:8080/check'
     let options = {
@@ -154,16 +152,24 @@ class Create extends Component {
     check().then((response)=>{
         console.log(response)
         console.log("abc")
+        delete relevantState.file
       if (response.status == 200) {
-        entry().update({"certificate":relevantState}).then(function() {
+          console.log("bcd")
+            entry().update({"certificate":relevantState}).then(
+            success => {
             alert("Created certificate");
-        });
+            },
+            err =>{
+                console.log(err)
+            }
         
+        );
+        this.backTrack();
       }
       if (response.status >= 400) {
         alert("Invalid sigid")
       }
-      this.backTrack();
+    //   this.backTrack();
     })
 
 
