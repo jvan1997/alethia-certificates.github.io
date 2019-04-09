@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import logo from './headerIcon.png';
 
 function user() {
-	    console.log("What:" + firebaseApp.auth().currentUser.email);
+	   // console.log("What:" + firebaseApp.auth().currentUser.email);
 		return firebaseApp.auth().currentUser;
 	}
 	function db() {
@@ -19,37 +19,37 @@ function user() {
 class Bar extends React.Component {
 	constructor(props){
 		  super(props);
-		  var that = this;
+
 		  this.state = {name:"",logged:false,}
-		  firebaseApp.auth().onAuthStateChanged(function(user) {
-			if (user) {
-				var data = {};
-				var getName = entry().get().then(function(doc) {
-					//console.log(doc.data().length);
-					data = doc.data();
-			//        console.log(people);
-					return data;
-				});
-				var namePromise = getName.then(function(datas){
-					console.log(datas);
-					that.setState({
-						...that.state,
-						name:datas['information']['name']
-				})});
-			} else {
-			  // No user is signed in.
-			}
-		  });
-  		
+  	
+ }
+ loadInfo(){
+	var that = this;
+	firebaseApp.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			var data = {};
+			var getName = entry().get().then(function(doc) {
+				//console.log(doc.data().length);
+				data = doc.data();
+		//        console.log(people);
+				return data;
+			});
+			var namePromise = getName.then(function(datas){
+			//	console.log(datas);
+				that.setState({
+					...that.state,
+					name:datas['information']['name']
+			})});
+		} else {
+			// No user is signed in.
+		}
+		});
  }
  componentDidMount() {
-	firebaseApp.auth().onAuthStateChanged(user => {
-		if(user){
-		  this.setState({ logged: true });
-		}
-	  else{
-		this.setState({ logged: false });
-	  }})}
+	let test = JSON.parse(localStorage.getItem("logged"));
+	console.log("bar"  + test);
+	this.setState({logged:test});
+}
 	goTo(event){
 		var destination = event.target.value;
 		this.props.history.push(`/${destination}`);
@@ -59,15 +59,21 @@ class Bar extends React.Component {
 		this.props.history.push(`/${destination}`);
 	}
 	signOutUser(){
-		this.props.history.push('/');
+
         firebaseApp.auth().signOut().then(function() {
-            console.log('Signed Out');
-          }, function(error) {
+						console.log('Signed Out');
+						let tokenKey = "logged";
+						let tokenValue = false;
+						window.localStorage.setItem(tokenKey, JSON.stringify(tokenValue));
+						this.props.history.push('/');
+          }.bind(this), function(error) {
             console.error('Sign Out Error', error);
-          });
+					});
+
     }
 	render() {
-		if(this.state.logged){
+    let test = JSON.parse(localStorage.getItem("logged"));
+		if(test){
 	return(
 	<nav class="flex items-center justify-between flex-wrap bg-transparent p-2">
 	<div class="flex items-center flex-no-shrink text-white pl-6 mr-6">

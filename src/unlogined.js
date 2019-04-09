@@ -16,14 +16,44 @@ function entry() {
 } 
 
 class Unsigned extends Component {
-	constructor(props) {
-        super(props);
-    }
+		constructor(props) {
+			super(props);
+			this.state = {
+				i : 0,
+				j: 0,
+				maintxt :'Issue and Verify digital certificates with Ethereum Smart Contracts',
+				maintxt2: 'Login or Signup to Begin',
+				speed : 100,
+				displaytxt: '',
+			};
+
+
+	}
+	componentDidMount() {
+		this.timeout = setInterval(() => {
+		  if (this.state.i < this.state.maintxt.length) {
+			let newI = this.state.i+1;
+			this.setState({ i: newI });
+				}
+				else{
+					if (this.state.j < this.state.maintxt2.length){
+							let newJ = this.state.maintxt2.length;
+							this.setState({ j: newJ });
+				}
+			}
+	  	
+		}, 100);
+	  }
+	  componentWillUnmount() {
+		clearInterval(this.timeout);
+	  }
     goTo(event){
 		var destination = event.target.value;
 		this.props.history.push(`/${destination}`);
 	}
   render() {
+		let displaytext = this.state.maintxt.substring(0,this.state.i);
+		let displaytext2 = this.state.maintxt2.substring(0,this.state.j);
     return (
       <div class="flex items-center h-full " >
 				<div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
@@ -32,16 +62,16 @@ class Unsigned extends Component {
         		 Home
         		</p>
 
-				<div class="w-full block text-white  text-xl font-bold text-center font-fancy justify-center mb-16" >
+				<div class="w-full block text-white  text-3xl font-bold text-center font-fancy justify-center mb-16" >
 						{/* <div>
 						<img class="mr-16 w-1/2" style={{cursor:'pointer'}} src={create} onClick={e => this.goTo(e)} alt="create" />
 						</div>
 						<img class="ml-16 w-1/3" style={{cursor:'pointer'}} src={verify} onClick={e => this.goTo(e)} alt="verify" /> */}
 			  <p class="mb-16">
-            Issue and Verify digital certificates with Ethereum Smart Contracts
+           {displaytext}
           </p>
-          <p>
-          Login or Signup to Begin
+          <p class="text-xl">
+						{displaytext2}
           </p>
 				</div>
 				</div>

@@ -22,25 +22,37 @@ class RegisterForm extends Component {
 	e.preventDefault()
 	let email = this.refs.email.value;
     	let password = this.refs.password.value;
-        firebaseApp.auth().createUserWithEmailAndPassword(email,password)
+        firebaseApp.auth().createUserWithEmailAndPassword(email,password).then(message=>{
+			firebaseApp.auth().signInWithEmailAndPassword(email,password).then(response=>{
+				let tokenKey = "logged";
+						let tokenValue = true;
+						window.localStorage.setItem(tokenKey, JSON.stringify(tokenValue));
+						this.props.history.push('/');
+			})
+            .catch(error => {
+				this.setState({error})
+				let tokenKey = "logged";
+				let tokenValue = false;
+				window.localStorage.setItem(tokenKey, JSON.stringify(tokenValue));
+				alert(error);
+			});
+			let firstname = this.refs.firstname.value;
+			let surname = this.refs.surname.value;
+			let idNum = this.refs.idNum.value;
+			var information = {
+			name:firstname, lastname:surname, idNum:idNum
+		};
+			var certificate = {};
+			db().doc(email.toLowerCase()).set({
+            information,certificate
+        });
+		})
             .catch(error => {
                 this.setState({error})
 		alert(error)
 			});
 		//	this.props.history.push('/login');
-	let firstname = this.refs.firstname.value;
-	let surname = this.refs.surname.value;
-	let idNum = this.refs.idNum.value;
-	var information = {
-			name:firstname, lastname:surname, idNum:idNum
-		};
 	
-	var certificate = {};
-	
-	db().doc(email.toLowerCase()).set({
-            information,certificate
-        });
-	this.props.history.push('/');
 	}
 	backTrack(){
 		this.props.history.goBack();

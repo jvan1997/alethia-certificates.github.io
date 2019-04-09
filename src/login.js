@@ -13,15 +13,23 @@ class Login extends React.Component {
   		}
  }
 		handleSignIn(e) {
-			console.log(e);
+	//		console.log(e);
 			e.preventDefault()
 			let email = this.refs.email.value
 			let password = this.refs.password.value
-			firebaseApp.auth().signInWithEmailAndPassword(email,password)
-            .catch(error => {
-                this.setState({error})
-		alert(error);
+			firebaseApp.auth().signInWithEmailAndPassword(email,password).then(response=>{
+				let tokenKey = "logged";
+						let tokenValue = true;
+						window.localStorage.setItem(tokenKey, JSON.stringify(tokenValue));
+						this.props.history.push('/');
 			})
+            .catch(error => {
+				this.setState({error})
+				let tokenKey = "logged";
+				let tokenValue = false;
+				window.localStorage.setItem(tokenKey, JSON.stringify(tokenValue));
+				alert(error);
+			});
 			
 		}
 		goTo(){

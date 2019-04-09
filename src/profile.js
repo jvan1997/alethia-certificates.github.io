@@ -8,6 +8,10 @@ import './App.css';
 import { withRouter } from 'react-router-dom';
 import Bar from './bar';
 import {user,db,entry} from './functions';
+import logo from './headerIcon.png';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import ReactDOM from 'react-dom';
 class Profile extends React.Component {
 	constructor(props){
     super(props);
@@ -38,6 +42,22 @@ editCert = (e) => {
 }
 createCert = (e) => {
 	this.props.history.push("/create");
+}
+downLoad= (e) => {
+	html2canvas(document.querySelector("#certificate")).then(canvas => {
+		const imgData = canvas.toDataURL('image/png');
+		const pdf = new jsPDF('p', 'mm', [500,600]);
+		console.log(canvas.width);
+		console.log(canvas);
+		console.log(imgData.width);
+		console.log(imgData);
+		console.log("second" + pdf.internal.pageSize.width);
+		// var imgOffset = (pdf.internal.pageSize.width) / 8;
+		// console.log("HMM" + imgOffset);
+		pdf.addImage(imgData,'PNG',0,0,canvas.width*0.2,canvas.height*0.2,"a","FAST");
+		pdf.save("certificate.pdf");
+	});
+
 }
 
 	render() {
@@ -79,49 +99,41 @@ createCert = (e) => {
 		//	console.log(fname);
 			return (
 				<div class="flex items-center h-full " >
-				<div class="container-xl h-full mx-auto pt-16 bg-transparent rounded">
+				<div class="container-sm h-full mx-auto pt-16 bg-transparent rounded align-middle content-center items-center">
 
 					<p class="w-full block text-white text-5xl font-fancy font-bold text-center justify-center pl-8 mb-10">
 						Profile - Certificate
 					</p>
-					
-					{/* <div class="max-w-sm mb-10 rounded overflow-hidden shadow-lg bg-white">
-  						<img class="w-full" src="https://tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains"/>
-  						<div class="px-6 py-4">
-   	 						<div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-    							<p class="text-grey-darker text-base">
-      								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-    							</p>
+					<div class="flex">
+					<div id="hm" class="container-sm flex flex-col rounded border-4 ">
+					<div id="certificate" class="w-auto align-center bg-white container-sm shadow-lg text-center font-fancy font-bold  px-8 pt-6 pb-8 m-auto">
+						<div class="text text-xs mb-2"> This certificate is intended for verification purposes.</div>
+						<div class="flex flex-col items-center mt-2 mb-8">
+							<div class="w-1/2  border-b mt-2"/>
 						</div>
 						
-					</div>  
-					<div class="flex justify-center col-md-6 items-center" >
-						<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.offLoad}>Close Certificate</button>
-						<button class="inline-block ml-12 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.editCert}>Edit Certificate</button>
-					</div> */}
-					<div class="container-xl">
-					<div class="max-w-md w-full pb-4 lg:flex mb-10 ">
-  <div class="bg-white h-48 w-full lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{"background-image": `url('${create}')`}} title="Woman holding a mug">
-  </div>
-  <div class="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r px-4 pt-4 flex flex-col justify-between leading-normal">
-    <div class="mb-8">
-      <p class="text-sm text-grey-dark font-fancy font-bold flex items-center">
-       Certificate Information
-      </p>
-      <div class="text-black font-bold font-fancy text-xl mb-2">Name:   {fname} {lname}</div>
-	  <div class="text-black font-bold font-fancy text-xl mt-2 mb-2">Units Completed: {units}</div>
-	  <div class="text-black font-bold font-fancy text-xl mt-2 mb-2">Major: {major}</div>
-    </div>
-    <div class="flex items-center">
-      <div class="w-10 h-10 rounded-full mr-4"></div>
-    </div>
-  </div>
-</div>
-<div class="flex justify-center col-md-6 items-center" >
-						<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.offLoad}>Close Certificate</button>
-						<button class="inline-block ml-12 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.editCert}>Edit Certificate</button>
-					</div> 
-				</div>		
+						<div class="text text-3xl mb-2"> {fname} </div>
+						
+						<div class="text text-3xl mb-2"> {lname} </div>
+						<div class="text text-xl mt-2 mb-8"> {major}</div>
+
+						<div class="flex flex-col items-center">
+						</div>
+						<div class="flex flex-col items-center mt-2 mb-8">
+							<div class="w-1/2  border-b mt-2"/>
+						</div>
+						<div class="text-base italic mb-14"> This certifies that the named individual's college degree is valid.</div>
+						<img class="border rounded fill-current mr-2 " width="100" height="100" src={logo} />
+					</div>
+					
+					</div>	
+					<div class="mt-8 flex flex-col">
+					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.downLoad}>Download Certificate</button>
+					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.editCert}>Edit Certificate</button>
+					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.offLoad}>Close Certificate</button>
+
+					</div>
+					</div>
 				</div>	
 				</div>
 				)	

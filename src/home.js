@@ -7,23 +7,47 @@ import verify from './Images/verify.png';
 import {withRouter} from "react-router-dom";
 class Home extends React.Component{
 	constructor(props) {
-        	super(props);
-	}	
+			super(props);
+			this.state = {
+				i : 0,
+				maintxt :'Decentralized Certificates on the Ethereum Blockchain',
+				speed : 100,
+				displaytxt: '',
+			};
+
+
+	}
+	componentDidMount() {
+		this.timeout = setInterval(() => {
+		  if (this.state.i < this.state.maintxt.length) {
+			let newI = this.state.i+1;
+			this.setState({ i: newI });
+	  		}
+	  	// 	else{
+		// 		console.log("eh");
+		//   		this.setState({i:0});
+	  	// }
+		}, 125);
+	  }
+	  componentWillUnmount() {
+		clearInterval(this.timeout);
+	  }
+		
 	goTo(event){
 		var destination = event.target.value;
 		this.props.history.push(`/${destination}`);
 	}
 	render() {
-		
+			let displaytext = this.state.maintxt.substring(0,this.state.i);
 			return (
 				<div class="flex items-center h-full " >
 				<div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
 
-				<p class="w-full block text-white text-5xl font-fancy font-bold text-center justify-center mb-16">
+				<p class="w-full block text-white text-5xl font-fancy font-bold text-center justify-center mb-8">
         			Alethia
         		</p>
-
-				<div class="flex justify-center col-md-6 items-center" >
+				<span class="text-white text-3xl font-fancy font-bold text-center justify-center mb-8" >{displaytext}</span>
+				<div class="mt-8 flex justify-center col-md-6 items-center" >
 						{/* <div>
 						<img class="mr-16 w-1/2" style={{cursor:'pointer'}} src={create} onClick={e => this.goTo(e)} alt="create" />
 						</div>

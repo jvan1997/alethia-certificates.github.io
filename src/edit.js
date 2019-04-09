@@ -75,17 +75,16 @@ class Edit extends Component {
                 <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
                 
                  <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-grey-darker ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" defaultValue={majors} value={majors} onChange={this.handleChange} >	
-                    <option value="-1"> Select </option>
-                <option value="Aerospace">Aerospace</option>
-                <option value="Biomedical">Biomedical</option>
-                <option value="Bioengineering">Bioengineering</option>
-                    <option value="Chemical">Chemical</option>
-                <option value="Civil">Civil</option>
-                <option value="Computer">Computer</option>
-                    <option value="Electrical">Electrical</option>
-                <option value="Industrial">Industrial</option>
-                <option value="Mechanical">Mechanical</option>
-                <option value="BS Software Engineering">Software </option>
+                 <option value="BS Aerospace Engineering">Aerospace</option>
+            <option value="BS Biomedical Engineering">Biomedical</option>
+            <option value="BS Bioengineering Engineering">Bioengineering</option>
+		        <option value="BS Chemical Engineering">Chemical</option>
+            <option value="BS Civil Engineering">Civil</option>
+            <option value="BS Computer Engineering">Computer</option>
+		        <option value="BS Electrical Engineering">Electrical</option>
+            <option value="BS Industrial Engineering">Industrial</option>
+            <option value="BS Mechanical Engineering">Mechanical</option>
+            <option value="BS Software Engineering">Software </option>
     
               </select>
               </div>
@@ -125,16 +124,15 @@ class Edit extends Component {
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
             
              <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-grey-darker ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
-		        <option value="-1"> Select </option>
-            <option value="Aerospace">Aerospace</option>
-            <option value="Biomedical">Biomedical</option>
-            <option value="Bioengineering">Bioengineering</option>
-		        <option value="Chemical">Chemical</option>
-            <option value="Civil">Civil</option>
-            <option value="Computer">Computer</option>
-		        <option value="Electrical">Electrical</option>
-            <option value="Industrial">Industrial</option>
-            <option value="Mechanical">Mechanical</option>
+            <option value="BS Aerospace Engineering">Aerospace</option>
+            <option value="BS Biomedical Engineering">Biomedical</option>
+            <option value="BS Bioengineering Engineering">Bioengineering</option>
+		        <option value="BS Chemical Engineering">Chemical</option>
+            <option value="BS Civil Engineering">Civil</option>
+            <option value="BS Computer Engineering">Computer</option>
+		        <option value="BS Electrical Engineering">Electrical</option>
+            <option value="BS Industrial Engineering">Industrial</option>
+            <option value="BS Mechanical Engineering">Mechanical</option>
             <option value="BS Software Engineering">Software </option>
 
           </select>

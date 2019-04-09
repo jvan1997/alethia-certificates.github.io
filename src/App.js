@@ -14,17 +14,11 @@ class App extends Component {
           logged:false,
       };
     }  
-    componentDidMount() {
-      firebaseApp.auth().onAuthStateChanged(user => {
-          if(user){
-            this.setState({ logged: true });
-          }
-        else{
-          this.setState({ logged: false });
-        }})}
+
   render() {
-   // console.log(this.state.logged);
-    if(this.state.logged){ 
+    let test = JSON.parse(localStorage.getItem("logged"));
+    console.log(test);
+    if(test){ 
       //console.log("I went here");    
       return (
 
