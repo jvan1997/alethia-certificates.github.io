@@ -49,9 +49,11 @@ http.createServer(function (req, res) {
               // console.log(strs)
               let name = ""
               let major = ""
+              let units = ""
 
               let nameToken = "STUDENT NAME:"
               let majorToken = "MAJOR:"
+              let schoolUnits = "SJSU CUM:"
               let returnObject = {}
 
               for (var i = 0; i < strs.length; i++) {
@@ -64,6 +66,11 @@ http.createServer(function (req, res) {
                   major = strs[i].split(majorToken)[1].trim()
                   // console.log(major)
                   returnObject.major = major
+                }
+                if (strs[i].includes(schoolUnits)) {
+                  units = strs[i].split(schoolUnits)[1].trim()
+                  // console.log(major)
+                  returnObject.units = units
                 }
 
               }
