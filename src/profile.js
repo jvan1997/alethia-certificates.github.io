@@ -44,17 +44,18 @@ createCert = (e) => {
 	this.props.history.push("/create");
 }
 downLoad= (e) => {
-	html2canvas(document.querySelector("#certificate")).then(canvas => {
+	html2canvas(document.querySelector("#certificate"),{width:892, height:964}).then(canvas => {
 		const imgData = canvas.toDataURL('image/png');
-		const pdf = new jsPDF('p', 'mm', [500,600]);
+		const pdf = new jsPDF({orientation:'p', unit:'px'});
 		console.log(canvas.width);
 		console.log(canvas);
-		console.log(imgData.width);
-		console.log(imgData);
+		console.log(`canvas.width is ${canvas.width}`);
+		console.log(`canvas.height is ${canvas.height}`)
+		// console.log(imgData);
 		console.log("second" + pdf.internal.pageSize.width);
 		// var imgOffset = (pdf.internal.pageSize.width) / 8;
 		// console.log("HMM" + imgOffset);
-		pdf.addImage(imgData,'PNG',0,0,canvas.width*0.2,canvas.height*0.2,"a","FAST");
+		pdf.addImage(imgData,'PNG',0,0,892,964,"a","FAST");
 		pdf.save("certificate.pdf");
 	});
 
