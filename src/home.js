@@ -27,7 +27,7 @@ class Home extends React.Component{
 		// 		console.log("eh");
 		//   		this.setState({i:0});
 	  	// }
-		}, 125);
+		}, 80);
 	  }
 	  componentWillUnmount() {
 		clearInterval(this.timeout);

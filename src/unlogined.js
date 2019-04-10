@@ -42,7 +42,7 @@ class Unsigned extends Component {
 				// }
 			// }
 	  	
-		}, 100);
+		}, 80);
 	  }
 	  componentWillUnmount() {
 		clearInterval(this.timeout);
