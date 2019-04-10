@@ -44,11 +44,12 @@ createCert = (e) => {
 	this.props.history.push("/create");
 }
 downLoad= (e) => {
-	html2canvas(document.querySelector("#certificate"),{width:892, height:964}).then(canvas => {
+	html2canvas(document.querySelector("#certificate"),{ width: 892,
+	height: 964
+  }).then(canvas => {
 		const imgData = canvas.toDataURL('image/png');
-		const pdf = new jsPDF({orientation:'p', unit:'px'});
-		console.log(canvas.width);
-		console.log(canvas);
+		const pdf = new jsPDF({orientation:'p',unit:'px'});
+
 		console.log(`canvas.width is ${canvas.width}`);
 		console.log(`canvas.height is ${canvas.height}`)
 		// console.log(imgData);
