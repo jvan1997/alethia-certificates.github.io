@@ -4,6 +4,7 @@ import './App.css';
 import { withRouter } from 'react-router-dom';
 import jon from './Images/jonathan.jpg';
 import jenil from './Images/jenil.jpg';
+import alethia from './Images/Alethia-Arch-Revised.png'
 class About extends React.Component {
 	constructor(props){
 		  super(props);
@@ -13,19 +14,19 @@ class About extends React.Component {
 				jenil:{
 					name: 'Jenil Thakker',
 					about: '',
-					contribution: '',
+					contribution: 'Implemented the Ethereum Blockchain of Alethia',
 					img: jenil,
 				},
 				jonathan:{
 					name: 'Jonathan Van',
 					about: '',
-					contribution: '',
+					contribution: 'Designed and implemented the UI/UX of Alethia',
 					img: jon,
 				},
 				vincent:{
 					name: 'Vincent Diep',
 					about: '',
-					contribution: '',
+					contribution: 'Set up the parsing and server of Alethia',
 					img: jon,
 				}
 			  }
@@ -60,11 +61,11 @@ renderTeam()
 
             <article class="overflow-hidden bg-white rounded-lg shadow-lg">
 
-                <a href="#">
+                <div>
                     <img alt="Placeholder" class="block h-auto w-full border-b-2 border-grey" src={this.state.team[key]["img"]}/>
-                </a>
+				</div>
 
-                <header class="flex items-center text-center flex-col justify-center leading-tight p-2 md:p-4">
+                <header class="flex items-center text-center flex-col justify-center leading-tight  md:p-2 md:pb-4">
                     <h1 class="text-lg">
                         <span class="no-underline text-black" >
                             {this.state.team[key]["name"]}
@@ -110,11 +111,19 @@ renderTeam()
 			<div class="flex items-center h-screen w-full">
 			<div class="container-xl h-screen w-screen rounded pt-24 font-fancy justify-center font-bold">
 				<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> About - Alethia </h1>
+				
+				
+
+<div class="mt-8 flex justify-center col-md-6 items-center w-1/3 overflow-hidden" >
+	<img alt="Placeholder" class="block rounded h-auto w-full " src={alethia}/>
+</div>
+
+				
 				<div class="mt-8 flex justify-center col-md-6 items-center" >
 					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="about" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Return</button>
 					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="team" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Team</button>
 	
-					</div>
+				</div>
 			</div>
 			</div>);
 	}
