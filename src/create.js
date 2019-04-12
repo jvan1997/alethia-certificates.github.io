@@ -6,6 +6,8 @@ import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import Bar from './bar';
+import './progress-bar-styles.css';
+import CircularProgressBar from 'react-circular-progressbar'
 function user() {
 //    console.log("What:" + auth.currentUser.email);
     return firebaseApp.auth().currentUser;
@@ -39,6 +41,7 @@ class Create extends Component {
             major: '', 
             units: '',
             file: undefined,
+            percentage:0
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -47,7 +50,10 @@ class Create extends Component {
     }  
         backTrack(){
      	this.props.history.goBack();
-     }
+     }  
+     componentWillUnmount() {
+		clearInterval(this.timeout);
+	  }
   render() {
     return (
       
@@ -108,6 +114,10 @@ class Create extends Component {
 </div>
                 
             </form>
+            <div class="progbar" style={{width:'100px', height:'100px', margin:'auto', padding:'10px'}}>
+            <CircularProgressBar percentage={this.state.percentage} className="progbar" />
+            </div>
+            
             </div>
 
               </div>
@@ -145,6 +155,20 @@ class Create extends Component {
     for (let key in relevantState) {
     options.body.append(key, relevantState[key]);
     }
+
+
+    
+    this.timeout = setInterval(() => {
+        if (this.state.percentage < 100) {
+          let newP = this.state.percentage+1;
+          this.setState({ percentage: newP });
+            }
+        // 	else{
+      // 		console.log("eh");
+      //   		this.setState({i:0});
+        // }
+      }, 250);
+
     // https://stackoverflow.com/questions/38794180/fetch-data-with-react
     let check = ()=>{
         return fetch(url, options)
