@@ -156,45 +156,67 @@ class Create extends Component {
     options.body.append(key, relevantState[key]);
     }
 
-
+    var xhr = new XMLHttpRequest()
     
-    this.timeout = setInterval(() => {
-        if (this.state.percentage < 100) {
-          let newP = this.state.percentage+1;
-          this.setState({ percentage: newP });
-            }
-        // 	else{
-      // 		console.log("eh");
-      //   		this.setState({i:0});
-        // }
-      }, 250);
+    xhr.upload.addEventListener("progress", e=>{
+        if( e.lengthComputable){
+            var percentComplete = Math.round(e.loaded * 100 / e.total)
+            this.setState({ percentage: percentComplete/2 })
+        }
+        else{
+            console.log("cant compute size")
+        }
+    },false)
+    
+    // xhr.setRequestHeader("Content-Type","multipart/form-data")
+
+    xhr.onreadystatechange = function(){
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            console.log(xhr.responseText)
+        }
+        
+    }
+
+
+    // this.timeout = setInterval(() => {
+    //     if (this.state.percentage < 100) {
+    //       let newP = this.state.percentage+1;
+    //       this.setState({ percentage: newP });
+    //         }
+    //     // 	else{
+    //   // 		console.log("eh");
+    //   //   		this.setState({i:0});
+    //     // }
+    //   }, 250);
+    xhr.open("POST", url, true)
+    xhr.send(options.body)
 
     // https://stackoverflow.com/questions/38794180/fetch-data-with-react
-    let check = ()=>{
-        return fetch(url, options)
-    }
-    check().then((response)=>{
-        console.log(response)
-        console.log("abc")
-        delete relevantState.file
-      if (response.status == 200) {
-          console.log("bcd")
-            entry().update({"certificate":relevantState}).then(
-            success => {
-            alert("Created certificate");
-            },
-            err =>{
-                console.log(err)
-            }
+    // let check = ()=>{
+    //     return fetch(url, options)
+    // }
+    // check().then((response)=>{
+    //     console.log(response)
+    //     console.log("abc")
+    //     delete relevantState.file
+    //   if (response.status == 200) {
+    //       console.log("bcd")
+    //         entry().update({"certificate":relevantState}).then(
+    //         success => {
+    //         alert("Created certificate");
+    //         },
+    //         err =>{
+    //             console.log(err)
+    //         }
         
-        );
-        this.backTrack();
-      }
-      if (response.status >= 400) {
-        alert("Invalid sigid")
-      }
-    //   this.backTrack();
-    })
+    //     );
+    //     this.backTrack();
+    //   }
+    //   if (response.status >= 400) {
+    //     alert("Invalid sigid")
+    //   }
+    // //   this.backTrack();
+    // })
 
 
 
