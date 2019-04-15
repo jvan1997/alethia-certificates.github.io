@@ -1,6 +1,7 @@
+
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
-const compiledFactory = require('./build/CertificateRegistry.json');
+const compiledFactory = require('./Backstuff/build/RegisteredCertificate');
 const fs = require('fs-extra')
 
 const provider = new HDWalletProvider(
@@ -22,6 +23,8 @@ const deploy = async () => {
 
   console.log(compiledFactory.interface);
   console.log('Contract deployed to', result.options.address);
+  return [accounts[0],result,compiledFactory];
 
 }
-deploy();
+export {deploy};
+//deploy();

@@ -252,21 +252,9 @@ class Create extends Component {
             
 
         })
-    
-
-
-
-    // open file and print to console
-
-    // var fr = new FileReader()
-    // fr.onload = (e)=> {
-    //     var res = e.target.result
-    //     console.log(res)
-    // }
-
-    // var txt = fr.readAsText(file)
-    
 }
+
+
 
 
 
