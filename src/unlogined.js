@@ -21,8 +21,8 @@ class Unsigned extends Component {
 			this.state = {
 				i : 0,
 				j: 0,
-				maintxt :'Issue and Verify digital certificates with Ethereum Smart Contracts',
-				maintxt2: 'Login or Signup to Begin',
+				maintxt :'Welcome! Please login or signup to use Alethia',
+				
 				speed : 100,
 				displaytxt: '',
 			};
@@ -35,14 +35,14 @@ class Unsigned extends Component {
 			let newI = this.state.i+1;
 			this.setState({ i: newI });
 				}
-				else{
-					if (this.state.j < this.state.maintxt2.length){
-							let newJ = this.state.maintxt2.length;
-							this.setState({ j: newJ });
-				}
-			}
+				// else{
+				// 	if (this.state.j < this.state.maintxt2.length){
+				// 			let newJ = this.state.maintxt2.length;
+				// 			this.setState({ j: newJ });
+				// }
+			// }
 	  	
-		}, 100);
+		}, 80);
 	  }
 	  componentWillUnmount() {
 		clearInterval(this.timeout);
@@ -53,7 +53,7 @@ class Unsigned extends Component {
 	}
   render() {
 		let displaytext = this.state.maintxt.substring(0,this.state.i);
-		let displaytext2 = this.state.maintxt2.substring(0,this.state.j);
+	//	let displaytext2 = this.state.maintxt2.substring(0,this.state.j);
     return (
       <div class="flex items-center h-full " >
 				<div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
@@ -71,7 +71,7 @@ class Unsigned extends Component {
            {displaytext}
           </p>
           <p class="text-xl">
-						{displaytext2}
+						{/* {displaytext2} */}
           </p>
 				</div>
 				</div>
