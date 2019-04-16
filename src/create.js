@@ -41,7 +41,8 @@ class Create extends Component {
             major: '', 
             units: '',
             file: undefined,
-            percentage:0
+            progressBarPercentage:0,
+            progressBarPercentageText:'0%'
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -115,7 +116,7 @@ class Create extends Component {
                 
             </form>
             <div class="progbar" style={{width:'100px', height:'100px', margin:'auto', padding:'10px'}}>
-            <CircularProgressBar percentage={this.state.percentage} className="progbar" />
+            <CircularProgressBar percentage={this.state.progressBarPercentage} className="progbar" text={`${this.state.progressBarPercentageText}`} />
             </div>
             
             </div>
@@ -161,7 +162,7 @@ class Create extends Component {
     xhr.upload.addEventListener("progress", e=>{
         if( e.lengthComputable){
             var percentComplete = Math.round(e.loaded * 100 / e.total)
-            this.setState({ percentage: percentComplete/2 })
+            this.setState({ progressBarPercentage: percentComplete/2, progressBarPercentageText: (percentComplete/2)+ "%" })
         }
         else{
             console.log("cant compute size")
@@ -169,12 +170,55 @@ class Create extends Component {
     },false)
     
     // xhr.setRequestHeader("Content-Type","multipart/form-data")
-
+    var self = this
     xhr.onreadystatechange = function(){
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
             console.log(xhr.responseText)
-        }
+        console.log("abc")
+        delete relevantState.file
+
+        self.timeout = setInterval(() => {
+            if (self.state.progressBarPercentage < 80) {
+              let newP = self.state.progressBarPercentage+1;
+              self.setState({ progressBarPercentage: newP, progressBarPercentageText:newP+"%" });
+                }
+            // 	else{
+          // 		console.log("eh");
+          //   		this.setState({i:0});
+            // }
+          }, 250);
+
+        entry().update({"certificate":relevantState}).then(
+
+            success => {
+                self.timeout = setInterval(() => {
+                    if (self.state.progressBarPercentage < 100) {
+                      let newP = self.state.progressBarPercentage+1;
+                      self.setState({ progressBarPercentage: newP, progressBarPercentageText: newP+"%" });
+                        }
+                    	else{
+                            self.setState({ progressBarPercentage: 100, progressBarPercentageText:"Done!" })
+                            alert("Created certificate");
+                            self.backTrack();
+                        }
+                    }, 250);
+
+                
+            },
+            err =>{
+                console.log(err)
+                self.setState({ progressBarPercentageText:"Error parsing file" })
+            }
         
+        );
+        
+        
+        }
+        if(this.readyState === XMLHttpRequest.DONE && this.status>=422){
+                alert("Invalid sigid")
+     
+        }
+               
     }
 
 
