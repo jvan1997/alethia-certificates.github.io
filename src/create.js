@@ -42,7 +42,8 @@ class Create extends Component {
             units: '',
             file: undefined,
             progressBarPercentage:0,
-            progressBarPercentageText:'0%'
+            progressBarPercentageText:'0%',
+            showProgressBar:false
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -116,7 +117,8 @@ class Create extends Component {
                 
             </form>
             <div class="progbar" style={{width:'100px', height:'100px', margin:'auto', padding:'10px'}}>
-            <CircularProgressBar percentage={this.state.progressBarPercentage} className="progbar" text={`${this.state.progressBarPercentageText}`} />
+            { this.state.showProgressBar ? <CircularProgressBar percentage={this.state.progressBarPercentage} className="progbar" text={`${this.state.progressBarPercentageText}`} /> : null}
+            
             </div>
             
             </div>
@@ -135,6 +137,8 @@ class Create extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    this.setState({ showProgressBar:true, progressBarPercentage: 0, progressBarPercentageText: "0"})
     console.log(event)
     let relevantState = { 
         "name": this.state.name,
@@ -207,16 +211,33 @@ class Create extends Component {
             },
             err =>{
                 console.log(err)
-                self.setState({ progressBarPercentageText:"Error parsing file" })
+                self.setState({ progressBarPercentageText:"Error saving data" })
             }
         
         );
         
         
         }
-        if(this.readyState === XMLHttpRequest.DONE && this.status>=422){
+        if(this.readyState === XMLHttpRequest.DONE && this.status >= 400){
+
+            switch(this.status){
+                case 400:
+                alert("No file submitted")
+                self.setState({ progressBarPercentageText:"Error can't find file" })
+                break
+
+                case 422:
                 alert("Invalid sigid")
-     
+                self.setState({ progressBarPercentageText:"Error processing file" })
+                break
+
+                default:
+                alert("Error")
+                self.setState({ progressBarPercentageText:"Error" })
+
+            }
+
+
         }
                
     }
