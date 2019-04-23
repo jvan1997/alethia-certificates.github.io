@@ -5,6 +5,7 @@ import { Button} from 'react-bootstrap';
 import './App.css';
 import { withRouter } from 'react-router-dom';
 import logo from './headerIcon.png';
+import ethereum from './Images/ethereum.png'
 
 function user() {
 	   // console.log("What:" + firebaseApp.auth().currentUser.email);
@@ -78,6 +79,10 @@ class Bar extends React.Component {
 	<nav class="flex items-center justify-between flex-wrap bg-transparent p-2">
 	<div class="flex items-center flex-no-shrink text-white pl-6 mr-6">
 	<img class="border rounded fill-current mr-2 " width="60" height="60" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={logo} />
+	<button class="text-grey-darkest -mt-1 font-fancy font-bold  ml-2 mr-3 text-4xl cursor-pointer" value="" onClick={e => this.goTo(e)} > X </button>
+
+	<img class="rounded fill-current mr-2 " width="40" height="40" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={ethereum} />
+
 		</div>
 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 	<div class="text-sm lg:flex-grow">
