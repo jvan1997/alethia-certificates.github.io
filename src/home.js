@@ -10,8 +10,8 @@ class Home extends React.Component{
 			super(props);
 			this.state = {
 				i : 0,
-				maintxt :'Decentralized Certificates on the Ethereum Blockchain',
-				speed : 100,
+				maintxt :'Decentralized Certificates on Ethereum Blockchain.',
+				speed : 5,
 				displaytxt: '',
 			};
 

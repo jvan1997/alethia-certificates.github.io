@@ -6,6 +6,8 @@ import { Button} from 'react-bootstrap';
 import Home from './home';
 import Bar from './bar';
 import Unsigned from './unlogined';
+import Particles from 'react-particles-js';
+
 class App extends Component {
  
 	constructor(props) {
@@ -21,11 +23,29 @@ class App extends Component {
     if(test){ 
       //console.log("I went here");    
       return (
-
 	        <div class="bg-cover-image h-screen" >
           <div>
 	        <Bar />
 	        <Home />
+          <Particles
+    params={{
+	    "particles": {
+	        "number": {
+	            "value": 100
+	        },
+	        "size": {
+	            "value": 3
+	        }
+	    },
+	    "interactivity": {
+	        "events": {
+	            "onhover": {
+	                "enable": true,
+	                "mode": "repulse"
+	            }
+	        }
+	    }
+	}} />
 	        </div>
           </div>
           );
@@ -37,6 +57,25 @@ class App extends Component {
       <div >
       <Bar />
       <Unsigned />
+      <Particles
+    params={{
+	    "particles": {
+	        "number": {
+	            "value": 100
+	        },
+	        "size": {
+	            "value": 3
+	        }
+	    },
+	    "interactivity": {
+	        "events": {
+	            "onhover": {
+	                "enable": true,
+	                "mode": "repulse"
+	            }
+	        }
+	    }
+	}} />
       </div>
       </div>
     );
