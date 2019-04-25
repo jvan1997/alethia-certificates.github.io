@@ -6,6 +6,14 @@ let deanSig = "12"
 
 http.createServer(function (req, res) {
 
+  if( req.method == "OPTIONS" && req.url == "/check"){
+    res.writeHead(200, {"Access-Control-Allow-Origin":"*", "Access-Control-Headers":"accept"})
+           
+          res.end()
+        return
+        }
+  
+
     console.log(req)
     console.log(req.url)
     console.log(req.method)
@@ -39,6 +47,12 @@ http.createServer(function (req, res) {
 
       if( req.method == "POST" && req.url == "/check"){
         if( body.sigid === deanSig){
+
+          if( body.file == "undefined"){
+            res.writeHead(400)
+            res.end()
+            return
+          }
 
 
           getPDFText(body.file)

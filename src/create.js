@@ -6,7 +6,9 @@ import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import Bar from './bar';
-import DatePicker from 'react-date-picker'
+import './progress-bar-styles.css';
+import CircularProgressBar from 'react-circular-progressbar'
+
 function user() {
 //    console.log("What:" + auth.currentUser.email);
     return firebaseApp.auth().currentUser;
@@ -41,6 +43,9 @@ class Create extends Component {
             date: new Date(),
             units: '',
             file: undefined,
+            progressBarPercentage:0,
+            progressBarPercentageText:'0%',
+            showProgressBar:false
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -50,7 +55,10 @@ class Create extends Component {
     onChange = date => this.setState({ date })
         backTrack(){
      	this.props.history.goBack();
-     }
+     }  
+     componentWillUnmount() {
+		clearInterval(this.timeout);
+	  }
   render() {
     return (
       
@@ -115,6 +123,11 @@ class Create extends Component {
 </div>
                 
             </form>
+            <div class="progbar" style={{width:'100px', height:'100px', margin:'auto', padding:'10px'}}>
+            { this.state.showProgressBar ? <CircularProgressBar percentage={this.state.progressBarPercentage} className="progbar" text={`${this.state.progressBarPercentageText}`} /> : null}
+            
+            </div>
+            
             </div>
 
               </div>
@@ -131,6 +144,8 @@ class Create extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    this.setState({ showProgressBar:true, progressBarPercentage: 0, progressBarPercentageText: "0"})
     console.log(event)
     let relevantState = { 
         "name": this.state.name,
@@ -152,32 +167,128 @@ class Create extends Component {
     for (let key in relevantState) {
     options.body.append(key, relevantState[key]);
     }
-    // https://stackoverflow.com/questions/38794180/fetch-data-with-react
-    let check = ()=>{
-        return fetch(url, options)
-    }
-    check().then((response)=>{
-        console.log(response)
+
+    var xhr = new XMLHttpRequest()
+    
+    xhr.upload.addEventListener("progress", e=>{
+        if( e.lengthComputable){
+            var percentComplete = Math.round(e.loaded * 100 / e.total)
+            this.setState({ progressBarPercentage: percentComplete/2, progressBarPercentageText: (percentComplete/2)+ "%" })
+        }
+        else{
+            console.log("cant compute size")
+        }
+    },false)
+    
+    // xhr.setRequestHeader("Content-Type","multipart/form-data")
+    var self = this
+    xhr.onreadystatechange = function(){
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            console.log(xhr.responseText)
         console.log("abc")
         delete relevantState.file
-      if (response.status == 200) {
-          console.log("bcd")
-            entry().update({"certificate":relevantState}).then(
+
+        self.timeout = setInterval(() => {
+            if (self.state.progressBarPercentage < 80) {
+              let newP = self.state.progressBarPercentage+1;
+              self.setState({ progressBarPercentage: newP, progressBarPercentageText:newP+"%" });
+                }
+            // 	else{
+          // 		console.log("eh");
+          //   		this.setState({i:0});
+            // }
+          }, 250);
+
+        entry().update({"certificate":relevantState}).then(
+
             success => {
-            alert("Created certificate");
+                self.timeout = setInterval(() => {
+                    if (self.state.progressBarPercentage < 100) {
+                      let newP = self.state.progressBarPercentage+1;
+                      self.setState({ progressBarPercentage: newP, progressBarPercentageText: newP+"%" });
+                        }
+                    	else{
+                            self.setState({ progressBarPercentage: 100, progressBarPercentageText:"Done!" })
+                            alert("Created certificate");
+                            self.backTrack();
+                        }
+                    }, 250);
+
+                
             },
             err =>{
                 console.log(err)
+                self.setState({ progressBarPercentageText:"Error saving data" })
             }
         
         );
-        this.backTrack();
-      }
-      if (response.status >= 400) {
-        alert("Invalid sigid")
-      }
-    //   this.backTrack();
-    })
+        
+        
+        }
+        if(this.readyState === XMLHttpRequest.DONE && this.status >= 400){
+
+            switch(this.status){
+                case 400:
+                alert("No file submitted")
+                self.setState({ progressBarPercentageText:"Error can't find file" })
+                break
+
+                case 422:
+                alert("Invalid sigid")
+                self.setState({ progressBarPercentageText:"Error processing file" })
+                break
+
+                default:
+                alert("Error")
+                self.setState({ progressBarPercentageText:"Error" })
+
+            }
+
+
+        }
+               
+    }
+
+
+    // this.timeout = setInterval(() => {
+    //     if (this.state.percentage < 100) {
+    //       let newP = this.state.percentage+1;
+    //       this.setState({ percentage: newP });
+    //         }
+    //     // 	else{
+    //   // 		console.log("eh");
+    //   //   		this.setState({i:0});
+    //     // }
+    //   }, 250);
+    xhr.open("POST", url, true)
+    xhr.send(options.body)
+
+    // https://stackoverflow.com/questions/38794180/fetch-data-with-react
+    // let check = ()=>{
+    //     return fetch(url, options)
+    // }
+    // check().then((response)=>{
+    //     console.log(response)
+    //     console.log("abc")
+    //     delete relevantState.file
+    //   if (response.status == 200) {
+    //       console.log("bcd")
+    //         entry().update({"certificate":relevantState}).then(
+    //         success => {
+    //         alert("Created certificate");
+    //         },
+    //         err =>{
+    //             console.log(err)
+    //         }
+        
+    //     );
+    //     this.backTrack();
+    //   }
+    //   if (response.status >= 400) {
+    //     alert("Invalid sigid")
+    //   }
+    // //   this.backTrack();
+    // })
 
 
 
