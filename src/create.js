@@ -6,6 +6,7 @@ import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import Bar from './bar';
+import DatePicker from 'react-date-picker'
 function user() {
 //    console.log("What:" + auth.currentUser.email);
     return firebaseApp.auth().currentUser;
@@ -37,6 +38,7 @@ class Create extends Component {
             surname:'',
             sigid: '', 
             major: '', 
+            date: new Date(),
             units: '',
             file: undefined,
         };
@@ -45,14 +47,15 @@ class Create extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlePDFSubmit = this.handlePDFSubmit.bind(this)
     }  
+    onChange = date => this.setState({ date })
         backTrack(){
      	this.props.history.goBack();
      }
   render() {
     return (
       
-        <div class="flex justify-center items-center h-screen" >
-        <div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
+        <div class="flex justify-center items-center h-full" >
+        <div class="container-xl mx-auto pt-24 bg-transparent rounded">
 	  <h1 class=" font-fancy font-bold text-lg text-white mb-4 pl-16 text-3xl "> Create Certificate </h1>
     <form onSubmit={this.handleSubmit}>
             <div class="flex justify-center col-md-6 items-center">
@@ -67,21 +70,25 @@ class Create extends Component {
                 <p class="text-white font-fancy font-bold text-lg">Signature ID:</p>
                 <input class="shadow ml-11 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="sigid"  type="text" name="sigid"  onChange={this.handleChange}/>
                 </div>
+                <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">Approval Date:</p>
+                <input class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="text" name="date"  onChange={this.handleChange}/>
+                </div>
         <div class="flex justify-left pl-4 col-md-6 items-center ">
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
             
-             <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
+             <select class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
 		        <option value="-1"> Select </option>
-                <option value="BS Aerospace Engineering">Aerospace</option>
-            <option value="BS Biomedical Engineering">Biomedical</option>
-            <option value="BS Bioengineering Engineering">Bioengineering</option>
-		        <option value="BS Chemical Engineering">Chemical</option>
-            <option value="BS Civil Engineering">Civil</option>
-            <option value="BS Computer Engineering">Computer</option>
-		        <option value="BS Electrical Engineering">Electrical</option>
-            <option value="BS Industrial Engineering">Industrial</option>
-            <option value="BS Mechanical Engineering">Mechanical</option>
-            <option value="BS Software Engineering">Software </option>
+                <option value="BS Aerospace Engineering">Aerospace Engineering</option>
+            <option value="BS Biomedical Engineering">Biomedical Engineering</option>
+            <option value="BS Bioengineering Engineering">Biomedical Engineering</option>
+		        <option value="BS Chemical Engineering">Chemical Engineering</option>
+            <option value="BS Civil Engineering">Civil Engineering</option>
+            <option value="BS Computer Engineering">Computer Engineering</option>
+		        <option value="BS Electrical Engineering">Electrical Engineering</option>
+            <option value="BS Industrial Engineering">Industrial Engineering</option>
+            <option value="BS Mechanical Engineering">Mechanical Engineering</option>
+            <option value="BS Software Engineering">Software Engineering</option>
 
           </select>
           </div>
@@ -254,21 +261,9 @@ class Create extends Component {
             
 
         })
-    
-
-
-
-    // open file and print to console
-
-    // var fr = new FileReader()
-    // fr.onload = (e)=> {
-    //     var res = e.target.result
-    //     console.log(res)
-    // }
-
-    // var txt = fr.readAsText(file)
-    
 }
+
+
 
 
 

@@ -800,6 +800,8 @@ module.exports = {
 
   zIndex: {
     'auto': 'auto',
+    'n2': -2,
+    'n1': -1,
     '0': 0,
     '10': 10,
     '20': 20,

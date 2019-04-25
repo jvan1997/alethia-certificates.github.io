@@ -55,8 +55,8 @@ class Edit extends Component {
         let units = data["units"];
         let sigid = data["sigid"]
         return (
-            <div class="flex justify-center items-center h-screen" >
-            <div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
+            <div class="flex justify-center items-center h-full" >
+            <div class="container-xl mx-auto pt-24 bg-transparent rounded">
           <h1 class=" font-fancy font-bold text-lg text-white mb-4 pl-16 text-3xl "> Edit Certificate </h1>
         <form onSubmit={this.handleSubmit}>
                 <div class="flex justify-center col-md-6 items-center">

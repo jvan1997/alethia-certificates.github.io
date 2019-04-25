@@ -3,6 +3,7 @@ import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import './css/tailwind.css';
+import Particles from 'react-particles-js';
 import Bar from './bar';
 class Login extends React.Component {
 	constructor(props){
@@ -40,10 +41,32 @@ class Login extends React.Component {
 		}
 	render() {
     	return (
-			<div class="bg-cover-image">
+			<div>
+		<Particles
+			className="bg-cover-image fixed w-screen h-screen z-n1"
+			params={{
+				"particles": {
+					"number": {
+						"value": 100
+					},
+					"size": {
+						"value": 3
+					}
+				},
+				"interactivity": {
+					"events": {
+						"onhover": {
+							"enable": true,
+							"mode": "repulse"
+						}
+					}
+				}
+			}}>          
+			</Particles>
+			<div class="z-n2">
 			<Bar />
-			<div class="flex items-center h-screen w-full">
-        		<div class="h-screen w-screen rounded pt-16 font-fancy font-bold">
+			<div class="flex items-center h-full">
+        		<div class=" w-full rounded pt-16 font-fancy font-bold">
         			<h1 class="HotelHopperLogin w-full font-fancy font-bold block text-white text-center justify-center mb-6">
         				Sign in to Alethia
         			</h1>
@@ -68,6 +91,7 @@ class Login extends React.Component {
         			</form>
         		</div>     
         	</div>
+			</div>
 			</div>
 		)	
 	}
