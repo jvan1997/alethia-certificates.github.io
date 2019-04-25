@@ -6,6 +6,8 @@ import create from './Images/create.png';
 import verify from './Images/verify.png';
 import { withRouter } from "react-router-dom";
 import { deploy } from './deploy';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 let util = require('util')
 let ethjsUtil = require('ethereumjs-util')
 let keypair = require('keypair');
@@ -21,11 +23,13 @@ class Verify extends React.Component {
 			publicKey: "",
 			metadataLoaded: false,
 			compiled: false,
-			verified: false
+			verified: false,
+			displayResults:false
 		};
 		this.setUpDeploy();
 		this.setCompiled = this.setCompiled.bind(this)
 		this.setVerified = this.setVerified.bind(this)
+		this.setDisplayResults = this.setDisplayResults.bind(this)
 	}
 
 	async setUpDeploy() {
@@ -51,7 +55,25 @@ class Verify extends React.Component {
 		})
 
 	}
+	downLoad= (e) => {
 
+		html2canvas(document.querySelector("#transaction"),{width: 1200,
+			height: 900
+	  }).then(canvas => {
+			const imgData = canvas.toDataURL('image/png');
+			const pdf = new jsPDF({orientation:'l',unit:'px'});
+	
+			console.log(`canvas.width is ${canvas.width}`);
+			console.log(`canvas.height is ${canvas.height}`)
+			// console.log(imgData);
+			console.log("second" + pdf.internal.pageSize.width);
+			// var imgOffset = (pdf.internal.pageSize.width) / 8;
+			// console.log("HMM" + imgOffset);
+			pdf.addImage(imgData,'PNG',0,0,1030,964,"a","FAST");
+			pdf.save("transaction.pdf");
+		});
+	
+	}
 	backTrack() {
 		this.props.history.goBack();
 	}
@@ -69,6 +91,12 @@ class Verify extends React.Component {
 	setVerified(){
 		this.setState({
 			verified:true
+		})
+		setTimeout(this.setDisplayResults,3000)
+	}
+	setDisplayResults(){
+		this.setState({
+			displayResults:true
 		})
 	}
 	render() {
@@ -89,43 +117,55 @@ class Verify extends React.Component {
 		}
 		else {
 			return (
-				<div class="flex items-center h-full " >
-					<div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
+				<div class="flex items-center h-full justify-center" >
+					<div class="h-full  mx-auto pt-24 bg-transparent rounded">
 						<VerifyHeader />
-
-						<span>Compiling Keypair... {this.state.compiled ? "Done!" : null} </span>
+						<div id="transaction" class="container-xl bg-white font-fancy text-lg rounded text-center h-full px-6 py-4 border border-grey-dark">
+						<span class="font-bold">Compiling Keypair... {this.state.compiled ? "Done!" : null} </span>
 
 						{this.state.compiled ?
 							(
 								<span>
 									<br />
-									<span> Verifying Keypair... {this.state.verified ? "Done!" : null} </span>
+									<span class="font-bold "> Verifying Keypair... {this.state.verified ? "Done!" : null} </span>
 
 									{this.state.verified ? (
 										
 										<span>
 											<br/>
-											<span> Success! Cert has been verified!</span>
-											<br />
-											<br/>
-											<span>Contract Address: {this.state.createdContractAddress}
-												<br />
-												Transaction Hash: {this.state.transactionHash}
-												<br />
-												Public Key:
-												<br/>
-												<span class="text-white" style={{"white-space":"pre-line"}}> {this.state.publicKey}
+											<span class="font-bold "> Success! Cert has been verified!</span>
+											{this.state.displayResults ? (
+												<span>
+													<span>
+														<div class="font-bold mt-2">Contract Address: </div>{this.state.createdContractAddress}
+														<div class="flex flex-col items-center mt-4 mb-4">
+															<div class="w-5/6  border-b "/>
+														</div>
+														<div class="font-bold ">Transaction Hash:</div> {this.state.transactionHash}
+														<div class="flex flex-col items-center mt-4 mb-4">
+															<div class="w-5/6  border-b "/>
+														</div>
+														<div class="font-bold">Public Key:</div>
+														<span class="mb-2" style={{"white-space":"pre-line"}}> {this.state.publicKey}
+														</span>
+													</span>
+													<br />	
 												</span>
-											</span>
-											<br />
+
+											) : null}
+											
 										</span>
 									) : null}
 								</span>
 							) : null
 						}
-
-						<div class="mt-8  justify-center col-md-6 items-center" >
+</div>
+						<div class="mt-8  flex w-full justify-between col-md-6 items-center" >
 							<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="create" style={{ cursor: 'pointer' }} onClick={e => this.backTrack(e)}>Go Back</button>
+							{this.state.displayResults  && (
+							<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.downLoad}>Download</button>
+							)
+							}
 						</div>
 					</div>
 				</div>
@@ -138,7 +178,9 @@ export default withRouter(Verify);
 
 const LoadingComponent = (props) => {
 	return (
-		<span class="text-white font-fancy font-bold"> Loading cert metadata ... </span>
+		<div class="container-xl bg-white font-fancy font-bold text-lg rounded text-center h-full px-4 py-4 border border-grey-dark">
+		<span class="font-fancy font-bold text-lg"> Loading cert metadata ... </span>
+		</div>
 	)
 }
 
