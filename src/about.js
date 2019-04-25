@@ -95,8 +95,8 @@ renderTeam()
 	render() {
 		if(this.state.status === 0){
     	return (
-			<div class="flex items-center h-screen w-full">
-    			<div class="container-xl h-screen w-screen rounded pt-24 font-fancy justify-center font-bold">
+			<div class="flex items-center justify-center h-full w-full">
+    			<div class="container-xl rounded pt-24 font-fancy justify-center font-bold">
 					<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> About </h1>
  					<p class="w-full text-xl font-fancy font-bold block text-white text-center justify-center mb-6">This page contains information on what Alethia is and the team behind the web application</p>
 					 <div class="mt-8 flex justify-center col-md-6 items-center" >
@@ -109,8 +109,8 @@ renderTeam()
 	}
 		else if (this.state.status === 1){
 			return(
-			<div class="flex items-center h-screen w-full">
-			<div class="container-xl h-screen w-screen rounded pt-24 font-fancy justify-center ">
+			<div class="flex items-center h-full justify-center w-full">
+			<div class="container-xl rounded pt-24 font-fancy justify-center ">
 				<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> About - Alethia </h1>
 				<div class="mt-8 flex justify-center  col-md-6 items-center" >
 						<img alt="Placeholder" class="w-1/3 rounded h-auto mr-4  " src={alethia}/>
@@ -128,8 +128,8 @@ renderTeam()
 	}
 		else{
 				return(
-					<div class="flex items-center h-screen w-full">
-					<div class="container-xl h-screen w-screen rounded pt-24 font-fancy justify-center font-bold">
+					<div class="flex items-center justify-center h-full w-full">
+					<div class="container-xl rounded pt-24 font-fancy justify-center font-bold">
 						<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> Team Members </h1>
 						<div>
 						<div class="container my-12 mx-auto px-4 md:px-12">
