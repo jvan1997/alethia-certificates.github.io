@@ -5,6 +5,7 @@ const compiledFactory = require('./Backstuff/build/RegisteredCertificate');
 let util = require('util')
 // const fs = require('fs-extra')
 
+
 // const provider = new HDWalletProvider(
 //   '7f0c51e82a244f96a0a8012e69128cd2',
 //   'ropsten.infura.io/v3/5821a9542c5f4c77b455bf00b6a45d72'
@@ -22,6 +23,7 @@ const deploy = async () => {
   // web3.eth.getAccounts().then(console.log)
   const accounts = await web3.eth.getAccounts();
   console.log(`accounts is ${accounts}`)
+
 
   console.log("Attempting to deploy from account", accounts[0]);
 

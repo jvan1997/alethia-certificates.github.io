@@ -5,6 +5,7 @@ import { Button} from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import './css/tailwind.css';
 import Bar from './bar';
+import Particles from 'react-particles-js';
 function user() {
     return firebaseApp.auth().currentUser;
 }
@@ -59,9 +60,30 @@ class RegisterForm extends Component {
 	}
 	render() {
     		return (
-				<div class="bg-cover-image">
+				<div>
+		<Particles
+			className="bg-cover-image fixed w-screen h-screen z-n1"
+			params={{
+				"particles": {
+					"number": {
+						"value": 100
+					},
+					"size": {
+						"value": 3
+					}
+				},
+				"interactivity": {
+					"events": {
+						"onhover": {
+							"enable": true,
+							"mode": "repulse"
+						}
+					}
+				}
+			}}>          </Particles>
+			<div class="z-n2">
 				<Bar /> 
-				<div class="flex items-center h-screen w-full">
+				<div class="flex items-center h-full w-full">
         		<div class="h-full w-full rounded font-fancy font-bold">
         			<h1 class="HotelHopperLogin w-full block text-white text-center justify-center mb-6">
         				Sign up to Alethia
@@ -69,23 +91,23 @@ class RegisterForm extends Component {
 
         			<form onSubmit={this.SignUp.bind(this)}>
         			<div class="flex flex-col mb-4 items-center">
-            			<input class="Rectangle shadow appearance-none border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" 
+            			<input class="Rectangle shadow appearance-none font-fancy font-bold border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" 
             			id="email"  ref="email" type="text" placeholder="Enter Email"/>
         			</div>
         			<div class="flex flex-col mb-4 items-center">
-            			<input class="Rectangle shadow appearance-none border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+            			<input class="Rectangle shadow appearance-none font-fancy font-bold border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
             			id="password" ref="password"type="password" placeholder="******************"/>
         			</div>
 					<div class="flex flex-col mb-4 items-center">
-            			<input class="Rectangle shadow appearance-none border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+            			<input class="Rectangle shadow appearance-none font-fancy font-bold border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
             			id="firstname" ref="firstname"type="text" placeholder="First Name"/>
         			</div>
 					<div class="flex flex-col mb-4 items-center">
-            			<input class="Rectangle shadow appearance-none border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+            			<input class="Rectangle shadow appearance-none font-fancy font-bold border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
             			id="surname" ref="surname"type="text" placeholder="Last Name"/>
         			</div>
 					<div class="flex flex-col mb-4 items-center">
-            			<input class="Rectangle shadow appearance-none border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+            			<input class="Rectangle shadow appearance-none font-fancy font-bold border border-purple-light rounded h-14 w-1/4 py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" 
             			id="idNum" ref="idNum"type="text" placeholder="Student ID Number"/>
         			</div>
         			<div class="flex items-center justify-center mb-6">
@@ -95,6 +117,7 @@ class RegisterForm extends Component {
         			</form>
         		</div>     
         	</div>
+			</div>
 			</div>
     );
   }

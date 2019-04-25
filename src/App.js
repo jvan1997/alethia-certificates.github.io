@@ -23,11 +23,9 @@ class App extends Component {
     if(test){ 
       //console.log("I went here");    
       return (
-	        <div class="bg-cover-image h-screen" >
-          <div>
-	        <Bar />
-	        <Home />
-          <Particles
+		  <div>
+<Particles
+	className="bg-cover-image fixed w-screen h-screen z-n1"
     params={{
 	    "particles": {
 	        "number": {
@@ -45,37 +43,41 @@ class App extends Component {
 	            }
 	        }
 	    }
-	}} />
-	        </div>
+	}}>          </Particles>
+			<div class="z-n2">
+	        <Bar />
+	        <Home />
+			</div>
+
           </div>
           );
       }
     else{
       return (
-        
-      <div class="bg-cover-image opacity-100 h-screen">
-      <div >
+		<div>
+		<Particles
+			className="bg-cover-image fixed w-screen h-screen z-n1"
+			params={{
+				"particles": {
+					"number": {
+						"value": 100
+					},
+					"size": {
+						"value": 3
+					}
+				},
+				"interactivity": {
+					"events": {
+						"onhover": {
+							"enable": true,
+							"mode": "repulse"
+						}
+					}
+				}
+			}}>          </Particles>
+			<div class="z-n2">
       <Bar />
       <Unsigned />
-      <Particles
-    params={{
-	    "particles": {
-	        "number": {
-	            "value": 100
-	        },
-	        "size": {
-	            "value": 3
-	        }
-	    },
-	    "interactivity": {
-	        "events": {
-	            "onhover": {
-	                "enable": true,
-	                "mode": "repulse"
-	            }
-	        }
-	    }
-	}} />
       </div>
       </div>
     );

@@ -10,24 +10,37 @@ class Home extends React.Component{
 			super(props);
 			this.state = {
 				i : 0,
-				maintxt :'Decentralized Certificates on Ethereum Blockchain.',
-				speed : 5,
+				maintxt :'Decentralized Certificates on the Ethereum Blockchain',
+				speed : 100,
 				displaytxt: '',
+				tmpTitle: 'Al-eth-ia   ',
+				fullTitle: 'Alethia',
+				j: 0
 			};
 
 
 	}
 	componentDidMount() {
 		this.timeout = setInterval(() => {
-		  if (this.state.i < this.state.maintxt.length) {
+		  	if (this.state.i < this.state.maintxt.length) {
 			let newI = this.state.i+1;
 			this.setState({ i: newI });
-	  		}
+			  }
 	  	// 	else{
 		// 		console.log("eh");
 		//   		this.setState({i:0});
 	  	// }
 		}, 80);
+		this.timeout = setInterval(() => {
+		   if(this.state.j < this.state.tmpTitle.length){
+			  let newJ = this.state.j+1;
+			  this.setState({ j: newJ });
+		   } 
+		// 	else{
+	  // 		console.log("eh");
+	  //   		this.setState({i:0});
+		// }
+	  }, 200);
 	  }
 	  componentWillUnmount() {
 		clearInterval(this.timeout);
@@ -39,12 +52,18 @@ class Home extends React.Component{
 	}
 	render() {
 			let displaytext = this.state.maintxt.substring(0,this.state.i);
+			let displayTitle ='';
+			if(this.state.j >= this.state.tmpTitle.length){
+				displayTitle = this.state.fullTitle;
+			}else{
+				displayTitle = this.state.tmpTitle.substring(0,this.state.j);
+			}
 			return (
 				<div class="flex items-center h-full " >
 				<div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
 
 				<p class="w-full block text-white text-5xl font-fancy font-bold text-center justify-center mb-8">
-        			Alethia
+        			{displayTitle}
         		</p>
 				<span class="text-white text-3xl font-fancy font-bold text-center justify-center mb-8" >{displaytext}</span>
 				<div class="mt-8 flex justify-center col-md-6 items-center" >
