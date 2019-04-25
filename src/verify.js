@@ -72,11 +72,6 @@ class Verify extends React.Component {
 		})
 	}
 	render() {
-
-
-
-
-
 		if (!this.state.metadataLoaded) {
 
 			return (
@@ -143,7 +138,7 @@ export default withRouter(Verify);
 
 const LoadingComponent = (props) => {
 	return (
-		<span class="text-white "> Loading cert metadata ... </span>
+		<span class="text-white font-fancy font-bold"> Loading cert metadata ... </span>
 	)
 }
 
