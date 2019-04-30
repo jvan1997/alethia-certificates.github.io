@@ -79,9 +79,9 @@ class Bar extends React.Component {
 	<nav class="flex items-center justify-between flex-wrap bg-transparent p-2">
 	<div class="flex items-center flex-no-shrink text-white pl-6 mr-6">
 	<img class="border rounded fill-current mr-2 " width="60" height="60" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={logo} />
-	<button class="text-grey-darkest -mt-1 font-fancy font-bold  ml-2 mr-3 text-4xl cursor-pointer" value="" onClick={e => this.goTo(e)} > X </button>
+	<button class="text-white -mt-1 font-fancy font-bold  ml-2 mr-3 text-3xl cursor-pointer" value="" onClick={e => this.goTo(e)} > x </button>
 
-	<img class="rounded fill-current mr-2 " width="40" height="40" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={ethereum} />
+	<img class="rounded fill-current mr-2 " width="50" height="50" alt="" style={{cursor:'pointer'}} onClick={e => this.goToImg(e)} src={ethereum} />
 
 		</div>
 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">

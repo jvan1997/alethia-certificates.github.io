@@ -12,28 +12,50 @@ import logo from './headerIcon.png';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import ReactDOM from 'react-dom';
+  
 class Profile extends React.Component {
 	constructor(props){
     super(props);
     this.state = {
+		loading: true,
         inputField: '',
-        data: '',
+        data: {},
     };
 }
-onLoad = (e) => {
+/**
+   * When the App component mounts, we listen for any authentication
+   * state changes in Firebase.
+   * Once subscribed, the 'user' parameter will either be null 
+   * (logged out) or an Object (logged in)
+   */
+  componentDidMount() {
+    this.authSubscription = firebaseApp.auth().onAuthStateChanged((user) => {
+		entry().get().then((doc) => {
+			if (doc.exists) {
+				let data = doc.data()['certificate'];
+				this.setState({ data: data });
+		  //      console.log("Document data:", data);
+			} else {
+				// doc.data() will be undefined in this case
+				this.setState({ data: null });
+		  //      console.log("No such document!");
+			}
+			this.setState({
+				loading: false,
+			  });
+		})
 
-   	entry().get().then((doc) => {
-        if (doc.exists) {
-            let data = doc.data()['certificate'];
-            this.setState({ data: data });
-      //      console.log("Document data:", data);
-        } else {
-            // doc.data() will be undefined in this case
-            this.setState({ data: null });
-      //      console.log("No such document!");
-        }
-    })
-}
+    });
+  }
+  /**
+   * Don't forget to stop listening for authentication state changes
+   * when the component unmounts.
+   */
+  componentWillUnmount() {
+    this.authSubscription();
+  }
+
+
 goTo(event){
 	var destination = event.target.value;
 	this.props.history.push(`/${destination}`);
@@ -72,7 +94,7 @@ downLoad= (e) => {
 		let dataUI = this.state.data;
 	//	console.log(dataUI);
 		var keys = Object.keys(dataUI);
-		if(dataUI){
+		if(dataUI && this.state.loading === false ){
 			if(keys.length == 0 || dataUI["name"] == '' || dataUI["surname"] == ''|| dataUI["units"] == ''|| dataUI["sigid"] == '' || dataUI["major"] == ''){
 				return (
 					<div class="flex items-center h-full " >
@@ -134,7 +156,6 @@ downLoad= (e) => {
 					
 					</div>	
 					<div class="mt-8 flex flex-col">
-					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.offLoad}>Close Certificate</button>
 					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.editCert}>Edit Certificate</button>
 					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="verify" style={{cursor:'pointer'}} onClick={(e) => this.goTo(e)}>Verify Certificate</button>
 
