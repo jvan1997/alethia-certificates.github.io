@@ -22,10 +22,10 @@ class Voting extends Component {
         let returns = this.vote();
         console.log(returns);
     }
-    vote = async () => {
+    addVote = async () => {
         console.log(this.props);
 
-        const certificate = Certificate("0x82E8AF74a6765b4fC1fCea0e5046B35a4932a418");
+        const certificate = Certificate("0x5786E813128a99CaD43F6303Fcd6b46138BFd285");
         console.log(certificate);
         this.setState({ loading: true, errorMessage: '', successMessage: '' });
         try {
@@ -59,7 +59,7 @@ class Voting extends Component {
                 Vote on Certificate
             </p>
             <div class="flex">
-            <button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" style={{cursor:'pointer'}} onClick={this.vote}>Vote</button>
+            <button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" style={{cursor:'pointer'}} onClick={this.addVote}>Vote</button>
             </div>
             </div>
             </div>)
