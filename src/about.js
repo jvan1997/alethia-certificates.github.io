@@ -10,7 +10,8 @@ class About extends React.Component {
 		  super(props);
 		  this.state={
 			  status: 0,
-			  aboutText: "Alethia is a pubic platform for creating, verifying and storing blockchain-enabled certificates. For creating the certificates, Alethia checks for a valid public key to verify the authenticity of the signature. The signatures are generated from openssl or provided by an institution issuing the certificate. Optionally, Alethia allows users to upload an unofficial transcript for automatically filling out certificate credentials. After the certificate is validated and created, the user is able to edit, download, verify or vote for the certificate. \n \n For verifying the certificate, the data is first deployed on the Ethereum blockchain, after checking for valid key pairs. The public key, and contract address are displayed post successful deployment of the Ethereum smart contract. For voting, users can pay a fee for the creation of the certificate through a small amount of wei.",
+			  aboutText: "Alethia is a pubic platform for creating, verifying and storing blockchain-enabled certificates. For creating the certificates, Alethia checks for a valid public key to verify the authenticity of the signature. The signatures are generated from openssl or provided by an institution issuing the certificate. Optionally, Alethia allows users to upload an unofficial transcript for automatically filling out certificate credentials. After the certificate is validated and created, the user is able to edit, download, verify or vote for the certificate.",
+			  paragraph2: "For verifying the certificate, the data is first deployed on the Ethereum blockchain, after checking for valid key pairs. The public key, and contract address are displayed post successful deployment of the Ethereum smart contract. For voting, users can pay a fee for the creation of the certificate through a small amount of wei.",
 			  team:{
 				jenil:{
 					name: 'Jenil Thakker',
@@ -112,12 +113,20 @@ renderTeam()
 			<div class="flex items-center h-full justify-center w-full">
 			<div class="container-xl rounded pt-24 font-fancy justify-center ">
 				<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> About - Alethia </h1>
-				<div class="mt-8 flex justify-center items-flex " >
-						<img alt="Placeholder" class="w-1/3 rounded h-auto mr-4  " src={alethia}/>
-						<div class="container-sm bg-white h-1/3 w-1/4 ml-4 text-xl font-fancy rounded p-10 ">
-						<div class="text-center font-bold mb-4">Alethia</div>{this.state.aboutText}</div>
-				</div>
+				<div class="mt-8 flex justify-center items-flex col-md-6" >
+						
+						<div class="container-sm bg-white h-1/3 w-full ml-8 mr-8 text-xl font-fancy rounded p-10 ">
+						<div class="text-center font-bold mb-4">Alethia</div>
+						<div class="mb-4">
+							{this.state.aboutText}
+						</div>
+						<div class="mb-4"> 
+							{this.state.paragraph2}
+						</div>
+						</div>
 				
+				<img alt="Placeholder" class="w-2/3 rounded h-auto mr-4  " src={alethia}/>
+				</div>
 				<div class="mt-8 flex justify-center col-md-6 items-center" >
 					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="about" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Return</button>
 					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="team" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Team</button>

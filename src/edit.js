@@ -71,6 +71,14 @@ class Edit extends Component {
                     <p class="text-white font-fancy font-bold text-lg">Signature ID:</p>
                     <input class="shadow ml-11 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="sigid"  type="text" name="sigid" defaultValue={sigid} onChange={this.handleChange}/>
                     </div>
+                    <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">Institution:</p>
+                <input class="shadow ml-14 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="institution"  type="text" name="institution"  onChange={this.handleChange}/>
+                </div>
+                <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">Approval Date:</p>
+                <input class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="text" name="date"  onChange={this.handleChange}/>
+                </div>
             <div class="flex justify-left pl-4 col-md-6 items-center ">
                 <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
                 
@@ -119,6 +127,14 @@ class Edit extends Component {
                 <div class="flex justify-center col-md-6 items-center">
                 <p class="text-white font-fancy font-bold text-lg">Signature ID:</p>
                 <input class="shadow ml-11 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="sigid"  type="text" name="sigid"  onChange={this.handleChange}/>
+                </div>
+                <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">Institution:</p>
+                <input class="shadow ml-14 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="institution"  type="text" name="institution"  onChange={this.handleChange}/>
+                </div>
+                <div class="flex justify-center col-md-6 items-center">
+                <p class="text-white font-fancy font-bold text-lg">Approval Date:</p>
+                <input class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="text" name="date"  onChange={this.handleChange}/>
                 </div>
         <div class="flex justify-left pl-4 col-md-6 items-center ">
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
