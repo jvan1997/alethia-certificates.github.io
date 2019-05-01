@@ -1,0 +1,22 @@
+{
+  "main.css": "/static/css/main.c439e119.chunk.css",
+  "main.js": "/static/js/main.57e512cf.chunk.js",
+  "main.js.map": "/static/js/main.57e512cf.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.c5541365.js",
+  "runtime~main.js.map": "/static/js/runtime~main.c5541365.js.map",
+  "static/js/2.447d9d9b.chunk.js": "/static/js/2.447d9d9b.chunk.js",
+  "static/js/2.447d9d9b.chunk.js.map": "/static/js/2.447d9d9b.chunk.js.map",
+  "index.html": "/index.html",
+  "precache-manifest.5165d5b36ec921ec7e5475c2577485d3.js": "/precache-manifest.5165d5b36ec921ec7e5475c2577485d3.js",
+  "service-worker.js": "/service-worker.js",
+  "static/css/main.c439e119.chunk.css.map": "/static/css/main.c439e119.chunk.css.map",
+  "static/media/Alethia-Arch-Revised.png": "/static/media/Alethia-Arch-Revised.985a596c.png",
+  "static/media/index.css": "/static/media/DirtyFog.6ad129df.jpg",
+  "static/media/create.png": "/static/media/create.d9268c91.png",
+  "static/media/ethereum.png": "/static/media/ethereum.888df991.png",
+  "static/media/headerIcon.png": "/static/media/headerIcon.5207ae4b.png",
+  "static/media/jenil.jpg": "/static/media/jenil.cc25cb9f.jpg",
+  "static/media/jonathan.jpg": "/static/media/jonathan.952b3582.jpg",
+  "static/media/newCreate.png": "/static/media/newCreate.b4de90b6.png",
+  "static/media/verify.png": "/static/media/verify.1c3c460a.png"
+}
