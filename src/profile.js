@@ -1,17 +1,12 @@
 
 import React, { Component } from 'react';
 import {firebaseApp} from "./firebase";
-import {RegisterForm} from "./signUp";
-import { Button} from 'react-bootstrap';
-import create from './Images/newCreate.png';
 import './App.css';
 import { withRouter } from 'react-router-dom';
-import Bar from './bar';
 import {user,db,entry} from './functions';
 import logo from './headerIcon.png';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import ReactDOM from 'react-dom';
   
 class Profile extends React.Component {
 	constructor(props){
@@ -60,9 +55,7 @@ goTo(event){
 	var destination = event.target.value;
 	this.props.history.push(`/${destination}`);
 }
-offLoad = (e) => {
-	this.setState({data: ''});
-}
+
 editCert = (e) => {
 	this.props.history.push("/profile/editCert");
 }
@@ -87,14 +80,19 @@ downLoad= (e) => {
 	});
 
 }
+vote = (e) =>{
+	this.props.history.push("/vote");
 
+}
 	render() {
-		
+		if(this.state.loading){
+			return null;
+		}
 	//	console.log("This is the data", this.state.data);
 		let dataUI = this.state.data;
 	//	console.log(dataUI);
 		var keys = Object.keys(dataUI);
-		if(dataUI && this.state.loading === false ){
+		if(dataUI){
 			if(keys.length == 0 || dataUI["name"] == '' || dataUI["surname"] == ''|| dataUI["units"] == ''|| dataUI["sigid"] == '' || dataUI["major"] == ''){
 				return (
 					<div class="flex items-center h-full " >
@@ -133,7 +131,7 @@ downLoad= (e) => {
 						Profile - Certificate
 					</p>
 					<div class="flex">
-					<div id="hm" class="container-sm flex flex-col rounded border-4 ">
+					<div class="container-sm flex flex-col rounded border-4 ">
 					<div id="certificate" class="w-auto align-center bg-white container-sm shadow-lg text-center font-fancy font-bold  px-8 pt-6 pb-8 m-auto">
 						<div class="text text-xs mb-2"> This certificate is intended for verification purposes.</div>
 						<div class="flex flex-col items-center mt-2 mb-8">
@@ -158,7 +156,7 @@ downLoad= (e) => {
 					<div class="mt-8 flex flex-col">
 					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.editCert}>Edit Certificate</button>
 					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="verify" style={{cursor:'pointer'}} onClick={(e) => this.goTo(e)}>Verify Certificate</button>
-
+					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="vote" style={{cursor:'pointer'}} onClick={(e) => this.goTo(e)}>Vote On Certificate</button>
 					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.downLoad}>Download Certificate</button>
 
 					</div>
@@ -168,18 +166,8 @@ downLoad= (e) => {
 				)	
 		}
 	}
-	else{
-    	return (
-			<div class="flex items-center h-full " >
-			<div class="container-xl h-full mx-auto pt-16 bg-transparent rounded">
-	  	<h1 class=" mb-16 font-fancy font-bold text-lg pl-20 text-white mb-4 text-5xl "> Profile</h1>
-		  <button class="inline-block ml-12 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.onLoad}>Display Certificate</button>
-            
-		</div>			
-
-	</div>
-	)	
-	}}
+	
+	}
 }
 
 export default withRouter(Profile);

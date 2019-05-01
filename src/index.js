@@ -17,7 +17,7 @@ import createPage from "./createPage";
 import Profile from "./profilepage";
 import VerifyPage from "./verifypage";
 import Edit from "./editPage";
-
+import Vote from "./votePage";
 const browserHistory = createBrowserHistory()
 // firebaseApp.auth().onAuthStateChanged(user => {
     let test = JSON.parse(localStorage.getItem("logged"));
@@ -42,6 +42,8 @@ ReactDOM.render(
     <Route exact path='/verify' component={VerifyPage}/>	
     <Route exact path='/profile/editCert' component={Edit}/>
     <Route exact path='/about' component={AboutPage}/>
+    <Route exact path='/vote' component={Vote}/>
+
     <Route component={Error}/>
     </Switch>
     </Router>, document.getElementById('root')
