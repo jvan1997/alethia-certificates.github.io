@@ -135,7 +135,7 @@ http.createServer(function (req, res) {
   else{
     var filePath = './build' + req.url;
     console.log(`filepath ${filePath}`)
-    if (filePath == './build/') {
+    if (filePath == './build/' || !(fs.existsSync(filePath))) {
         filePath = './build/index.html';
     }
   
