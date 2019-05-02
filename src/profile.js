@@ -141,8 +141,8 @@ vote = (e) =>{
 						<div class="text text-3xl mb-2"> {fname} </div>
 						
 						<div class="text text-3xl mb-2"> {lname} </div>
-						<div class="text text-xl mt-2 mb-8"> {major}</div>
-
+						<div class="text text-xl mt-2 mb-2"> {major}</div>
+						<div class="text text-2xl mt-2 mb-6"> San Jose State University</div>
 						<div class="flex flex-col items-center">
 						</div>
 						<div class="flex flex-col items-center mt-2 mb-8">
