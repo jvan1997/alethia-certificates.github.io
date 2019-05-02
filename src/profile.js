@@ -125,7 +125,7 @@ vote = (e) =>{
 		//	console.log(fname);
 			return (
 				<div class="flex items-center h-full " >
-				<div class="container-sm h-full mx-auto pt-16 bg-transparent rounded align-middle content-center items-center">
+				<div class="container-sm h-full mx-auto pt-16 pb-10 bg-transparent rounded align-middle content-center items-center">
 
 					<p class="w-full block text-white text-5xl font-fancy font-bold text-center justify-center pl-8 mb-10">
 						Profile - Certificate
