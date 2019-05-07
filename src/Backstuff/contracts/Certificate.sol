@@ -73,6 +73,9 @@ contract Certificate {
     * @dev addVote is a payable function that allows people to verify a certificate.
     */
     function addVote() public payable {
+        require(msg.sender == receipient);
+        require(approval_date == 2019);
+        require(msg.value == 1);
         vote = add(1, vote);
         emit voting(msg.sender, vote);
     }
