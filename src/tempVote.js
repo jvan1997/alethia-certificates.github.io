@@ -118,7 +118,7 @@ isEmpty(obj) {
                     }
                     else{
                         if(data['major'] && data['name'] && data['surname'] && data['units']){
-                            this.setState({certificate:data,viewing:true, inputtedUser:email});
+                            this.setState({certificate:data,viewing:true, inputtedUser:email, errorMessage:''});
                         }
                         else{
                             this.setState({errorMessage:'This user is missing information in their certificate'});
