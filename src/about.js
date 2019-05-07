@@ -4,6 +4,7 @@ import './App.css';
 import { withRouter } from 'react-router-dom';
 import jon from './Images/jonathan.jpg';
 import jenil from './Images/jenil.jpg';
+import vincent from './Images/vincent.jpg';
 import alethia from './Images/Alethia-Arch-Revised.png'
 class About extends React.Component {
 	constructor(props){
@@ -28,8 +29,8 @@ class About extends React.Component {
 				vincent:{
 					name: 'Vincent Diep',
 					about: '',
-					contribution: 'Set up the parsing and server of Alethia',
-					img: jon,
+					contribution: 'Imlemented Server-side and Hosting of Alethia',
+					img: vincent,
 				}
 			  }
 		  }
