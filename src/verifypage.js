@@ -1,17 +1,12 @@
 
-import React, { Component } from 'react';
-import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
+import React from 'react';
 import './App.css';
 import { withRouter } from 'react-router-dom';
 import Bar from './bar';
 import Verify from './verify';
 import Particles from 'react-particles-js';
 class VerifyPage extends React.Component {
-	constructor(props){
-  		super(props);
-  		
- }
+
 
 	render() {
     	return (

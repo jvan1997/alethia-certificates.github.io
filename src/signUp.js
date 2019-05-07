@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import './css/tailwind.css';
 import Bar from './bar';
 import Particles from 'react-particles-js';
-function user() {
-    return firebaseApp.auth().currentUser;
-}
 function db() {
     return firebaseApp.firestore().collection('users');
 }
-function entry() {
-    return db().doc(user().email);
-}
 class RegisterForm extends Component {
-    constructor(props) {
-        super(props);
-    }  
+
  	SignUp(e){
 	e.preventDefault()
 	let email = this.refs.email.value;
@@ -52,7 +43,6 @@ class RegisterForm extends Component {
                 this.setState({error})
 		alert(error)
 			});
-		//	this.props.history.push('/login');
 	
 	}
 	backTrack(){

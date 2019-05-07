@@ -1,6 +1,5 @@
 import React from 'react';
 import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
 import './css/tailwind.css';
 import Particles from 'react-particles-js';
@@ -14,7 +13,6 @@ class Login extends React.Component {
   		}
  }
 		handleSignIn(e) {
-	//		console.log(e);
 			e.preventDefault()
 			let email = this.refs.email.value
 			let password = this.refs.password.value
@@ -86,7 +84,7 @@ class Login extends React.Component {
             			<input class="Rectangle bg-transparent border border-white text-white hover:border-grey hover:text-grey font-bold font-fancy py-2 px-4 md:ml-2 rounded" type="submit" value="Login" />
         			</div>
 					<div class="flex items-center justify-center">
-					<a class="flex flex-col text-left text-white hover:text-grey text-s font-bold font-fancy italic" onClick={() => this.goTo()} value="signup" style={{cursor: 'pointer'}}>Don't have an Account?</a>
+					<button class="flex flex-col text-left text-white hover:text-grey text-s font-bold font-fancy italic" onClick={() => this.goTo()} value="signup" style={{cursor: 'pointer'}}>Don't have an Account?</button>
        			 	</div>
         			</form>
         		</div>     

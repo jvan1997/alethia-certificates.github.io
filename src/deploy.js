@@ -1,7 +1,7 @@
 
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
-const compiledFactory = require('./Backstuff/build/RegisteredCertificate');
+const compiledFactory = require('./Ethereum/build/RegisteredCertificate');
 let util = require('util')
 // const fs = require('fs-extra')
 

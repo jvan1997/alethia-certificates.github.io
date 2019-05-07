@@ -1,7 +1,6 @@
 import {firebaseApp} from './firebase'
 
 export const user = () => {
-//    console.log("What:" + auth.currentUser.email);
     return firebaseApp.auth().currentUser;
 };
 export const db = () => { 

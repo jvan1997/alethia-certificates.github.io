@@ -1,12 +1,9 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import {firebaseApp} from "./firebase";
 import './App.css';
 import { withRouter } from 'react-router-dom';
-import {user,db,entry} from './functions';
 import logo from './headerIcon.png';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
   
 class TempVote extends React.Component {
 	constructor(props){
@@ -32,7 +29,6 @@ removeSelection(){
 voteFor(){
     let voted = this.state.voted;
     voted.push(this.state.inputtedUser);
-    console.log(voted);
     firebaseApp.firestore().collection('approved').doc('voted').set({voted}).then((returns) =>{
         alert("You have verified this user");
         this.removeSelection();
@@ -67,9 +63,7 @@ voteFor(){
 		})
         firebaseApp.firestore().collection('users').get().then((doc) => {
             let UsersArr = []
-            console.log(doc.docs);
             for(let aDoc in doc.docs){
-                console.log(doc.docs[aDoc].id);
                 UsersArr.push(doc.docs[aDoc].id);
             }
             this.setState({users:UsersArr});
@@ -94,7 +88,6 @@ isEmpty(obj) {
 }
 
   handleNameFind(e){
-      console.log(this.state.users);
       e.preventDefault();
       let email = this.refs.email.value;
       if(this.state.currentUser === email){
@@ -107,12 +100,11 @@ isEmpty(obj) {
           this.setState({errorMessage:'This user does not exist.'});
       }
       else{
-          console.log("Looking for: " + email);
         firebaseApp.auth().onAuthStateChanged((user2) => {
             firebaseApp.firestore().collection('users').doc(email).get().then((doc) => {
                 if (doc.exists) {
                     let data = doc.data()['certificate'];
-                    console.log(data);
+
                     if(this.isEmpty(data)){
                         this.setState({errorMessage:'This user has not uploaded their certificate yet.'});
                     }
@@ -173,7 +165,7 @@ render() {
                 <div class="flex items-flex  h-full " >
                 <div class="h-full  mx-auto pt-20 bg-transparent rounded text-center">
                  <div>
-                  <h1 class=" font-fancy font-bold text-lg text-white mb-8 ml-8 text-5xl "> Vote Page </h1>
+                  <h1 class=" font-fancy font-bold text-lg text-white mb-8 ml-8 text-5xl "> Vote </h1>
                   </div>
             <div class="flex pb-4">
             <div class="container-sm flex flex-col rounded border-4 ">
@@ -194,7 +186,7 @@ render() {
                     <div class="w-1/2  border-b mt-2"/>
                 </div>
                 <div class="text-base italic mb-14"> This certifies that the named individual's college degree is valid.</div>
-                <img class="border rounded fill-current mr-2 " width="100" height="100" src={logo} />
+                <img class="border rounded fill-current mr-2 " alt="" width="100" height="100" src={logo} />
             </div>
             
             </div>	
@@ -202,7 +194,8 @@ render() {
             <button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" 
             value="profile" style={{cursor:'pointer'}} onClick={(e) => this.removeSelection()}>Abstain Vote</button>
             <button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" 
-            value="verify" style={{cursor:'pointer'}} onClick={(e) => this.voteFor(e)}>Vote</button>
+            value="verify" style={{cursor:'pointer'}} onClick={(e) =>           window.confirm("Are you sure this is a legitimate certificate to vote for?") &&
+            this.voteFor(e)}>Vote</button>
             </div>
             </div>
             </div>
@@ -213,7 +206,7 @@ render() {
                 <div class="flex items-flex  h-full " >
                 <div class="h-full  mx-auto pt-20 bg-transparent rounded text-center">
                  <div>
-                  <h1 class=" font-fancy font-bold text-lg text-white mb-8 ml-8 text-5xl "> Vote Page </h1>
+                  <h1 class=" font-fancy font-bold text-lg text-white mb-8 ml-8 text-5xl "> Vote </h1>
                   </div>
                   <div class="w-full">
     <div class="flex items-center justify-center">

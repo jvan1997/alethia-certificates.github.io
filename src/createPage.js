@@ -4,9 +4,7 @@ import Bar from './bar';
 import Particles from 'react-particles-js';
 class createPage extends Component {
  
-	constructor(props) {
-        super(props);
-    }  
+
 
   render() {
     return (

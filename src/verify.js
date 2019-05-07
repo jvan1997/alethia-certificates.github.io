@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import { Router, Route, Link, RouteHandler } from 'react-router-dom';
 import './index.css';
-import create from './Images/create.png';
-import verify from './Images/verify.png';
 import { withRouter } from "react-router-dom";
 import { deploy } from './deploy';
 import html2canvas from 'html2canvas';
@@ -34,20 +31,11 @@ class Verify extends React.Component {
 
 	async setUpDeploy() {
 		let returns = await deploy();
-		console.log(`returns is ${util.inspect(returns)}`);
 		this.setState({
 			createdContractAddress: returns.receipt.contractAddress,
 			transactionHash: returns.transactionHash,
 			metadataLoaded: true
 		})
-
-		// let hash =  "0x" + returns.compiledFactory.bytecode
-		// let prefix = "\x19Ethereum Signed Message:\n" + hash.length
-		// let prefixedHash = web3.utils.soliditySha3( hash + prefix)
-		// let pk = ethjsUtil.ecrecover(  ethjsUtil.toBuffer(prefixedHash), returns.receipt.v, ethjsUtil.toBuffer(returns.receipt.r), ethjsUtil.toBuffer(returns.receipt.s))
-		// let addrBuf = ethjsUtil.pubToAddress(pk)
-		// let addr = ethjsUtil.bufferToHex(addrBuf)
-		// console.log(`addr is ${addr}`)
 		let pair = keypair();
 		setTimeout( this.setCompiled,3000)
 		this.setState({
@@ -62,13 +50,6 @@ class Verify extends React.Component {
 	  }).then(canvas => {
 			const imgData = canvas.toDataURL('image/png');
 			const pdf = new jsPDF({orientation:'l',unit:'px'});
-	
-			console.log(`canvas.width is ${canvas.width}`);
-			console.log(`canvas.height is ${canvas.height}`)
-			// console.log(imgData);
-			console.log("second" + pdf.internal.pageSize.width);
-			// var imgOffset = (pdf.internal.pageSize.width) / 8;
-			// console.log("HMM" + imgOffset);
 			pdf.addImage(imgData,'PNG',0,0,1030,964,"a","FAST");
 			pdf.save("transaction.pdf");
 		});
@@ -194,7 +175,7 @@ const VerifyHeader = (props) => {
 	return (
 		<div>
 			<p class="w-full block text-white text-5xl font-fancy font-bold text-center justify-center mb-8">
-				Verify Certificate
+				Verify 
         		</p>
 			<span class="text-white text-3xl font-fancy font-bold text-center justify-center mb-8" > </span>
 		</div>

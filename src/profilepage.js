@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import Edit from './edit';
 import Bar from './bar';
 import Profile from './profile';
 import Particles from 'react-particles-js';
 class ProfilePage extends Component {
  
-	constructor(props) {
-        super(props);
-    }  
+
 
   render() {
     return (

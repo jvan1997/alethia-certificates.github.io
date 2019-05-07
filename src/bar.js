@@ -1,54 +1,24 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
 import './App.css';
 import { withRouter } from 'react-router-dom';
 import logo from './headerIcon.png';
 import ethereum from './Images/ethereum.png'
 
-function user() {
-	   // console.log("What:" + firebaseApp.auth().currentUser.email);
-		return firebaseApp.auth().currentUser;
-	}
-	function db() {
-		return firebaseApp.firestore().collection('users');
-	}
-	function entry() {
-		return db().doc(user().email);
-	}
 class Bar extends React.Component {
 	constructor(props){
 		  super(props);
 
-		  this.state = {name:"",logged:false,}
+		  this.state = {
+				name:"",
+				logged:false,
+			}
   	
  }
- loadInfo(){
-	var that = this;
-	firebaseApp.auth().onAuthStateChanged(function(user) {
-		if (user) {
-			var data = {};
-			var getName = entry().get().then(function(doc) {
-				//console.log(doc.data().length);
-				data = doc.data();
-		//        console.log(people);
-				return data;
-			});
-			var namePromise = getName.then(function(datas){
-			//	console.log(datas);
-				that.setState({
-					...that.state,
-					name:datas['information']['name']
-			})});
-		} else {
-			// No user is signed in.
-		}
-		});
- }
+
  componentDidMount() {
 	let test = JSON.parse(localStorage.getItem("logged"));
-	console.log("bar"  + test);
 	this.setState({logged:test});
 }
 	goTo(event){
@@ -62,13 +32,11 @@ class Bar extends React.Component {
 	signOutUser(){
 
         firebaseApp.auth().signOut().then(function() {
-						console.log('Signed Out');
 						let tokenKey = "logged";
 						let tokenValue = false;
 						window.localStorage.setItem(tokenKey, JSON.stringify(tokenValue));
 						this.props.history.push('/');
           }.bind(this), function(error) {
-            console.error('Sign Out Error', error);
 					});
 
     }
@@ -127,11 +95,3 @@ else{
 }
 
 export default withRouter(Bar);
-// 	return (
-		// <div class="text-right">
-		// Welcome {this.state.name}      
-		// <Button value="" class="float-right" onClick={e => this.goTo(e)}> Home</Button>
-		// <Button value="profile" class="float-right" onClick={e => this.goTo(e)}> Profile</Button>
-    //     <Button class="float-right" onClick={() => this.signOutUser()}> Logout</Button>
-		// </div>
-		// )	

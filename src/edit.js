@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import logo from './Images/logo.png';
 import './App.css';
-import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
-import {user,db,entry} from './functions';
+import {entry} from './functions';
 
 class Edit extends Component {
 	constructor(props) {
@@ -19,6 +17,12 @@ class Edit extends Component {
         backTrack(){
      	this.props.history.goBack();
      }
+     componentWillMount(){
+        let test = JSON.parse(localStorage.getItem("logged"));
+        if(!test){
+            this.props.history.push('/');
+        }
+     }
      componentDidMount() {
         firebaseApp.auth().onAuthStateChanged(user => {
             if(user){
@@ -26,11 +30,8 @@ class Edit extends Component {
                     if (doc.exists) {
                         let data = doc.data()['certificate'];
                         this.setState({ certificate: data });
-                      //  console.log("Document data:", data);
                     } else {
-                        // doc.data() will be undefined in this case
                         this.setState({ data: null });
-                     //   console.log("No such document!");
                     }
                 })
             } else{
@@ -42,13 +43,12 @@ class Edit extends Component {
   render() {
       var keys = Object.keys(this.state.certificate);
       let data = this.state.certificate;
-    if((keys.length != 0 &&
-         data["name"] != '' &&
-          data["surname"] != '' &&
-           data["units"] != '' && 
-           data["sigid"] != '' && 
-           data["major"] != '')){
-     //   console.log("yes");
+    if((keys.length !== 0 &&
+         data["name"] !== '' &&
+          data["surname"] !== '' &&
+           data["units"] !== '' && 
+           data["sigid"] !== '' && 
+           data["major"] !== '')){
         let majors = data["major"];
         let fname = data["name"];
         let lname = data["surname"];
@@ -133,7 +133,7 @@ class Edit extends Component {
                 <input class="shadow ml-14 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="institution"  type="text" name="institution"  onChange={this.handleChange}/>
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
-                <p class="text-white font-fancy font-bold text-lg">Approval Date:</p>
+                <p class="text-white font-fancy font-bold text-lg">Approval Year:</p>
                 <input class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="text" name="date"  onChange={this.handleChange}/>
                 </div>
         <div class="flex justify-left pl-4 col-md-6 items-center ">
@@ -169,8 +169,6 @@ class Edit extends Component {
   }
 }
   handleChange(event) {
-   // console.log("doing stuff");
-    console.log(event.target.value);
     var certificate = this.state.certificate;
     certificate[event.target.name] = event.target.value;
     this.setState({
@@ -180,8 +178,8 @@ class Edit extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     entry().update({"certificate":this.state.certificate}).then(function() {
+        
 		alert("Edited certificate");
   });
   this.backTrack();

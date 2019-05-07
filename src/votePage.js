@@ -5,10 +5,7 @@ import Bar from './bar';
 import Particles from 'react-particles-js';
 
 class votePage extends Component {
- 
-	constructor(props) {
-        super(props);
-    }  
+
 
   render() {
     return (

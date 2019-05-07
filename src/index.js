@@ -6,11 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import{Router, Route,Switch } from 'react-router-dom';
 import Login from "./login";
 import RegisterForm from "./signUp";
-import {firebaseApp} from "./firebase";
 import { createBrowserHistory } from 'history';
-import Error from "./Error";
-import Particles from 'react-particles-js';
-import CreateCert from "./CreateCert";
 import AboutPage from "./aboutPage";
 
 import createPage from "./createPage";
@@ -22,11 +18,9 @@ const browserHistory = createBrowserHistory()
 // firebaseApp.auth().onAuthStateChanged(user => {
     let test = JSON.parse(localStorage.getItem("logged"));
     if(test){
-       // console.log('user signed in or up', user);
          if(window.location.pathname === "/login" || window.location.pathname ==='/signup')
              browserHistory.push('/');
     } else{
-        console.log('user has signed out or still needs to sign in');
         if(window.location.pathname !== "/signup" && window.location.pathname !== "/login" && window.location.pathname!=="/about")
             browserHistory.replace('/' );
     }
@@ -44,7 +38,7 @@ ReactDOM.render(
     <Route exact path='/about' component={AboutPage}/>
     <Route exact path='/vote' component={Vote}/>
 
-    <Route component={Error}/>
+    <Route component={App}/>
     </Switch>
     </Router>, document.getElementById('root')
     );

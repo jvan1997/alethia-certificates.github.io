@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Router, Route, Link, RouteHandler} from 'react-router-dom';
-import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
 import Home from './home';
 import Bar from './bar';
 import Unsigned from './unlogined';

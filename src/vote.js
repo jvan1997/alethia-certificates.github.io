@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import Certificate from './Backstuff/contracts/Certificate';
-import web3 from './Backstuff/web3';
-import {firebaseApp} from "./firebase";
+import Certificate from './Ethereum/contracts/Certificate';
+import web3 from './Ethereum/web3';
 import './App.css';
 import { withRouter } from 'react-router-dom';
-import {user,db,entry} from './functions';
-import logo from './headerIcon.png';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 class Voting extends Component {
     constructor(props) {
         super(props);
