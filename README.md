@@ -31,13 +31,13 @@ After following the prerequisities and navigiating into the directory, do the fo
 $ npm install --save
 ```
 
-After it is complete, all the dependencies should be installed. The application can now be run.
+2. After it is complete, all the dependencies should be installed. The application can now be run.
 
 ```
 $ npm start
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+The terminal will then open the default browser for the system and run on localhost. 
 
 ## Running the tests
 
