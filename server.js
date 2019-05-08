@@ -48,8 +48,9 @@ http.createServer(function (req, res) {
       if( req.method == "POST" && req.url == "/check"){
         if( body.sigid === deanSig){
 
-          if( body.file == "undefined"){
-            res.writeHead(400)
+          if( typeof(body.file) == "undefined"){
+            res.writeHead(200, {'Content-Type': 'text', "Access-Control-Allow-Origin":"*"})
+              res.write('Valid deanSig'); //write a response
               res.end()
             return
           }

@@ -139,16 +139,16 @@ class Create extends Component {
                     <div class={ this.calculateProgressBarPercentageTextCSS() }>
                         {this.state.progressBarPercentageText}
                     </div>
-            
-            </div>
+                    
+                </div>
             
             
             </CustomContentCircularProgressBar>
             : null}
             
             </div>
-
-              </div>
+            
+            </div>
 
               </div>
               </div>
@@ -172,22 +172,42 @@ class Create extends Component {
 
     this.setState({ showProgressBar:true, progressBarPercentage: 0, progressBarPercentageText: "Uploading...", progressBarStatus:'load'})
     console.log(event)
-    let relevantState = { 
-        "name": this.state.name,
-        "surname": this.state.surname,
-        "sigid": this.state.sigid,
-        "major": this.state.major,
-        "units": this.state.units,
+
+    let relevantState
+    if( this.state.file != undefined){
+        relevantState = { 
+            "name": this.state.name,
+            "surname": this.state.surname,
+            "sigid": this.state.sigid,
+            "major": this.state.major,
+            "units": this.state.units,
             "file": this.state.file,
-                "institution": this.state.institution,
+            "institution": this.state.institution,
             "date": this.state.date
+        }
     }
+    else{
+        if( this.state.file == undefined){
+            console.log('this state file is undefined')
+            relevantState = { 
+                "name": this.state.name,
+                "surname": this.state.surname,
+                "sigid": this.state.sigid,
+                "major": this.state.major,
+                "units": this.state.units,
+                "institution": this.state.institution,
+                "date": this.state.date
+            }
+        }
+    }
+    
+    
     
     // https://stackoverflow.com/questions/49686694/uploading-a-file-using-fetch-in-reactjs
     let url = 'http://localhost:8080/check'
     let options = {
         method: 'post',
-        headers: {},
+        
         
     }
     options.body = new FormData();
@@ -198,8 +218,11 @@ class Create extends Component {
     var xhr = new XMLHttpRequest()
     
     xhr.upload.addEventListener("progress", e=>{
+        console.log()
         if( e.lengthComputable){
             var percentComplete = Math.round(e.loaded * 100 / e.total)
+            console.log(xhr.getAllResponseHeaders())
+            console.log(xhr)
             this.setState({ progressBarPercentage: percentComplete/2 })
         }
         else{
@@ -211,12 +234,13 @@ class Create extends Component {
     var self = this
     xhr.onreadystatechange = function(){
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            console.log(xhr.getAllResponseHeaders())
             console.log(xhr.responseText)
         console.log("abc")
         delete relevantState.file
 
         self.timeout = setInterval(() => {
-              let newP = self.state.progressBarPercentage+1;
+            let newP = self.state.progressBarPercentage+1;
             if (self.state.progressBarPercentage < 60) {
               self.setState({ progressBarPercentage: newP, progressBarPercentageText:"Uploading." });
             }
@@ -227,7 +251,7 @@ class Create extends Component {
                 self.setState({ progressBarPercentage: newP, progressBarPercentageText:"Uploading..." });
             }
             else{
-                }
+            }
             
           }, 250);
 
@@ -240,6 +264,7 @@ class Create extends Component {
                       self.setState({ progressBarPercentage: newP });
                         }
                     	else{
+                            clearInterval(self.timeout)
                             self.setState({ progressBarPercentage: 100, progressBarPercentageText:"Done!", progressBarStatus:'done' })
                             alert("Created certificate");
                             self.backTrack();
@@ -256,7 +281,9 @@ class Create extends Component {
         );
         }
         if(this.readyState === XMLHttpRequest.DONE && this.status >= 400){
-
+            console.log(this.response)
+            console.log(this.getAllResponseHeaders())
+            console.log(this.responseText)
             switch(this.status){
                 case 400:
                 alert("No file submitted")
@@ -348,6 +375,13 @@ class Create extends Component {
 
 
     fileSelect = ev.currentTarget.files
+    console.log(`fileSelect is ${fileSelect}`)
+
+    // user clicked x in file selection popup
+    if( fileSelect.length == 0){
+        return
+    }
+
     this.setState({file:ev.currentTarget.files[0]},
         ()=>{
             console.log(fileSelect)
