@@ -25,6 +25,7 @@ var pdfjsLib;
 
 class Create extends Component {
   componentDidMount () {
+    // Load in the pdf library used to parse the pdf
     const script = document.createElement("script");
 
     script.src = "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/build/pdf.min.js";
@@ -171,6 +172,7 @@ class Create extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    // Check for sufficient units for graduated status
     if( this.state.units < 120){
         alert("Insufficient amount of units for graduation")
         return
@@ -179,6 +181,7 @@ class Create extends Component {
     this.setState({ showProgressBar:true, progressBarPercentage: 0, progressBarPercentageText: "Uploading...", progressBarStatus:'load'})
     console.log(event)
 
+    // Prepare information to be sent to server
     let relevantState
     if( this.state.file != undefined){
         relevantState = { 
@@ -208,7 +211,7 @@ class Create extends Component {
     }
     
     
-    
+    // Prepare the post request to the server
     // https://stackoverflow.com/questions/49686694/uploading-a-file-using-fetch-in-reactjs
     let url = 'http://localhost:8080/check'
     let options = {
@@ -222,7 +225,7 @@ class Create extends Component {
     }
 
     var xhr = new XMLHttpRequest()
-    
+    // Progress Bar Event Listener
     xhr.upload.addEventListener("progress", e=>{
         console.log()
         if( e.lengthComputable){
@@ -238,6 +241,7 @@ class Create extends Component {
     
     // xhr.setRequestHeader("Content-Type","multipart/form-data")
     var self = this
+    // Handle server response
     xhr.onreadystatechange = function(){
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
             console.log(xhr.getAllResponseHeaders())
@@ -260,7 +264,7 @@ class Create extends Component {
             }
             
           }, 250);
-
+          // Update certificate
         entry().update({"certificate":relevantState}).then(
 
             success => {
@@ -286,6 +290,7 @@ class Create extends Component {
         
         );
         }
+        // Server responds with error status
         if(this.readyState === XMLHttpRequest.DONE && this.status >= 400){
             console.log(this.response)
             console.log(this.getAllResponseHeaders())
@@ -383,7 +388,7 @@ class Create extends Component {
     fileSelect = ev.currentTarget.files
     console.log(`fileSelect is ${fileSelect}`)
 
-    // user clicked x in file selection popup
+    // Handle user clicking x  when in file selection popup
     if( fileSelect.length == 0){
         return
     }
@@ -404,7 +409,7 @@ class Create extends Component {
 
     
                 
-                
+                // Parse PDF
                this.getPDFText(data)
                .then( (text) =>{
                 console.log(`text is ${text}`)
@@ -478,7 +483,7 @@ class Create extends Component {
 
 
 
-
+// Event when pdf library has been loaded
   pdfLibraryLoaded(ev){
     pdfjsLib = window['pdfjs-dist/build/pdf']
     console.log('pdflibloaded')
@@ -486,7 +491,7 @@ class Create extends Component {
 }
 
 /**
- * 
+ * Get the text content from the pdf
  * @param {*} data Is pdf read as data url
  */
 async getPDFText(data){
