@@ -23,18 +23,18 @@ $ cd alethia-certificates.github.io
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+After following the prerequisities and navigiating into the directory, do the following:
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+1. Install the Project Dependencies
 
 ```
-until finished
+$ npm install --save
+```
+
+After it is complete, all the dependencies should be installed. The application can now be run.
+
+```
+$ npm start
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
