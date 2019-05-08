@@ -16,8 +16,9 @@ Clone the source locally:
 
 
 ```
-git clone https://github.com/jvan1997/alethia-certificates.github.io/
-cd alethia-certificates.github.io
+$ git clone https://github.com/jvan1997/alethia-certificates.github.io/
+
+$ cd alethia-certificates.github.io
 ```
 
 ### Installing
