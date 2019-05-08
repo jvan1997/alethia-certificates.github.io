@@ -114,7 +114,7 @@ isEmpty(obj) {
  */
   handleNameFind(e){
       e.preventDefault();
-      let email = this.refs.email.value;
+      let email = this.refs.email.value.toLowerCase();
       if(this.state.currentUser === email){
         this.setState({errorMessage:'Cannot verify yourself.'});
       }
