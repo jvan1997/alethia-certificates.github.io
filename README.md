@@ -38,8 +38,8 @@ The build is minified and the filenames include the hashes.<br>
 + Creating a certificate:
 .. + Uploading a certificate:
 + Viewing a certificate:
-..* Download:
-..* Edit:
+ + Download:
+ + Edit:
 ..* Vote:
 ..* Verify:
 + About Alethia
