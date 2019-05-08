@@ -71,15 +71,15 @@ class Create extends Component {
     <form onSubmit={this.handleSubmit}>
             <div class="flex justify-center col-md-6 items-center">
                 <p class="text-white font-fancy font-bold text-lg">First Name:</p>
-                <input class="shadow ml-12 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
+                <input required class="shadow ml-12 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
                 <p class="text-white font-fancy font-bold text-lg">Last Name:</p>
-                <input class="shadow ml-13 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="surname" type="text" name="surname" value={this.state.surname} onChange={this.handleChange}/>
+                <input required class="shadow ml-13 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="surname" type="text" name="surname" value={this.state.surname} onChange={this.handleChange}/>
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
                 <p class="text-white font-fancy font-bold text-lg">Signature ID:</p>
-                <input class="shadow ml-11 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="sigid"  type="text" name="sigid"  onChange={this.handleChange}/>
+                <input required class="shadow ml-11 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="sigid"  type="text" name="sigid"  onChange={this.handleChange}/>
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
                 <p class="text-white font-fancy font-bold text-lg">Institution:</p>
@@ -92,8 +92,8 @@ class Create extends Component {
         <div class="flex justify-left pl-4 col-md-6 items-center ">
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
             
-             <select class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
-		        <option value="-1"> Select </option>
+             <select required class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
+		        <option value=""> Select </option>
                 <option value="BS Aerospace Engineering">Aerospace Engineering</option>
             <option value="BS Biomedical Engineering">Biomedical Engineering</option>
             <option value="BS Bioengineering Engineering">Biomedical Engineering</option>
@@ -109,7 +109,7 @@ class Create extends Component {
           </div>
         <div class="flex justify-center col-md-6 items-center">
                 <p class="text-white font-fancy font-bold text-lg">Units Completed:</p>
-                <input class="shadow ml-2 mt-2 mb-2 appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="units" type="text" name="units" value={this.state.units} onChange={this.handleChange}/>
+                <input required class="shadow ml-2 mt-2 mb-2 appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="units" type="number" min="0" step="0.1" name="units" value={this.state.units} onChange={this.handleChange}/>
                 </div>
         <div class="pl-4">
         <button class="inline-block h-12 w-32 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 mr-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" type="button" onClick={() => this.backTrack()}> Cancel</button>
