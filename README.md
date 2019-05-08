@@ -1,17 +1,23 @@
 # Alethia
 
-Alethia is blockchain-enabled certification verification service. The name "Alethia" stems from the Greek spirit of truth, something that this project values. The intent of this application is to allow alumni to upload their certificates and along with a signature ID provided by their school's dean in order to allow other users of Alethia to vote for their certificate to make it valid.
+Alethia is blockchain-enabled certification verification service. The name "Alethia" stems from the Greek spirit of truth, something that this project values. The intent of this application is to allow alumni to upload their certificates and along with a signature ID provided by their school's dean in order to allow other users of Alethia to vote for their certificate to make it valid. 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Having a terminal is necessary for installing the application. If you are on an operating system that does not have a native terminal, use programs such as Visual Studio Code.
+
+Acquiring the github repository is also necessary, enter the following line into the terminal in order to get access to Alethia's files.
+
+Clone the source locally:
+
 
 ```
-Give examples
+git clone https://github.com/jvan1997/alethia-certificates.github.io/
+cd alethia-certificates.github.io
 ```
 
 ### Installing
