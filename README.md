@@ -38,7 +38,7 @@ The build is minified and the filenames include the hashes.<br>
 + Creating a certificate:
 ++ Uploading a certificate:
 + Viewing a certificate:
-++ Download:
+..+ Download:
 ++ Edit:
 ++ Vote:
 ++ Verify:
