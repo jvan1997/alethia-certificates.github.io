@@ -9,6 +9,8 @@ Alethia is a platform for blockchain enabled certificates using Ethereum's Rikeb
 5. To deposit test tokens, request some from a test faucet (Instructions: https://medium.com/hellogold/adding-tokens-to-metamask-60b2fedd5bd9)
 6. In your terminal type `testrpc` in one window and run the application on a different window. (Link to download: https://truffleframework.com/docs/ganache/quickstart)
 
+## Running the application
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
@@ -31,5 +33,18 @@ The build is minified and the filenames include the hashes.<br>
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
 ## Code Structure
+
+### React Components
++ Creating a certificate:
+++ Uploading a certificate:
++ Viewing a certificate:
+++ Download:
+++ Edit:
+++ Vote:
+++ Verify:
+
+### Ethereum Components
++ Deploying a certificate:
++ Voting on a certificate:
 
 ## Dependencies
