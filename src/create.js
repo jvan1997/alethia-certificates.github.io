@@ -40,10 +40,11 @@ class Create extends Component {
             surname:'',
             sigid: '', 
             major: '', 
-            date: new Date(),
+            date: (new Date()).getUTCFullYear(),
             units: '',
             file: undefined,
             progressBarPercentage:0,
+            institution:'',
             progressBarPercentageText:'0%',
             showProgressBar:false
         };
@@ -80,11 +81,11 @@ class Create extends Component {
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
                 <p class="text-white font-fancy font-bold text-lg">Institution:</p>
-                <input class="shadow ml-14 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="institution"  type="text" name="institution"  onChange={this.handleChange}/>
+                <input required class="shadow ml-14 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="institution"  type="text" name="institution" value={this.state.institution} onChange={this.handleChange}/>
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
                 <p class="text-white font-fancy font-bold text-lg">Approval Date:</p>
-                <input class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="text" name="date"  onChange={this.handleChange}/>
+                <input required class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="number" min="1900" step="any" name="date" value={this.state.date}  onChange={this.handleChange}/>
                 </div>
         <div class="flex justify-left pl-4 col-md-6 items-center ">
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
@@ -149,7 +150,11 @@ class Create extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    this.setState({ showProgressBar:true, progressBarPercentage: 0, progressBarPercentageText: "0"})
+    if( this.state.units < 120){
+        alert("Insufficient amount of units for graduation")
+        return
+    }
+
     console.log(event)
     let relevantState = { 
         "name": this.state.name,
@@ -157,7 +162,9 @@ class Create extends Component {
         "sigid": this.state.sigid,
         "major": this.state.major,
         "units": this.state.units,
-        "file": this.state.file
+            "file": this.state.file,
+                "institution": this.state.institution,
+            "date": this.state.date
     }
     
     // https://stackoverflow.com/questions/49686694/uploading-a-file-using-fetch-in-reactjs
@@ -335,12 +342,30 @@ class Create extends Component {
                 let name = ""
                 let major = ""
                 let units = 0
+                let institution = ""
+                let date = ""
 
                 let nameToken = "STUDENT NAME:"
                 let majorToken = "MAJOR:"
                 let unitsToken = "ALL COLLEGE:"
+                let institutionToken = "University"
+                let dateToken = "DATE PRINTED:"
+                let institutionFound = false
+                let dateFound = false
 
                 for(var i=0;i<strs.length;i++){
+                    if( !institutionFound && (/.*university.*/gi).test(strs[i])){
+                        institution = strs[i]
+                        institutionFound = true
+                        this.setState({institution:institution})
+                    }
+                    if( !dateFound && strs[i].includes(dateToken)){
+                        let dateString = strs[i].split(dateToken)[1].trim()
+                        dateFound = true
+                        date = new Date(dateString)
+                        this.setState({date:date.getUTCFullYear()})
+                    }
+
                     if( strs[i].includes(nameToken)){
                         name = strs[i].split(nameToken)[1].trim()
                         console.log(name)

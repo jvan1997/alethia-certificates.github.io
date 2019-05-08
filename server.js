@@ -14,7 +14,7 @@ http.createServer(function (req, res) {
         }
   
 
-    console.log(req)
+    // console.log(req)
     console.log(req.url)
     console.log(req.method)
     var busboy = new Busboy({ headers: req.headers })
@@ -50,7 +50,7 @@ http.createServer(function (req, res) {
 
           if( body.file == "undefined"){
             res.writeHead(400)
-            res.end()
+              res.end()
             return
           }
 
@@ -64,13 +64,33 @@ http.createServer(function (req, res) {
               let name = ""
               let major = ""
               let units = ""
+              let institution = ""
+              let date = ""
 
               let nameToken = "STUDENT NAME:"
               let majorToken = "MAJOR:"
               let schoolUnits = "SJSU CUM:"
+              let institutionToken = "University"
+              let dateToken = "DATE PRINTED:"
+              let institutionFound = false
+              let dateFound = false
+
               let returnObject = {}
 
               for (var i = 0; i < strs.length; i++) {
+                if( !institutionFound && (/.*university.*/gi).test(strs[i])){
+                  institution = strs[i]
+                  institutionFound = true
+                  returnObject.institution = institution
+                }
+
+                if( !dateFound && strs[i].includes(dateToken)){
+                  let dateString = strs[i].split(dateToken)[1].trim()
+                  dateFound = true
+                  date = new Date(dateString)
+                  returnObject.date = date.getUTCFullYear()
+                }
+
                 if (strs[i].includes(nameToken)) {
                   name = strs[i].split(nameToken)[1].trim()
                   // console.log(name)
