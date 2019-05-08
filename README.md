@@ -39,9 +39,15 @@ $ npm start
 
 The terminal will then open the default browser for the system and run on localhost. 
 
-## Running the tests
+## Features
 
-Explain how to run the automated tests for this system
+- [x] Registration
+- [x] Login
+- [x] Uploading and Submitting Certificate
+- [x] Editing a previously submitted Certificate
+- [x] Verifying Certificate via Ethereum Blockchain
+- [x] Searching and Voting for other Certificates
+
 
 ### Break down into end to end tests
 
@@ -58,10 +64,6 @@ Explain what these tests test and why
 ```
 Give an example
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
