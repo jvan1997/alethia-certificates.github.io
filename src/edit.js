@@ -108,20 +108,21 @@ class Edit extends Component {
             <div class="flex justify-left pl-4 col-md-6 items-center ">
                 <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
                 
-                 <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-grey-darker ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" defaultValue={majors} value={majors} onChange={this.handleChange} >	
-                 <option value="BS Aerospace Engineering">Aerospace</option>
-            <option value="BS Biomedical Engineering">Biomedical</option>
-            <option value="BS Bioengineering Engineering">Bioengineering</option>
-		        <option value="BS Chemical Engineering">Chemical</option>
-            <option value="BS Civil Engineering">Civil</option>
-            <option value="BS Computer Engineering">Computer</option>
-		        <option value="BS Electrical Engineering">Electrical</option>
-            <option value="BS Industrial Engineering">Industrial</option>
-            <option value="BS Mechanical Engineering">Mechanical</option>
-            <option value="BS Software Engineering">Software </option>
-    
-              </select>
-              </div>
+                <select class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={majors} onChange={this.handleChange} >	
+		        <option value="-1"> Select </option>
+                <option value="BS Aerospace Engineering">Aerospace Engineering</option>
+            <option value="BS Biomedical Engineering">Biomedical Engineering</option>
+            <option value="BS Bioengineering Engineering">Biomedical Engineering</option>
+		        <option value="BS Chemical Engineering">Chemical Engineering</option>
+            <option value="BS Civil Engineering">Civil Engineering</option>
+            <option value="BS Computer Engineering">Computer Engineering</option>
+		        <option value="BS Electrical Engineering">Electrical Engineering</option>
+            <option value="BS Industrial Engineering">Industrial Engineering</option>
+            <option value="BS Mechanical Engineering">Mechanical Engineering</option>
+            <option value="BS Software Engineering">Software Engineering</option>
+
+          </select>
+          </div>
             <div class="flex justify-center col-md-6 items-center">
                     <p class="text-white font-fancy font-bold text-lg">Units Completed:</p>
                     <input class="shadow ml-2 mt-2 mb-2 appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="units" type="text" name="units" defaultValue={units} onChange={this.handleChange}/>
@@ -165,17 +166,18 @@ class Edit extends Component {
         <div class="flex justify-left pl-4 col-md-6 items-center ">
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
             
-             <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-grey-darker ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
-            <option value="BS Aerospace Engineering">Aerospace</option>
-            <option value="BS Biomedical Engineering">Biomedical</option>
-            <option value="BS Bioengineering Engineering">Bioengineering</option>
-		        <option value="BS Chemical Engineering">Chemical</option>
-            <option value="BS Civil Engineering">Civil</option>
-            <option value="BS Computer Engineering">Computer</option>
-		        <option value="BS Electrical Engineering">Electrical</option>
-            <option value="BS Industrial Engineering">Industrial</option>
-            <option value="BS Mechanical Engineering">Mechanical</option>
-            <option value="BS Software Engineering">Software </option>
+            <select class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
+		        <option value="-1"> Select </option>
+                <option value="BS Aerospace Engineering">Aerospace Engineering</option>
+            <option value="BS Biomedical Engineering">Biomedical Engineering</option>
+            <option value="BS Bioengineering Engineering">Biomedical Engineering</option>
+		        <option value="BS Chemical Engineering">Chemical Engineering</option>
+            <option value="BS Civil Engineering">Civil Engineering</option>
+            <option value="BS Computer Engineering">Computer Engineering</option>
+		        <option value="BS Electrical Engineering">Electrical Engineering</option>
+            <option value="BS Industrial Engineering">Industrial Engineering</option>
+            <option value="BS Mechanical Engineering">Mechanical Engineering</option>
+            <option value="BS Software Engineering">Software Engineering</option>
 
           </select>
           </div>
