@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import Edit from './edit';
 import Bar from './bar';
 import Profile from './profile';
 import Particles from 'react-particles-js';
+/**
+ * Profile Page that has particles as well as the profile component
+ */
 class ProfilePage extends Component {
- 
-	constructor(props) {
-        super(props);
-    }  
-
   render() {
     return (
-<div>
+		<div>
 		<Particles
 			className="bg-cover-image fixed w-screen h-screen z-n1"
 			params={{
@@ -31,7 +28,8 @@ class ProfilePage extends Component {
 						}
 					}
 				}
-			}}>          </Particles>
+			}}>          
+			</Particles>
 			<div class="z-n2">
 		  <Bar />
 		  <Profile/>

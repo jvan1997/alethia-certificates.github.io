@@ -1,24 +1,51 @@
 import React, { Component } from 'react';
-import logo from './Images/logo.png';
 import './App.css';
-import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
-import {user,db,entry} from './functions';
-
+import {entry} from './functions';
+/**
+ * Class edit is basically allowing the user to edit their certificate.
+ */
 class Edit extends Component {
 	constructor(props) {
         super(props);
         this.state = {
-            certificate:[]
+            certificate:[],
+            voted:[],
+            loading:true,
         };
 	
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }  
+    }
+    /**
+     * This function will be used a lot to allow the user to navigate to a previous page.
+     */  
         backTrack(){
      	this.props.history.goBack();
      }
+     /**
+      * Checks if hte user is logged in or not, and gets the list of voters.
+      */
+     componentWillMount(){
+        let test = JSON.parse(localStorage.getItem("logged"));
+        if(!test){
+            this.props.history.push('/');
+        }
+        this.authSubscription = firebaseApp.auth().onAuthStateChanged((user2) => {
+        firebaseApp.firestore().collection('approved').doc('voted').get().then((doc) => {
+          if (doc.exists) {
+                    this.setState({voted:doc.data()['voted'], loading:false, currentUser:user2.email});
+          } else {
+            this.setState({ voted: null });
+          }
+          
+        })
+        });
+      }
+    /**
+     * Gets the certificate information of the user.
+     */
      componentDidMount() {
         firebaseApp.auth().onAuthStateChanged(user => {
             if(user){
@@ -26,11 +53,8 @@ class Edit extends Component {
                     if (doc.exists) {
                         let data = doc.data()['certificate'];
                         this.setState({ certificate: data });
-                      //  console.log("Document data:", data);
                     } else {
-                        // doc.data() will be undefined in this case
                         this.setState({ data: null });
-                     //   console.log("No such document!");
                     }
                 })
             } else{
@@ -39,16 +63,18 @@ class Edit extends Component {
         })
         
     }
+    /**
+     * Renders the information of the user's certificiate and allows them to change it.
+     */
   render() {
       var keys = Object.keys(this.state.certificate);
       let data = this.state.certificate;
-    if((keys.length != 0 &&
-         data["name"] != '' &&
-          data["surname"] != '' &&
-           data["units"] != '' && 
-           data["sigid"] != '' && 
-           data["major"] != '')){
-     //   console.log("yes");
+    if((keys.length !== 0 &&
+         data["name"] !== '' &&
+          data["surname"] !== '' &&
+           data["units"] !== '' && 
+           data["sigid"] !== '' && 
+           data["major"] !== '')){
         let majors = data["major"];
         let fname = data["name"];
         let lname = data["surname"];
@@ -82,20 +108,21 @@ class Edit extends Component {
             <div class="flex justify-left pl-4 col-md-6 items-center ">
                 <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
                 
-                 <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-grey-darker ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" defaultValue={majors} value={majors} onChange={this.handleChange} >	
-                 <option value="BS Aerospace Engineering">Aerospace</option>
-            <option value="BS Biomedical Engineering">Biomedical</option>
-            <option value="BS Bioengineering Engineering">Bioengineering</option>
-		        <option value="BS Chemical Engineering">Chemical</option>
-            <option value="BS Civil Engineering">Civil</option>
-            <option value="BS Computer Engineering">Computer</option>
-		        <option value="BS Electrical Engineering">Electrical</option>
-            <option value="BS Industrial Engineering">Industrial</option>
-            <option value="BS Mechanical Engineering">Mechanical</option>
-            <option value="BS Software Engineering">Software </option>
-    
-              </select>
-              </div>
+                <select class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={majors} onChange={this.handleChange} >	
+		        <option value="-1"> Select </option>
+                <option value="BS Aerospace Engineering">Aerospace Engineering</option>
+            <option value="BS Biomedical Engineering">Biomedical Engineering</option>
+            <option value="BS Bioengineering Engineering">Biomedical Engineering</option>
+		        <option value="BS Chemical Engineering">Chemical Engineering</option>
+            <option value="BS Civil Engineering">Civil Engineering</option>
+            <option value="BS Computer Engineering">Computer Engineering</option>
+		        <option value="BS Electrical Engineering">Electrical Engineering</option>
+            <option value="BS Industrial Engineering">Industrial Engineering</option>
+            <option value="BS Mechanical Engineering">Mechanical Engineering</option>
+            <option value="BS Software Engineering">Software Engineering</option>
+
+          </select>
+          </div>
             <div class="flex justify-center col-md-6 items-center">
                     <p class="text-white font-fancy font-bold text-lg">Units Completed:</p>
                     <input class="shadow ml-2 mt-2 mb-2 appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="units" type="text" name="units" defaultValue={units} onChange={this.handleChange}/>
@@ -133,23 +160,24 @@ class Edit extends Component {
                 <input class="shadow ml-14 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="institution"  type="text" name="institution"  onChange={this.handleChange}/>
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
-                <p class="text-white font-fancy font-bold text-lg">Approval Date:</p>
+                <p class="text-white font-fancy font-bold text-lg">Approval Year:</p>
                 <input class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="text" name="date"  onChange={this.handleChange}/>
                 </div>
         <div class="flex justify-left pl-4 col-md-6 items-center ">
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
             
-             <select class="block ml-6 h-8 w-24 pl-4 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-grey-darker ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
-            <option value="BS Aerospace Engineering">Aerospace</option>
-            <option value="BS Biomedical Engineering">Biomedical</option>
-            <option value="BS Bioengineering Engineering">Bioengineering</option>
-		        <option value="BS Chemical Engineering">Chemical</option>
-            <option value="BS Civil Engineering">Civil</option>
-            <option value="BS Computer Engineering">Computer</option>
-		        <option value="BS Electrical Engineering">Electrical</option>
-            <option value="BS Industrial Engineering">Industrial</option>
-            <option value="BS Mechanical Engineering">Mechanical</option>
-            <option value="BS Software Engineering">Software </option>
+            <select class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
+		        <option value="-1"> Select </option>
+                <option value="BS Aerospace Engineering">Aerospace Engineering</option>
+            <option value="BS Biomedical Engineering">Biomedical Engineering</option>
+            <option value="BS Bioengineering Engineering">Biomedical Engineering</option>
+		        <option value="BS Chemical Engineering">Chemical Engineering</option>
+            <option value="BS Civil Engineering">Civil Engineering</option>
+            <option value="BS Computer Engineering">Computer Engineering</option>
+		        <option value="BS Electrical Engineering">Electrical Engineering</option>
+            <option value="BS Industrial Engineering">Industrial Engineering</option>
+            <option value="BS Mechanical Engineering">Mechanical Engineering</option>
+            <option value="BS Software Engineering">Software Engineering</option>
 
           </select>
           </div>
@@ -169,8 +197,6 @@ class Edit extends Component {
   }
 }
   handleChange(event) {
-   // console.log("doing stuff");
-    console.log(event.target.value);
     var certificate = this.state.certificate;
     certificate[event.target.name] = event.target.value;
     this.setState({
@@ -180,10 +206,19 @@ class Edit extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     entry().update({"certificate":this.state.certificate}).then(function() {
 		alert("Edited certificate");
   });
+  let voted = this.state.voted;
+  for (var i=voted.length-1; i>=0; i--) {
+    if (voted[i] === this.state.currentUser) {
+        voted.splice(i, 1);
+        break;       //<-- Uncomment  if only the first term has to be removed
+    }
+  }
+  firebaseApp.firestore().collection('approved').doc('voted').set({voted}).then((returns) =>{
+    alert("Certificate has been updated, you must get your certificiate re-verified");
+})
   this.backTrack();
   }
 }

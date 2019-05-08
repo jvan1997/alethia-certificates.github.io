@@ -5,32 +5,37 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import{Router, Route,Switch } from 'react-router-dom';
 import Login from "./login";
+import './css/tailwind.css';
 import RegisterForm from "./signUp";
-import {firebaseApp} from "./firebase";
 import { createBrowserHistory } from 'history';
-import Error from "./Error";
-import Particles from 'react-particles-js';
-import CreateCert from "./CreateCert";
 import AboutPage from "./aboutPage";
-
 import createPage from "./createPage";
 import Profile from "./profilepage";
 import VerifyPage from "./verifypage";
 import Edit from "./editPage";
 import Vote from "./votePage";
+/**
+ * BrowserHistory allows us to go back and forth between different pages on Alethia.
+ */
 const browserHistory = createBrowserHistory()
+/**
+ * This checks to see if a user is logged in or not and redirects them accordingly.
+ */
 // firebaseApp.auth().onAuthStateChanged(user => {
     let test = JSON.parse(localStorage.getItem("logged"));
     if(test){
-       // console.log('user signed in or up', user);
          if(window.location.pathname === "/login" || window.location.pathname ==='/signup')
              browserHistory.push('/');
     } else{
-        console.log('user has signed out or still needs to sign in');
         if(window.location.pathname !== "/signup" && window.location.pathname !== "/login" && window.location.pathname!=="/about")
             browserHistory.replace('/' );
     }
 // })
+/**
+ * This is the render function that allows us to load components based on the 
+ * path in the address bar. Accessing a path that does not exist takes you to 
+ * the home/landing page.
+ */
 ReactDOM.render(
     <Router path="/App" history={browserHistory}>
     <Switch>
@@ -44,7 +49,7 @@ ReactDOM.render(
     <Route exact path='/about' component={AboutPage}/>
     <Route exact path='/vote' component={Vote}/>
 
-    <Route component={Error}/>
+    <Route component={App}/>
     </Switch>
     </Router>, document.getElementById('root')
     );

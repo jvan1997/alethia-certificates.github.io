@@ -1,13 +1,14 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import {firebaseApp} from "./firebase";
 import './App.css';
 import { withRouter } from 'react-router-dom';
-import {user,db,entry} from './functions';
 import logo from './headerIcon.png';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-  
+/**
+ * Voting component; The alogrithm is quite simple, like a zombie infestation.
+ * At least One person starts as the verified user, and then they are able to vote for other users
+ * People who are unverified are not able to vote for other unverified users yet.
+ */
 class TempVote extends React.Component {
 	constructor(props){
     super(props);
@@ -25,14 +26,18 @@ class TempVote extends React.Component {
     };
     this.removeSelection = this.removeSelection.bind(this);
 }
+/**
+ * Clears the user selection if the verified user wants to view someone else's certificate.
+ */
 removeSelection(){
     this.setState({viewing:false,certificate:null})
 }
-
+/**
+ * Adds the intended votee into the list of approved voters.
+ */
 voteFor(){
     let voted = this.state.voted;
     voted.push(this.state.inputtedUser);
-    console.log(voted);
     firebaseApp.firestore().collection('approved').doc('voted').set({voted}).then((returns) =>{
         alert("You have verified this user");
         this.removeSelection();
@@ -41,8 +46,10 @@ voteFor(){
 /**
    * When the App component mounts, we listen for any authentication
    * state changes in Firebase.
-   * Once subscribed, the 'user' parameter will either be null 
-   * (logged out) or an Object (logged in)
+   * If there is no user logged ,it redirects them from teh vote page
+   * If they are logged, then it will fetch the data of the user, 
+   * if they are verified or not, as well as a list of the current users of Alethia
+   * 
    */
   componentWillMount() {
         let test = JSON.parse(localStorage.getItem("logged"));
@@ -67,9 +74,7 @@ voteFor(){
 		})
         firebaseApp.firestore().collection('users').get().then((doc) => {
             let UsersArr = []
-            console.log(doc.docs);
             for(let aDoc in doc.docs){
-                console.log(doc.docs[aDoc].id);
                 UsersArr.push(doc.docs[aDoc].id);
             }
             this.setState({users:UsersArr});
@@ -85,6 +90,10 @@ voteFor(){
   componentWillUnmount() {
     this.authSubscription();
   }
+  /**
+   * Goes through the certificate, and if its empty, returns false.
+   * @param {The certificate} obj 
+   */
 isEmpty(obj) {
     for(var prop in obj) {
         if(obj.hasOwnProperty(prop))
@@ -92,9 +101,18 @@ isEmpty(obj) {
     }
     return true;
 }
-
+/**
+ * Will display error messages if the following occurs:
+ *      If the user inputs themselves
+ *      If the user inputs someone who is already verified
+ *      If the user inputs someone who does not exist
+ *      If the user inputs someone who does not have a certificate
+ *      If the user has nothing on their profile (rarely happens)
+ *      If the user inputs someone with an incomplete certificiate
+ * Else it will display the certificate on the unverified user for them.
+ * @param {The event which the verified user submits a name.} e 
+ */
   handleNameFind(e){
-      console.log(this.state.users);
       e.preventDefault();
       let email = this.refs.email.value;
       if(this.state.currentUser === email){
@@ -107,12 +125,11 @@ isEmpty(obj) {
           this.setState({errorMessage:'This user does not exist.'});
       }
       else{
-          console.log("Looking for: " + email);
         firebaseApp.auth().onAuthStateChanged((user2) => {
             firebaseApp.firestore().collection('users').doc(email).get().then((doc) => {
                 if (doc.exists) {
                     let data = doc.data()['certificate'];
-                    console.log(data);
+
                     if(this.isEmpty(data)){
                         this.setState({errorMessage:'This user has not uploaded their certificate yet.'});
                     }
@@ -134,6 +151,9 @@ isEmpty(obj) {
         )
       }
   }
+  /**
+   * Displays the status of the user.
+   */
 getStatus(){
     let statusArr = [];
     if(this.state.verified === false){
@@ -148,18 +168,16 @@ getStatus(){
     }
     return statusArr;
 }
-
-goTo(event){
-	var destination = event.target.value;
-	this.props.history.push(`/${destination}`);
-}
-
-editCert = (e) => {
-	this.props.history.push("/profile/editCert");
-}
-createCert = (e) => {
-	this.props.history.push("/create");
-}
+/**
+ * Render function
+ * While the data is still loading, it will display nothing
+ * After it finished loading and allows us to view it, 
+ * meaning the information of the inputted user has been loaded,
+ * it will display their certificate, to which we can either vote
+ * or abstain from voting
+ * If no user is inputted yet, it will display that a user is verified
+ * or not, and if they are verified, allow the user to search for other users.
+ */
 render() {
     if(this.state.loading){
         return null;
@@ -173,7 +191,7 @@ render() {
                 <div class="flex items-flex  h-full " >
                 <div class="h-full  mx-auto pt-20 bg-transparent rounded text-center">
                  <div>
-                  <h1 class=" font-fancy font-bold text-lg text-white mb-8 ml-8 text-5xl "> Vote Page </h1>
+                  <h1 class=" font-fancy font-bold text-lg text-white mb-8 ml-8 text-5xl "> Vote </h1>
                   </div>
             <div class="flex pb-4">
             <div class="container-sm flex flex-col rounded border-4 ">
@@ -194,7 +212,7 @@ render() {
                     <div class="w-1/2  border-b mt-2"/>
                 </div>
                 <div class="text-base italic mb-14"> This certifies that the named individual's college degree is valid.</div>
-                <img class="border rounded fill-current mr-2 " width="100" height="100" src={logo} />
+                <img class="border rounded fill-current mr-2 " alt="" width="100" height="100" src={logo} />
             </div>
             
             </div>	
@@ -202,7 +220,8 @@ render() {
             <button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" 
             value="profile" style={{cursor:'pointer'}} onClick={(e) => this.removeSelection()}>Abstain Vote</button>
             <button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" 
-            value="verify" style={{cursor:'pointer'}} onClick={(e) => this.voteFor(e)}>Vote</button>
+            value="verify" style={{cursor:'pointer'}} onClick={(e) =>           window.confirm("Are you sure this is a legitimate certificate to vote for?") &&
+            this.voteFor(e)}>Vote</button>
             </div>
             </div>
             </div>
@@ -213,7 +232,7 @@ render() {
                 <div class="flex items-flex  h-full " >
                 <div class="h-full  mx-auto pt-20 bg-transparent rounded text-center">
                  <div>
-                  <h1 class=" font-fancy font-bold text-lg text-white mb-8 ml-8 text-5xl "> Vote Page </h1>
+                  <h1 class=" font-fancy font-bold text-lg text-white mb-8 ml-8 text-5xl "> Vote </h1>
                   </div>
                   <div class="w-full">
     <div class="flex items-center justify-center">

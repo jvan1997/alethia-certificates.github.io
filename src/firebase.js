@@ -1,5 +1,7 @@
 import firebase from 'firebase'
-
+/**
+ * Firebase key and information to access the storage information of our firebase.
+ */
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBtbNnNibLkSVqYQ1asDWCLLnV3_g5v4to",

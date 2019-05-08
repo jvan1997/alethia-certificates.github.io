@@ -1,19 +1,12 @@
 
-import React, { Component } from 'react';
-import {firebaseApp} from "./firebase";
-import {RegisterForm} from "./signUp";
-import { Button} from 'react-bootstrap';
+import React from 'react';
 import './App.css';
 import Particles from 'react-particles-js';
 import { withRouter } from 'react-router-dom';
 import Bar from './bar';
 import About from './about';
 class AboutPage extends React.Component {
-	constructor(props){
-  		super(props);
-  		
- }
-
+	
 	render() {
     	return (
 			<div>

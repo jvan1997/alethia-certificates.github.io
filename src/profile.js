@@ -1,9 +1,9 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import {firebaseApp} from "./firebase";
 import './App.css';
 import { withRouter } from 'react-router-dom';
-import {user,db,entry} from './functions';
+import {entry} from './functions';
 import logo from './headerIcon.png';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -18,10 +18,11 @@ class Profile extends React.Component {
     };
 }
 /**
-   * When the App component mounts, we listen for any authentication
+   * Before the App component mounts, we listen for any authentication
    * state changes in Firebase.
    * Once subscribed, the 'user' parameter will either be null 
    * (logged out) or an Object (logged in)
+	 * This will push the information of the certificate onto the state.
    */
   componentWillMount() {
 	let test = JSON.parse(localStorage.getItem("logged"));
@@ -31,11 +32,8 @@ class Profile extends React.Component {
 			if (doc.exists) {
 				let data = doc.data()['certificate'];
 				this.setState({ data: data });
-		  //      console.log("Document data:", data);
 			} else {
-				// doc.data() will be undefined in this case
 				this.setState({ data: null });
-		  //      console.log("No such document!");
 			}
 			this.setState({
 				loading: false,
@@ -44,62 +42,73 @@ class Profile extends React.Component {
 
 	});}
 	else{
-		this.props.history.push('/');
-		window.location.reload();
+		
 	}
-  }
+	}
+	
   /**
-   * Don't forget to stop listening for authentication state changes
-   * when the component unmounts.
+   * Unmounts the subscription/access to the firebase when the
+	 * component unmounts.
    */
   componentWillUnmount() {
     this.authSubscription();
   }
 
-
+/**
+ * This is the standard redirection method to reroute to another page.
+ * @param {the button that was pressed} event 
+ */
 goTo(event){
 	var destination = event.target.value;
 	this.props.history.push(`/${destination}`);
 }
-
+/**
+ * Takes the user to the edit certificate page
+ */
 editCert = (e) => {
 	this.props.history.push("/profile/editCert");
 }
+/**
+ * If the user does not have a certificate, take them to the create page.
+ */
 createCert = (e) => {
 	this.props.history.push("/create");
 }
+/**
+ * Allows the user to download a pdf of their certificiate.
+ */
 downLoad= (e) => {
 	html2canvas(document.querySelector("#certificate"),{ width: 892,
 	height: 964
   }).then(canvas => {
 		const imgData = canvas.toDataURL('image/png');
 		const pdf = new jsPDF({orientation:'p',unit:'px'});
-
-		console.log(`canvas.width is ${canvas.width}`);
-		console.log(`canvas.height is ${canvas.height}`)
-		// console.log(imgData);
-		console.log("second" + pdf.internal.pageSize.width);
-		// var imgOffset = (pdf.internal.pageSize.width) / 8;
-		// console.log("HMM" + imgOffset);
 		pdf.addImage(imgData,'PNG',0,0,892,964,"a","FAST");
 		pdf.save("certificate.pdf");
 	});
 
 }
+/**
+ * Takes user to the vote page
+ */
 vote = (e) =>{
 	this.props.history.push("/vote");
 
 }
+/**
+ * Render method that loads the certificate if a user has one
+ * As well as buttons to verify, download, download and edit their certificate
+ * If user does not have one, it will display that there is none and link them
+ * to the create page.
+ */
 	render() {
 		if(this.state.loading){
 			return null;
 		}
-	//	console.log("This is the data", this.state.data);
 		let dataUI = this.state.data;
-	//	console.log(dataUI);
 		var keys = Object.keys(dataUI);
 		if(dataUI){
-			if(keys.length == 0 || dataUI["name"] == '' || dataUI["surname"] == ''|| dataUI["units"] == ''|| dataUI["sigid"] == '' || dataUI["major"] == ''){
+			if(keys.length === 0 || dataUI["name"] === '' || dataUI["surname"] === ''|| dataUI["units"] === ''|| dataUI["sigid"] === '' || dataUI["major"] === ''){
 				return (
 					<div class="flex items-center h-full " >
 				<div class="container-xl h-full mx-auto pt-16 bg-transparent rounded">
@@ -121,19 +130,15 @@ vote = (e) =>{
 				);
 			}
 			else{
-			console.log("Inside", dataUI);
 			let major = dataUI["major"];
 			let fname = dataUI["name"];
 			let lname = dataUI["surname"];
-			let units = dataUI["units"];
-			let sigid = dataUI["sigid"]
-		//	console.log(fname);
 			return (
 				<div class="flex items-center h-full " >
 				<div class="container-sm h-full mx-auto pt-16 pb-10 bg-transparent rounded align-middle content-center items-center">
 
 					<p class="w-full block text-white text-5xl font-fancy font-bold text-center justify-center pl-8 mb-10">
-						Profile - Certificate
+						Profile
 					</p>
 					<div class="flex">
 					<div class="container-sm flex flex-col rounded border-4 ">
@@ -154,15 +159,15 @@ vote = (e) =>{
 							<div class="w-1/2  border-b mt-2"/>
 						</div>
 						<div class="text-base italic mb-14"> This certifies that the named individual's college degree is valid.</div>
-						<img class="border rounded fill-current mr-2 " width="100" height="100" src={logo} />
+						<img class="border rounded fill-current mr-2 " alt="" width="100" height="100" src={logo} />
 					</div>
 					
 					</div>	
 					<div class="mt-8 flex flex-col">
-					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.editCert}>Edit Certificate</button>
-					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="verify" style={{cursor:'pointer'}} onClick={(e) => this.goTo(e)}>Verify Certificate</button>
-					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="vote" style={{cursor:'pointer'}} onClick={(e) => this.goTo(e)}>Vote On Certificate</button>
-					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.downLoad}>Download Certificate</button>
+					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.editCert}>Edit</button>
+					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="verify" style={{cursor:'pointer'}} onClick={(e) => this.goTo(e)}>Verify</button>
+					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="vote" style={{cursor:'pointer'}} onClick={(e) => this.goTo(e)}>Vote</button>
+					<button class="inline-block ml-8 h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={this.downLoad}>Download</button>
 
 					</div>
 					</div>

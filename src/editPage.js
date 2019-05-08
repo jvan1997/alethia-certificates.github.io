@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import Edit from './edit';
 import Bar from './bar';
 import Particles from 'react-particles-js'
-class createPage extends Component {
+class editPage extends Component {
  
-	constructor(props) {
-        super(props);
-    }  
-
   render() {
     return (
       <div>
@@ -39,4 +35,4 @@ class createPage extends Component {
     );
   }
 }
-export default createPage;
+export default editPage;

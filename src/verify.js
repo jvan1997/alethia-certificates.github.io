@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import { Router, Route, Link, RouteHandler } from 'react-router-dom';
 import './index.css';
-import create from './Images/create.png';
-import verify from './Images/verify.png';
 import { withRouter } from "react-router-dom";
 import { deploy } from './deploy';
 import html2canvas from 'html2canvas';
@@ -13,7 +10,11 @@ let ethjsUtil = require('ethereumjs-util')
 let keypair = require('keypair');
 
 
-
+/**
+ * Verify page that the user can navigate to in order to 
+ * load their ethereum interaction, as well as transaction hash,
+ * public and private key.
+ */
 class Verify extends React.Component {
 	constructor(props) {
 		super(props);
@@ -31,23 +32,17 @@ class Verify extends React.Component {
 		this.setVerified = this.setVerified.bind(this)
 		this.setDisplayResults = this.setDisplayResults.bind(this)
 	}
-
+/**
+ * Async request to call on the deploy method from deploy.js
+ * Then it gets the returns from there and stores it onto the state.
+ */
 	async setUpDeploy() {
 		let returns = await deploy();
-		console.log(`returns is ${util.inspect(returns)}`);
 		this.setState({
 			createdContractAddress: returns.receipt.contractAddress,
 			transactionHash: returns.transactionHash,
 			metadataLoaded: true
 		})
-
-		// let hash =  "0x" + returns.compiledFactory.bytecode
-		// let prefix = "\x19Ethereum Signed Message:\n" + hash.length
-		// let prefixedHash = web3.utils.soliditySha3( hash + prefix)
-		// let pk = ethjsUtil.ecrecover(  ethjsUtil.toBuffer(prefixedHash), returns.receipt.v, ethjsUtil.toBuffer(returns.receipt.r), ethjsUtil.toBuffer(returns.receipt.s))
-		// let addrBuf = ethjsUtil.pubToAddress(pk)
-		// let addr = ethjsUtil.bufferToHex(addrBuf)
-		// console.log(`addr is ${addr}`)
 		let pair = keypair();
 		setTimeout( this.setCompiled,3000)
 		this.setState({
@@ -55,6 +50,9 @@ class Verify extends React.Component {
 		})
 
 	}
+	/**
+	 * Allows the user to download the verification component as a pdf.
+	 */
 	downLoad= (e) => {
 
 		html2canvas(document.querySelector("#transaction"),{width: 1200,
@@ -62,49 +60,67 @@ class Verify extends React.Component {
 	  }).then(canvas => {
 			const imgData = canvas.toDataURL('image/png');
 			const pdf = new jsPDF({orientation:'l',unit:'px'});
-	
-			console.log(`canvas.width is ${canvas.width}`);
-			console.log(`canvas.height is ${canvas.height}`)
-			// console.log(imgData);
-			console.log("second" + pdf.internal.pageSize.width);
-			// var imgOffset = (pdf.internal.pageSize.width) / 8;
-			// console.log("HMM" + imgOffset);
 			pdf.addImage(imgData,'PNG',0,0,1030,964,"a","FAST");
 			pdf.save("transaction.pdf");
 		});
 	
 	}
+	/**
+	 * Checks if hte user is logged in.
+	 */
 	componentWillMount(){
         let test = JSON.parse(localStorage.getItem("logged"));
         if(!test){
             this.props.history.push('/');
         }
-     }
+	 }
+	 /**
+	  * The standard backtrack function to navigate back.
+	  */
 	backTrack() {
 		this.props.history.goBack();
 	}
+	/**
+	 * the standard reroute page to go to other pages.
+	 * @param {The button click that has a destination.} event 
+	 */
 	goTo(event) {
 		var destination = event.target.value;
 		this.props.history.push(`/${destination}`);
 	}
+	/**
+	 * The information is compiled timer.
+	 */
 	setCompiled(){
 		this.setState({
 			compiled:true
 		})
 		setTimeout(this.setVerified,3000)
 	}
-
+/**
+ * The information is verified timer.
+ */
 	setVerified(){
 		this.setState({
 			verified:true
 		})
 		setTimeout(this.setDisplayResults,3000)
 	}
+	/**
+	 * Displays the results when this boolean is true.
+	 */
 	setDisplayResults(){
 		this.setState({
 			displayResults:true
 		})
 	}
+	/**
+	 * Renders the verification page after loading the information.
+	 * AFter it finishes loading, it will display the entire verification page
+	 * This must have ganache client or some other program similar to it open in 
+	 * order to use.
+	 * It will show the Transaction Hash, Contract Address and PUblic Key.
+	 */
 	render() {
 		if (!this.state.metadataLoaded) {
 
@@ -194,7 +210,7 @@ const VerifyHeader = (props) => {
 	return (
 		<div>
 			<p class="w-full block text-white text-5xl font-fancy font-bold text-center justify-center mb-8">
-				Verify Certificate
+				Verify 
         		</p>
 			<span class="text-white text-3xl font-fancy font-bold text-center justify-center mb-8" > </span>
 		</div>

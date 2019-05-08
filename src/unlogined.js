@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
-import logo from './Images/logo.png';
 import './App.css';
-import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
-import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
-function user() {
-//    console.log("What:" + auth.currentUser.email);
-    return firebaseApp.auth().currentUser;
-}
-function db() {
-    return firebaseApp.firestore().collection('users');
-}
-function entry() {
-    return db().doc(user().email);
-} 
+import {withRouter} from 'react-router-dom';
 
+/**
+ * This page is rendered if the user is not logged in.
+ */
 class Unsigned extends Component {
 		constructor(props) {
 			super(props);
@@ -29,31 +19,37 @@ class Unsigned extends Component {
 
 
 	}
+	/**
+	 * This is the timing for the self typing text for welcoming message.
+	 */
 	componentDidMount() {
 		this.timeout = setInterval(() => {
 		  if (this.state.i < this.state.maintxt.length) {
 			let newI = this.state.i+1;
 			this.setState({ i: newI });
 				}
-				// else{
-				// 	if (this.state.j < this.state.maintxt2.length){
-				// 			let newJ = this.state.maintxt2.length;
-				// 			this.setState({ j: newJ });
-				// }
-			// }
-	  	
 		}, 80);
-	  }
+		}
+		/**
+		 * Clears the timing when the component unmounts.
+		 */
 	  componentWillUnmount() {
 		clearInterval(this.timeout);
-	  }
+		}
+		/**
+		 * This is the standard reroute function that takes user to a differnet page upon button click
+		 * Every button has a different value that we use to reroute.
+		 * @param {button press} event 
+		 */
     goTo(event){
 		var destination = event.target.value;
 		this.props.history.push(`/${destination}`);
 	}
+	/**
+	 * Renders the component page, basically it is home and tells you to login/sign up to use Alethia
+	 */
   render() {
 		let displaytext = this.state.maintxt.substring(0,this.state.i);
-	//	let displaytext2 = this.state.maintxt2.substring(0,this.state.j);
     return (
       <div class="flex items-center h-full " >
 				<div class="container-xl h-full mx-auto pt-24 bg-transparent rounded">
@@ -63,15 +59,8 @@ class Unsigned extends Component {
         		</p>
 
 				<div class="w-full block text-white  text-3xl font-bold text-center font-fancy justify-center mb-16" >
-						{/* <div>
-						<img class="mr-16 w-1/2" style={{cursor:'pointer'}} src={create} onClick={e => this.goTo(e)} alt="create" />
-						</div>
-						<img class="ml-16 w-1/3" style={{cursor:'pointer'}} src={verify} onClick={e => this.goTo(e)} alt="verify" /> */}
-			  <p class="mb-16">
-           {displaytext}
-          </p>
-          <p class="text-xl">
-						{/* {displaytext2} */}
+					<p class="mb-16">
+           	{displaytext}
           </p>
 				</div>
 				</div>

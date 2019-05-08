@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import logo from './Images/logo.png';
 import './App.css';
 import './index.css';
-import {Router, Route, Link, RouteHandler,withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
-import { Button} from 'react-bootstrap';
-import Bar from './bar';
 import './progress-bar-styles.css';
 import CustomContentCircularProgressBar from './CustomContentProgressBar'
 
 function user() {
-//    console.log("What:" + auth.currentUser.email);
     return firebaseApp.auth().currentUser;
 }
 function db() {
@@ -93,7 +89,7 @@ class Create extends Component {
                 <input required class="shadow ml-14 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="institution"  type="text" name="institution" value={this.state.institution} onChange={this.handleChange}/>
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
-                <p class="text-white font-fancy font-bold text-lg">Approval Date:</p>
+                <p class="text-white font-fancy font-bold text-lg">Approval Year:</p>
                 <input required class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="number" min="1900" step="any" name="date" value={this.state.date}  onChange={this.handleChange}/>
                 </div>
         <div class="flex justify-left pl-4 col-md-6 items-center ">
@@ -162,8 +158,6 @@ class Create extends Component {
     );
   }
   handleChange(event) {
-   // console.log("doing stuff");
-    //console.log(event.target.value);
     this.setState({
         [event.target.name]:event.target.value
 	});
@@ -235,7 +229,7 @@ class Create extends Component {
             this.setState({ progressBarPercentage: percentComplete/2 })
         }
         else{
-            console.log("cant compute size")
+            console.log("Cannot compute size")
         }
     },false)
     
@@ -317,50 +311,8 @@ class Create extends Component {
                
     }
 
-
-    // this.timeout = setInterval(() => {
-    //     if (this.state.percentage < 100) {
-    //       let newP = this.state.percentage+1;
-    //       this.setState({ percentage: newP });
-    //         }
-    //     // 	else{
-    //   // 		console.log("eh");
-    //   //   		this.setState({i:0});
-    //     // }
-    //   }, 250);
     xhr.open("POST", url, true)
     xhr.send(options.body)
-
-    // https://stackoverflow.com/questions/38794180/fetch-data-with-react
-    // let check = ()=>{
-    //     return fetch(url, options)
-    // }
-    // check().then((response)=>{
-    //     console.log(response)
-    //     console.log("abc")
-    //     delete relevantState.file
-    //   if (response.status == 200) {
-    //       console.log("bcd")
-    //         entry().update({"certificate":relevantState}).then(
-    //         success => {
-    //         alert("Created certificate");
-    //         },
-    //         err =>{
-    //             console.log(err)
-    //         }
-        
-    //     );
-    //     this.backTrack();
-    //   }
-    //   if (response.status >= 400) {
-    //     alert("Invalid sigid")
-    //   }
-    // //   this.backTrack();
-    // })
-
-
-
-    
 
   }
 
@@ -381,10 +333,6 @@ class Create extends Component {
 
   handlePDFSubmit(ev){
 
-        
-    console.log(pdfjsLib)
-
-
     fileSelect = ev.currentTarget.files
     console.log(`fileSelect is ${fileSelect}`)
 
@@ -395,27 +343,15 @@ class Create extends Component {
 
     this.setState({file:ev.currentTarget.files[0]},
         ()=>{
-            console.log(fileSelect)
 
 
             let reader = new FileReader()
 
             reader.onload = (e)=>{
-                console.log(e.target.result)
                 let data = e.target.result
-                console.log(data)
-
-
-
-    
-                
-                // Parse PDF
-               this.getPDFText(data)
-               .then( (text) =>{
-                console.log(`text is ${text}`)
-
+  
+                this.getPDFText(data).then( (text) =>{
                 let strs = text.split("\n")
-                console.log(strs)
                 let name = ""
                 let major = ""
                 let units = 0
@@ -445,7 +381,6 @@ class Create extends Component {
 
                     if( strs[i].includes(nameToken)){
                         name = strs[i].split(nameToken)[1].trim()
-                        console.log(name)
                         let nameComponents = name.split(" ")
                         let lastName = nameComponents[0].replace(",","")
                         let firstName = nameComponents[1]
@@ -453,30 +388,19 @@ class Create extends Component {
                     }
                     if( strs[i].includes(majorToken)){
                         major = strs[i].split(majorToken)[1].trim()
-                        console.log(major)
                         this.setState({major:major})
                     }
                     if( strs[i].includes(unitsToken)){
                       units = strs[i].trim().split(/\s+/)
-                      console.log(units)  
                   }
-
                 }
                 let totalUnits = units[4]
                 this.setState({units:totalUnits})
                })
                 
-            
-                
             }
             var file = fileSelect[0]
-            console.log(file)
-    
-            console.log( `state.file is ${this.state.file}`)
-            reader.readAsDataURL(this.state.file)
-            
-            
-
+                reader.readAsDataURL(this.state.file)
         })
 }
 
@@ -486,8 +410,6 @@ class Create extends Component {
 // Event when pdf library has been loaded
   pdfLibraryLoaded(ev){
     pdfjsLib = window['pdfjs-dist/build/pdf']
-    console.log('pdflibloaded')
-    console.log(pdfjsLib)
 }
 
 /**
@@ -497,24 +419,14 @@ class Create extends Component {
 async getPDFText(data){
     var loadingTask = pdfjsLib.getDocument(data);
     let pdf = await loadingTask.promise
-    console.log(pdf)
-
     let pdfText = ''
 
-    console.log(pdf.numPages)
     for(var i=1;i<=pdf.numPages;i++){
         let page = await pdf.getPage(i)
-        // console.log(page)
         let textContent = await page.getTextContent()
-        // console.log(textContent)
 
         pdfText = textContent.items.reduce( (acc,curr) => acc + curr.str +"\n", pdfText )
-        // for( var j=0; j<textContent.items.length;j++){
-        //     pdfText += textContent.items[j].str + "\n"
-        // }
     }
-
-    // console.log(pdfText)
     
     return pdfText
 }

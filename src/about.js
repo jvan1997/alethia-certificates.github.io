@@ -1,11 +1,15 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import { withRouter } from 'react-router-dom';
 import jon from './Images/jonathan.jpg';
 import jenil from './Images/jenil.jpg';
 import vincent from './Images/vincent.jpg';
 import alethia from './Images/Alethia-Arch-Revised.png'
+/**
+ * Class about contains information on what Alethia is 
+ * It also contains information about the team members that built Alethia.
+ */
 class About extends React.Component {
 	constructor(props){
 		  super(props);
@@ -36,6 +40,10 @@ class About extends React.Component {
 		  }
   		
  }
+ /**
+  * Sets the status of the page. It switches between what Alethia is, 
+  * the team page, or the default about page.
+  */
  goTo(event){
 	let value = event.target.value;
 	 if(value==='alethia'){
@@ -54,6 +62,9 @@ class About extends React.Component {
 		 });
 	 }
  }
+ /**
+  * Renders the team information based on the information that was on state.
+  */
 renderTeam()
 {
 	let teamMates = []
@@ -94,16 +105,18 @@ renderTeam()
 	}
 	return teamMates;
 }
+/**
+ * Render method, switches based on the status. Can display either the team information, Alethia information.
+ */
 	render() {
 		if(this.state.status === 0){
     	return (
 			<div class="flex items-center justify-center h-full w-full">
     			<div class="container-xl rounded pt-24 font-fancy justify-center font-bold">
 					<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> About </h1>
- 					<p class="w-full text-xl font-fancy font-bold block text-white text-center justify-center mb-6">This page contains information on what Alethia is and the team behind the web application</p>
 					 <div class="mt-8 flex justify-center col-md-6 items-center" >
 					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="alethia" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>What is Alethia?</button>
-					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="team" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Team Members</button>
+					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="team" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Team</button>
 					</div>
 				</div>
 			</div>
@@ -140,7 +153,7 @@ renderTeam()
 				return(
 					<div class="flex items-center justify-center h-full w-full">
 					<div class="container-xl rounded pt-24 font-fancy justify-center font-bold">
-						<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> Team Members </h1>
+						<h1 class="w-full text-5xl font-fancy font-bold block text-white text-center justify-center mb-6"> Team</h1>
 						<div>
 						<div class="container my-12 mx-auto px-4 md:px-12">
 						<div class="flex flex-wrap -mx-1 lg:-mx-4">
