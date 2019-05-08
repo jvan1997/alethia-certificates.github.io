@@ -3,10 +3,11 @@ import Voting from './vote';
 import TempVote from './tempVote';
 import Bar from './bar';
 import Particles from 'react-particles-js';
-
+/**
+ * Vote Page renders the Particles, as well as tempVote component
+ * 
+ */
 class votePage extends Component {
-
-
   render() {
     return (
       <div>

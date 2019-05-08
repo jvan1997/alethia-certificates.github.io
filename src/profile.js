@@ -18,10 +18,11 @@ class Profile extends React.Component {
     };
 }
 /**
-   * When the App component mounts, we listen for any authentication
+   * Before the App component mounts, we listen for any authentication
    * state changes in Firebase.
    * Once subscribed, the 'user' parameter will either be null 
    * (logged out) or an Object (logged in)
+	 * This will push the information of the certificate onto the state.
    */
   componentWillMount() {
 	let test = JSON.parse(localStorage.getItem("logged"));
@@ -43,27 +44,39 @@ class Profile extends React.Component {
 	else{
 		
 	}
-  }
+	}
+	
   /**
-   * Don't forget to stop listening for authentication state changes
-   * when the component unmounts.
+   * Unmounts the subscription/access to the firebase when the
+	 * component unmounts.
    */
   componentWillUnmount() {
     this.authSubscription();
   }
 
-
+/**
+ * This is the standard redirection method to reroute to another page.
+ * @param {the button that was pressed} event 
+ */
 goTo(event){
 	var destination = event.target.value;
 	this.props.history.push(`/${destination}`);
 }
-
+/**
+ * Takes the user to the edit certificate page
+ */
 editCert = (e) => {
 	this.props.history.push("/profile/editCert");
 }
+/**
+ * If the user does not have a certificate, take them to the create page.
+ */
 createCert = (e) => {
 	this.props.history.push("/create");
 }
+/**
+ * Allows the user to download a pdf of their certificiate.
+ */
 downLoad= (e) => {
 	html2canvas(document.querySelector("#certificate"),{ width: 892,
 	height: 964
@@ -75,10 +88,19 @@ downLoad= (e) => {
 	});
 
 }
+/**
+ * Takes user to the vote page
+ */
 vote = (e) =>{
 	this.props.history.push("/vote");
 
 }
+/**
+ * Render method that loads the certificate if a user has one
+ * As well as buttons to verify, download, download and edit their certificate
+ * If user does not have one, it will display that there is none and link them
+ * to the create page.
+ */
 	render() {
 		if(this.state.loading){
 			return null;

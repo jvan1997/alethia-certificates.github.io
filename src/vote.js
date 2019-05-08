@@ -15,33 +15,23 @@ class Voting extends Component {
     }
     voteCalled(){
         let returns = this.vote();
-        console.log(returns);
     }
     addVote = async () => {
-        console.log(this.props);
 
         const certificate = Certificate("0x5786E813128a99CaD43F6303Fcd6b46138BFd285");
-        console.log(certificate);
         this.setState({ loading: true, errorMessage: '', successMessage: '' });
         try {
-            console.log("inside try");
           const accounts = await web3.eth.getAccounts();
-            console.log(accounts[0]);
           certificate.methods.addVote().send({
             from: accounts[0],
             value: web3.utils.toWei(this.state.feeAmount, 'ether')
           });
-          console.log("2");
     
           this.setState({ successMessage: `You've successfully paid ${this.state.feeAmount} ether for this certificate.` });
-          console.log("3");
         } catch (err) {
-            console.log(err.message);
           this.setState({ errorMessage: err.message });
         }
-        console.log("4");
         const balance = await web3.eth.getBalance(this.props.address);
-        console.log(`Balance is ${balance}`);
     
         this.setState({ loading: false});
       }
@@ -61,5 +51,4 @@ class Voting extends Component {
       }
     }
     export default withRouter(Voting);
-      //render might go here. 
-      //UI needs to be added (button for voting such as onSubmit={this.vote})
+    

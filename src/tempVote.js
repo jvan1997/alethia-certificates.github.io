@@ -4,7 +4,11 @@ import {firebaseApp} from "./firebase";
 import './App.css';
 import { withRouter } from 'react-router-dom';
 import logo from './headerIcon.png';
-  
+/**
+ * Voting component; The alogrithm is quite simple, like a zombie infestation.
+ * At least One person starts as the verified user, and then they are able to vote for other users
+ * People who are unverified are not able to vote for other unverified users yet.
+ */
 class TempVote extends React.Component {
 	constructor(props){
     super(props);
@@ -22,10 +26,15 @@ class TempVote extends React.Component {
     };
     this.removeSelection = this.removeSelection.bind(this);
 }
+/**
+ * Clears the user selection if the verified user wants to view someone else's certificate.
+ */
 removeSelection(){
     this.setState({viewing:false,certificate:null})
 }
-
+/**
+ * Adds the intended votee into the list of approved voters.
+ */
 voteFor(){
     let voted = this.state.voted;
     voted.push(this.state.inputtedUser);
@@ -37,8 +46,10 @@ voteFor(){
 /**
    * When the App component mounts, we listen for any authentication
    * state changes in Firebase.
-   * Once subscribed, the 'user' parameter will either be null 
-   * (logged out) or an Object (logged in)
+   * If there is no user logged ,it redirects them from teh vote page
+   * If they are logged, then it will fetch the data of the user, 
+   * if they are verified or not, as well as a list of the current users of Alethia
+   * 
    */
   componentWillMount() {
         let test = JSON.parse(localStorage.getItem("logged"));
@@ -79,6 +90,10 @@ voteFor(){
   componentWillUnmount() {
     this.authSubscription();
   }
+  /**
+   * Goes through the certificate, and if its empty, returns false.
+   * @param {The certificate} obj 
+   */
 isEmpty(obj) {
     for(var prop in obj) {
         if(obj.hasOwnProperty(prop))
@@ -86,7 +101,17 @@ isEmpty(obj) {
     }
     return true;
 }
-
+/**
+ * Will display error messages if the following occurs:
+ *      If the user inputs themselves
+ *      If the user inputs someone who is already verified
+ *      If the user inputs someone who does not exist
+ *      If the user inputs someone who does not have a certificate
+ *      If the user has nothing on their profile (rarely happens)
+ *      If the user inputs someone with an incomplete certificiate
+ * Else it will display the certificate on the unverified user for them.
+ * @param {The event which the verified user submits a name.} e 
+ */
   handleNameFind(e){
       e.preventDefault();
       let email = this.refs.email.value;
@@ -126,6 +151,9 @@ isEmpty(obj) {
         )
       }
   }
+  /**
+   * Displays the status of the user.
+   */
 getStatus(){
     let statusArr = [];
     if(this.state.verified === false){
@@ -140,18 +168,16 @@ getStatus(){
     }
     return statusArr;
 }
-
-goTo(event){
-	var destination = event.target.value;
-	this.props.history.push(`/${destination}`);
-}
-
-editCert = (e) => {
-	this.props.history.push("/profile/editCert");
-}
-createCert = (e) => {
-	this.props.history.push("/create");
-}
+/**
+ * Render function
+ * While the data is still loading, it will display nothing
+ * After it finished loading and allows us to view it, 
+ * meaning the information of the inputted user has been loaded,
+ * it will display their certificate, to which we can either vote
+ * or abstain from voting
+ * If no user is inputted yet, it will display that a user is verified
+ * or not, and if they are verified, allow the user to search for other users.
+ */
 render() {
     if(this.state.loading){
         return null;

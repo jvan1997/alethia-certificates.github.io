@@ -5,6 +5,9 @@ import { withRouter } from 'react-router-dom';
 import Bar from './bar';
 import Verify from './verify';
 import Particles from 'react-particles-js';
+/**
+ * Verify Page loads the page with Particles and the verify page component
+ */
 class VerifyPage extends React.Component {
 
 
@@ -30,7 +33,8 @@ class VerifyPage extends React.Component {
 						}
 					}
 				}
-			}}>          </Particles>
+			}}>          
+			</Particles>
 			<div class="z-n2">
 		  <Bar />
 		  <Verify/>

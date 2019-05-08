@@ -3,26 +3,49 @@ import './App.css';
 import {withRouter} from 'react-router-dom';
 import {firebaseApp} from "./firebase";
 import {entry} from './functions';
-
+/**
+ * Class edit is basically allowing the user to edit their certificate.
+ */
 class Edit extends Component {
 	constructor(props) {
         super(props);
         this.state = {
-            certificate:[]
+            certificate:[],
+            voted:[],
+            loading:true,
         };
 	
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }  
+    }
+    /**
+     * This function will be used a lot to allow the user to navigate to a previous page.
+     */  
         backTrack(){
      	this.props.history.goBack();
      }
+     /**
+      * Checks if hte user is logged in or not, and gets the list of voters.
+      */
      componentWillMount(){
         let test = JSON.parse(localStorage.getItem("logged"));
         if(!test){
             this.props.history.push('/');
         }
-     }
+        this.authSubscription = firebaseApp.auth().onAuthStateChanged((user2) => {
+        firebaseApp.firestore().collection('approved').doc('voted').get().then((doc) => {
+          if (doc.exists) {
+                    this.setState({voted:doc.data()['voted'], loading:false, currentUser:user2.email});
+          } else {
+            this.setState({ voted: null });
+          }
+          
+        })
+        });
+      }
+    /**
+     * Gets the certificate information of the user.
+     */
      componentDidMount() {
         firebaseApp.auth().onAuthStateChanged(user => {
             if(user){
@@ -40,6 +63,9 @@ class Edit extends Component {
         })
         
     }
+    /**
+     * Renders the information of the user's certificiate and allows them to change it.
+     */
   render() {
       var keys = Object.keys(this.state.certificate);
       let data = this.state.certificate;
@@ -179,9 +205,18 @@ class Edit extends Component {
   handleSubmit(event) {
     event.preventDefault();
     entry().update({"certificate":this.state.certificate}).then(function() {
-        
 		alert("Edited certificate");
   });
+  let voted = this.state.voted;
+  for (var i=voted.length-1; i>=0; i--) {
+    if (voted[i] === this.state.currentUser) {
+        voted.splice(i, 1);
+        break;       //<-- Uncomment  if only the first term has to be removed
+    }
+  }
+  firebaseApp.firestore().collection('approved').doc('voted').set({voted}).then((returns) =>{
+    alert("Certificate has been updated, you must get your certificiate re-verified");
+})
   this.backTrack();
   }
 }

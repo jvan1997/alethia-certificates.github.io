@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import './App.css';
 import {firebaseApp} from "./firebase";
 import {withRouter} from "react-router-dom";
-import './css/tailwind.css';
 import Bar from './bar';
 import Particles from 'react-particles-js';
 function db() {
     return firebaseApp.firestore().collection('users');
 }
+/**
+ * Registration class that when a user inputs the information regarding email
+ * name and id number ,it will store them in the user database.
+ */
 class RegisterForm extends Component {
-
+/**
+ * When the user presses sign up, it registers them onto the firebase, and assigns
+ * data under their user name to the database that is specific to the user.
+ * @param {sign up on submit function} e 
+ */
  	SignUp(e){
 	e.preventDefault()
 	let email = this.refs.email.value;
@@ -45,9 +52,16 @@ class RegisterForm extends Component {
 			});
 	
 	}
+	/**
+	 * The go back button
+	 */
 	backTrack(){
 		this.props.history.goBack();
 	}
+	/**
+	 * Renders the sign up page for the user to sign up if they route to the page.
+	 * Has particles, sign up component.
+	 */
 	render() {
     		return (
 				<div>

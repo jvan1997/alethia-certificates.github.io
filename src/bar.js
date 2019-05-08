@@ -5,7 +5,9 @@ import './App.css';
 import { withRouter } from 'react-router-dom';
 import logo from './headerIcon.png';
 import ethereum from './Images/ethereum.png'
-
+/**
+ * Header bar with options for the user.
+ */
 class Bar extends React.Component {
 	constructor(props){
 		  super(props);
@@ -16,19 +18,33 @@ class Bar extends React.Component {
 			}
   	
  }
-
+/**
+ * Loads the local storage boolean beforehand so that we can instantly
+ *  determine what bar to render.
+ */
  componentDidMount() {
 	let test = JSON.parse(localStorage.getItem("logged"));
 	this.setState({logged:test});
 }
+/**
+ * Each button routes the user to a different page based on their value
+ * @param {The source of the button} event 
+ */
 	goTo(event){
 		var destination = event.target.value;
 		this.props.history.push(`/${destination}`);
 	}
+	/**
+	 * Each image's alt can also link to a different page (this is usually for home)
+	 * @param {The image} event 
+	 */
 	goToImg(event){
 		var destination = event.target.alt;
 		this.props.history.push(`/${destination}`);
 	}
+	/**
+	 * The sign out function; After signing out, it sets login token to false and redirects to the home page.
+	 */
 	signOutUser(){
 
         firebaseApp.auth().signOut().then(function() {

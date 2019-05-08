@@ -2,6 +2,11 @@ import React from 'react';
 import './App.css';
 import './index.css';
 import {withRouter} from "react-router-dom";
+/**
+ * This is the home page. Loads a welcome message 
+ * and options to either create or view certificates
+ * 
+ */
 class Home extends React.Component{
 	constructor(props) {
 			super(props);
@@ -56,8 +61,10 @@ class Home extends React.Component{
         		</p>
 				<span class="text-white text-3xl font-fancy font-bold text-center justify-center mb-8" >{displaytext}</span>
 				<div class="mt-8 flex justify-center col-md-6 items-center" >
-					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="create" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Create Certificate</button>
-					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" value="profile" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>View Certificate</button>
+					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 mr-2  font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" 
+					value="create" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>Create Certificate</button>
+					<button class="inline-block h-16 w-48 border-b-2 border-t-2 border-l-2 border-r-2 px-4 py-2 ml-2 font-fancy font-bold text-lg leading-none border rounded bg-transparent text-white border-white hover:border-grey hover:text-grey mt-4 mb-4 lg:mt-0" 
+					value="profile" style={{cursor:'pointer'}} onClick={e => this.goTo(e)}>View Certificate</button>
 				</div>
 				</div>
 				</div>

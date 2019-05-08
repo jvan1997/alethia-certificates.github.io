@@ -5,16 +5,22 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import{Router, Route,Switch } from 'react-router-dom';
 import Login from "./login";
+import './css/tailwind.css';
 import RegisterForm from "./signUp";
 import { createBrowserHistory } from 'history';
 import AboutPage from "./aboutPage";
-
 import createPage from "./createPage";
 import Profile from "./profilepage";
 import VerifyPage from "./verifypage";
 import Edit from "./editPage";
 import Vote from "./votePage";
+/**
+ * BrowserHistory allows us to go back and forth between different pages on Alethia.
+ */
 const browserHistory = createBrowserHistory()
+/**
+ * This checks to see if a user is logged in or not and redirects them accordingly.
+ */
 // firebaseApp.auth().onAuthStateChanged(user => {
     let test = JSON.parse(localStorage.getItem("logged"));
     if(test){
@@ -25,6 +31,11 @@ const browserHistory = createBrowserHistory()
             browserHistory.replace('/' );
     }
 // })
+/**
+ * This is the render function that allows us to load components based on the 
+ * path in the address bar. Accessing a path that does not exist takes you to 
+ * the home/landing page.
+ */
 ReactDOM.render(
     <Router path="/App" history={browserHistory}>
     <Switch>

@@ -10,7 +10,11 @@ let ethjsUtil = require('ethereumjs-util')
 let keypair = require('keypair');
 
 
-
+/**
+ * Verify page that the user can navigate to in order to 
+ * load their ethereum interaction, as well as transaction hash,
+ * public and private key.
+ */
 class Verify extends React.Component {
 	constructor(props) {
 		super(props);
@@ -28,7 +32,10 @@ class Verify extends React.Component {
 		this.setVerified = this.setVerified.bind(this)
 		this.setDisplayResults = this.setDisplayResults.bind(this)
 	}
-
+/**
+ * Async request to call on the deploy method from deploy.js
+ * Then it gets the returns from there and stores it onto the state.
+ */
 	async setUpDeploy() {
 		let returns = await deploy();
 		this.setState({
@@ -43,6 +50,9 @@ class Verify extends React.Component {
 		})
 
 	}
+	/**
+	 * Allows the user to download the verification component as a pdf.
+	 */
 	downLoad= (e) => {
 
 		html2canvas(document.querySelector("#transaction"),{width: 1200,
@@ -55,37 +65,62 @@ class Verify extends React.Component {
 		});
 	
 	}
+	/**
+	 * Checks if hte user is logged in.
+	 */
 	componentWillMount(){
         let test = JSON.parse(localStorage.getItem("logged"));
         if(!test){
             this.props.history.push('/');
         }
-     }
+	 }
+	 /**
+	  * The standard backtrack function to navigate back.
+	  */
 	backTrack() {
 		this.props.history.goBack();
 	}
+	/**
+	 * the standard reroute page to go to other pages.
+	 * @param {The button click that has a destination.} event 
+	 */
 	goTo(event) {
 		var destination = event.target.value;
 		this.props.history.push(`/${destination}`);
 	}
+	/**
+	 * The information is compiled timer.
+	 */
 	setCompiled(){
 		this.setState({
 			compiled:true
 		})
 		setTimeout(this.setVerified,3000)
 	}
-
+/**
+ * The information is verified timer.
+ */
 	setVerified(){
 		this.setState({
 			verified:true
 		})
 		setTimeout(this.setDisplayResults,3000)
 	}
+	/**
+	 * Displays the results when this boolean is true.
+	 */
 	setDisplayResults(){
 		this.setState({
 			displayResults:true
 		})
 	}
+	/**
+	 * Renders the verification page after loading the information.
+	 * AFter it finishes loading, it will display the entire verification page
+	 * This must have ganache client or some other program similar to it open in 
+	 * order to use.
+	 * It will show the Transaction Hash, Contract Address and PUblic Key.
+	 */
 	render() {
 		if (!this.state.metadataLoaded) {
 
