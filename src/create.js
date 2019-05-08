@@ -7,7 +7,7 @@ import {firebaseApp} from "./firebase";
 import { Button} from 'react-bootstrap';
 import Bar from './bar';
 import './progress-bar-styles.css';
-import CircularProgressBar from 'react-circular-progressbar'
+import CustomContentCircularProgressBar from './CustomContentProgressBar'
 
 function user() {
 //    console.log("What:" + auth.currentUser.email);
@@ -44,14 +44,16 @@ class Create extends Component {
             units: '',
             file: undefined,
             progressBarPercentage:0,
+            progressBarPercentageText:"",
+            showProgressBar:false,
             institution:'',
-            progressBarPercentageText:'0%',
-            showProgressBar:false
+            progressBarStatus:'load', // can be 'load','done','error'
         };
 	
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlePDFSubmit = this.handlePDFSubmit.bind(this)
+        this.calculateProgressBarPercentageTextCSS = this.calculateProgressBarPercentageTextCSS.bind(this)
     }  
     onChange = date => this.setState({ date })
         backTrack(){
@@ -129,11 +131,24 @@ class Create extends Component {
                 
             </form>
             <div class="progbar" style={{width:'100px', height:'100px', margin:'auto', padding:'10px'}}>
-            { this.state.showProgressBar ? <CircularProgressBar percentage={this.state.progressBarPercentage} className="progbar" text={`${this.state.progressBarPercentageText}`} /> : null}
+            { this.state.showProgressBar ? <CustomContentCircularProgressBar percentage={this.state.progressBarPercentage} className="progbar" > 
+                <div class="text-center text-white">
+                    <div class="CustomContentCircularProgressBar-Percentage">
+                        {this.state.progressBarPercentage} %
+                    </div>
+                    <div class={ this.calculateProgressBarPercentageTextCSS() }>
+                        {this.state.progressBarPercentageText}
+                    </div>
             
             </div>
             
+            
+            </CustomContentCircularProgressBar>
+            : null}
+            
             </div>
+
+              </div>
 
               </div>
               </div>
@@ -155,6 +170,7 @@ class Create extends Component {
         return
     }
 
+    this.setState({ showProgressBar:true, progressBarPercentage: 0, progressBarPercentageText: "Uploading...", progressBarStatus:'load'})
     console.log(event)
     let relevantState = { 
         "name": this.state.name,
@@ -184,7 +200,7 @@ class Create extends Component {
     xhr.upload.addEventListener("progress", e=>{
         if( e.lengthComputable){
             var percentComplete = Math.round(e.loaded * 100 / e.total)
-            this.setState({ progressBarPercentage: percentComplete/2, progressBarPercentageText: (percentComplete/2)+ "%" })
+            this.setState({ progressBarPercentage: percentComplete/2 })
         }
         else{
             console.log("cant compute size")
@@ -200,14 +216,19 @@ class Create extends Component {
         delete relevantState.file
 
         self.timeout = setInterval(() => {
-            if (self.state.progressBarPercentage < 80) {
               let newP = self.state.progressBarPercentage+1;
-              self.setState({ progressBarPercentage: newP, progressBarPercentageText:newP+"%" });
+            if (self.state.progressBarPercentage < 60) {
+              self.setState({ progressBarPercentage: newP, progressBarPercentageText:"Uploading." });
+            }
+            else if (self.state.progressBarPercentage < 70) {
+                self.setState({ progressBarPercentage: newP, progressBarPercentageText:"Uploading.." });
+            }
+            else if (self.state.progressBarPercentage < 80) {
+                self.setState({ progressBarPercentage: newP, progressBarPercentageText:"Uploading..." });
+            }
+            else{
                 }
-            // 	else{
-          // 		console.log("eh");
-          //   		this.setState({i:0});
-            // }
+            
           }, 250);
 
         entry().update({"certificate":relevantState}).then(
@@ -216,10 +237,10 @@ class Create extends Component {
                 self.timeout = setInterval(() => {
                     if (self.state.progressBarPercentage < 100) {
                       let newP = self.state.progressBarPercentage+1;
-                      self.setState({ progressBarPercentage: newP, progressBarPercentageText: newP+"%" });
+                      self.setState({ progressBarPercentage: newP });
                         }
                     	else{
-                            self.setState({ progressBarPercentage: 100, progressBarPercentageText:"Done!" })
+                            self.setState({ progressBarPercentage: 100, progressBarPercentageText:"Done!", progressBarStatus:'done' })
                             alert("Created certificate");
                             self.backTrack();
                         }
@@ -229,29 +250,27 @@ class Create extends Component {
             },
             err =>{
                 console.log(err)
-                self.setState({ progressBarPercentageText:"Error saving data" })
+                self.setState({ progressBarPercentageText:"Error saving data", progressBarStatus:'error' })
             }
         
         );
-        
-        
         }
         if(this.readyState === XMLHttpRequest.DONE && this.status >= 400){
 
             switch(this.status){
                 case 400:
                 alert("No file submitted")
-                self.setState({ progressBarPercentageText:"Error can't find file" })
+                self.setState({ progressBarPercentageText:"Error can't find file", progressBarStatus:'error' })
                 break
 
                 case 422:
                 alert("Invalid sigid")
-                self.setState({ progressBarPercentageText:"Error processing file" })
+                self.setState({ progressBarPercentage: 0, progressBarPercentageText: "Invalid sigid", progressBarStatus:'error' })
                 break
 
                 default:
                 alert("Error")
-                self.setState({ progressBarPercentageText:"Error" })
+                self.setState({ progressBarPercentageText:"Error",progressBarStatus:'error' })
 
             }
 
@@ -305,6 +324,19 @@ class Create extends Component {
 
     
 
+  }
+
+  calculateProgressBarPercentageTextCSS(){
+    let className = "CustomContentCircularProgressBar-PercentageText "
+        switch(this.state.progressBarStatus){
+            case 'load' :  return className + ""
+                break
+            case 'error' : return className + "CustomContentCircularProgressBar-PercentageText-Error"
+                break;
+            case 'done': return className + "CustomContentCircularProgressBar-PercentageText-Done"
+                break;
+            default: return className
+        }
   }
 
   // PDF-related code

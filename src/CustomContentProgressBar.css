@@ -1,0 +1,24 @@
+.CustomContentProgressBar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.CustomContentProgressBar-Error {
+    color: red
+}
+
+.CustomContentCircularProgressBar-Percentage {
+}
+
+.CustomContentCircularProgressBar-PercentageText {
+    font-size: .75rem;
+}
+
+.CustomContentCircularProgressBar-PercentageText-Error {
+    color:darkviolet;
+}
+
+.CustomContentCircularProgressBar-PercentageText-Done {
+    color:green;
+}
