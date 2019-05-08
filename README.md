@@ -36,15 +36,15 @@ The build is minified and the filenames include the hashes.<br>
 
 ### React Components
 * Creating a certificate:
- * Uploading a certificate:
+  * Uploading a certificate:
 * Viewing a certificate:
- * Download:
- * Edit:
- * Vote:
- * Verify:
+  * Download:
+  * Edit:
+  * Vote:
+  * Verify:
 * About Alethia
- * Team: Jonathan Van, Jenil Thakker, Vincent Diep
- * How it works: Architecture and design for Alethia
+  * Team: Jonathan Van, Jenil Thakker, Vincent Diep
+  * How it works: Architecture and design for Alethia
 
 ### Ethereum Components
 + Deploying a certificate:
