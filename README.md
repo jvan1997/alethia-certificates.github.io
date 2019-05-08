@@ -48,23 +48,6 @@ The terminal will then open the default browser for the system and run on localh
 - [x] Verifying Certificate via Ethereum Blockchain
 - [x] Searching and Voting for other Certificates
 
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Built With
 
 * [Firebase](https://github.com/firebase/) - Backend and Database storage.
@@ -73,7 +56,9 @@ Give an example
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Jenil Thakker** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Vincent Diep** - *Integration with backend and frontend; Set up Server.* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Jonathan Van** - *Designed and Implemented Frontend* - [PurpleBooth](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
