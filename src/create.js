@@ -30,6 +30,9 @@ class Create extends Component {
 
     document.body.appendChild(script);
 }
+/**
+      * Checks if the user is logged in or not, and gets the list of voters.
+      */
 	constructor(props) {
         super(props);
         this.state = {
@@ -44,7 +47,9 @@ class Create extends Component {
             progressBarPercentageText:"",
             showProgressBar:false,
             institution:'',
-            progressBarStatus:'load', // can be 'load','done','error'
+            progressBarStatus:'load', // can be 'load','done','error',
+            voted:[],
+            loading:true
         };
 	
         this.handleChange = this.handleChange.bind(this);
@@ -61,6 +66,20 @@ class Create extends Component {
         if(!test){
             this.props.history.push('/');
         }
+        this.authSubscription = firebaseApp.auth().onAuthStateChanged((user2) => {
+        firebaseApp.firestore().collection('approved').doc('voted').get().then((doc) => {
+            console.log(user2.email);
+            console.log(doc);
+          if (doc.exists) {
+                    console.log(doc.data()['voted']);
+                    this.setState({voted:doc.data()['voted'], loading:false, currentUser:user2.email});
+          } else {
+              console.log("null");
+            this.setState({ voted: null });
+          }
+          
+        })
+        });
      }
      componentWillUnmount() {
 		clearInterval(this.timeout);
@@ -270,10 +289,23 @@ class Create extends Component {
                     	else{
                             clearInterval(self.timeout)
                             self.setState({ progressBarPercentage: 100, progressBarPercentageText:"Done!", progressBarStatus:'done' })
-                            alert("Created certificate");
-                            self.backTrack();
+                            let voted = self.state.voted;
+                            console.log(voted);
+                                for (var i=voted.length-1; i>=0; i--) {
+                                if (voted[i] === self.state.currentUser) {
+                                    voted.splice(i, 1);
+                                    break;       //<-- Uncomment  if only the first term has to be removed
+                                }
+                                }
+                                firebaseApp.firestore().collection('approved').doc('voted').set({voted}).then((returns) =>{
+                                alert("Certificate has been created, you must get your certificate verified");
+                                self.backTrack();                            
+                            })
+                            
                         }
                     }, 250);
+
+                    
 
                 
             },
