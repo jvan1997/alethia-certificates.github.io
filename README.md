@@ -37,17 +37,17 @@ The build is minified and the filenames include the hashes.<br>
 ### React Components
 * Creating a certificate:
   * Uploading a certificate:
-  
-  ![](/src/Gifs/Create.gif)
+
+    ![](/src/Gifs/Create.gif)
 
 * Viewing a certificate:
   * Download:
 
-  ![](/src/Gifs/Download.gif)
+    ![](/src/Gifs/Download.gif)
 
   * Edit:
 
-  ![](/src/Gifs/Edit.gif)
+    ![](/src/Gifs/Edit.gif)
 
   * Vote:
 
@@ -57,7 +57,7 @@ The build is minified and the filenames include the hashes.<br>
 
   * Verify:
 
-  ![](/src/Gifs/Verify.gif)
+    ![](/src/Gifs/Verify.gif)
 * About Alethia
   * Team: Jonathan Van, Jenil Thakker, Vincent Diep
   * How it works: Architecture and design for Alethia
@@ -67,6 +67,18 @@ The build is minified and the filenames include the hashes.<br>
 ### Ethereum Components
 + Deploying a certificate:
 + Voting on a certificate:
+
+## Built With
+
+* [Firebase](https://github.com/firebase/) - Backend and Database storage.
+* [React](https://github.com/facebook/react) - Web Framework to render Alethia.
+* [TailwindCSS](https://github.com/tailwindcss/tailwindcss) - Styling Standard used for the Frontend.
+
+## Authors
+
+* **Jenil Thakker** - *Implemented Ethereum Blockchain into Alethia*
+* **Vincent Diep** - *Integration with backend and frontend; Set up Server.*PurpleBooth)
+* **Jonathan Van** - *Designed and Implemented Frontend*
 
 ## Dependencies
 
