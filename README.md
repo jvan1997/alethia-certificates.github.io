@@ -66,17 +66,17 @@ The build is minified and the filenames include the hashes.<br>
     │   ├── App.js                      # Loads the home page
     │   ├── bar.js                      # Navigation bar for Alethia
     │   ├── create.js                   # Create and Upload Certificate
-        ├── edit.js                     # Edit Uploaded Certificate
-        ├── deploy.js                   # Deploy Certificate onto Ethereum
-        ├── firebase.js                 # Set up Firebase information
-        ├── functions.js                # Functions of Firebase
-        ├── index.js                    # Routing for the React pages
-        ├── keys.js                     # Generates the key value pair
-        ├── login.js                    # Login Authenticator Component
-        ├── profile.js                  # Profile Page to Interact with Certificate
-        ├── signUp.js                   # Sign Up the User
-        ├── verify.js                   # Verify the Certificate onto Ethereum
-        └── vote.js                     # View one's status and verify other Certificates
+    │   ├── edit.js                     # Edit Uploaded Certificate
+    │   ├── deploy.js                   # Deploy Certificate onto Ethereum
+    │   ├── firebase.js                 # Set up Firebase information
+    │   ├── functions.js                # Functions of Firebase
+    │   ├── index.js                    # Routing for the React pages
+    │   ├── keys.js                     # Generates the key value pair
+    │   ├── login.js                    # Login Authenticator Component
+    │   ├── profile.js                  # Profile Page to Interact with Certificate
+    │   ├── signUp.js                   # Sign Up the User
+    │   ├── verify.js                   # Verify the Certificate onto Ethereum
+    │   └── vote.js                     # View one's status and verify other Certificates
 
     └── ...
 
