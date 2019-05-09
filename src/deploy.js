@@ -3,24 +3,21 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const compiledFactory = require('./Ethereum/build/RegisteredCertificate');
 let util = require('util')
-// const fs = require('fs-extra')
 
-
-// const provider = new HDWalletProvider(
-//   '7f0c51e82a244f96a0a8012e69128cd2',
-//   'ropsten.infura.io/v3/5821a9542c5f4c77b455bf00b6a45d72'
-// );
 const provider = new Web3.providers.HttpProvider('http://localhost:8545');
 const web3 = new Web3(provider);
 
-
+/**
+ * Deploys contract and return transaction hash, account address
+ */
 const deploy = async () => {
 
 
   const accounts = await web3.eth.getAccounts();
 
+  // Load Contract code
   const contractInstance = new web3.eth.Contract(JSON.parse(compiledFactory.interface))
-
+  // Deploy Contract
   let deploy = contractInstance.deploy({ data: '0x' + compiledFactory.bytecode })
 
   let promise = new Promise( (resolve, reject)=>{
@@ -58,4 +55,3 @@ const deploy = async () => {
 
 }
 export {deploy};
-//deploy();
