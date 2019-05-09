@@ -56,7 +56,7 @@ The build is minified and the filenames include the hashes.<br>
     │   ├── Backstuff                   # Ethereum related files go in here
     │   ├── css                         # CSS files go in here
     │   ├── Gifs                        # Gifs used for README go here
-        └── Images                      # Images used for Alethia go here
+    │   └── Images                      # Images used for Alethia go here
     └── ...
 
 ### Important Files in Alethia
@@ -77,7 +77,6 @@ The build is minified and the filenames include the hashes.<br>
     │   ├── signUp.js                   # Sign Up the User
     │   ├── verify.js                   # Verify the Certificate onto Ethereum
     │   └── vote.js                     # View one's status and verify other Certificates
-
     └── ...
 
 ### Video Demo of React Components
