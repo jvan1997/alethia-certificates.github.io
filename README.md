@@ -68,7 +68,7 @@ The build is minified and the filenames include the hashes.<br>
 
 ### Ethereum Components
 + Deploying a certificate:
-+ Voting on a certificate:
+  ![](/src/Gifs/ganache.gif)
 
 ## Built With
 
