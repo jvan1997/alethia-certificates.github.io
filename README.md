@@ -91,5 +91,5 @@ The build is minified and the filenames include the hashes.<br>
 ## Acknowledgments
 
 * Dr. Younghee Park
-* Proessor Rod Fatoohi
+* Professor Rod Fatoohi
 
