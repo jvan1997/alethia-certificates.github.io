@@ -1,5 +1,7 @@
 ## Alethia
-Alethia is a platform for blockchain enabled certificates using Ethereum's Rikeby Testnet and Ganache-CLI for testing smart contracts. Link to the source code: https://github.com/jvan1997/alethia-certificates.github.io
+Alethia is a platform for blockchain enabled certificates using Ethereum's Rikeby Testnet and Ganache-CLI for testing smart contracts. The name "Alethia" stems from the Greek spirit of truth, something that this project values. The intent of this application is to allow alumni to upload their certificates and along with a signature ID provided by their school's dean in order to allow other users of Alethia to vote for their certificate to make it valid. 
+
+`Link to the source code: https://github.com/jvan1997/alethia-certificates.github.io`
 
 ## Setup 
 1. `git clone https://github.com/jvan1997/alethia-certificates.github.io.git`
