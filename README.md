@@ -35,7 +35,7 @@ The build is minified and the filenames include the hashes.<br>
 ## Code Structure
 
 ### React Components
-* Creating a certificate:
+#### Creating a certificate:
   * Uploading a certificate:
 * Viewing a certificate:
   * Download:
@@ -43,8 +43,9 @@ The build is minified and the filenames include the hashes.<br>
   * Edit:
   ![](/src/Gifs/Edit.gif)
   * Vote:
-    ![](/src/Gifs/Unverified Vote.gif)
-    ![](/src/Gifs/Verified Vote.gif)
+    ![](/src/Gifs/UnverifiedVote.gif)
+
+    ![](/src/Gifs/VerifiedVote.gif)
   * Verify:
   ![](/src/Gifs/Verify.gif)
 * About Alethia
