@@ -10,6 +10,8 @@ Alethia is a platform for blockchain enabled certificates using Ethereum's Rikeb
 4. Download Metamask for your browser, and deposit some test tokens. (Link to download: https://metamask.io/)
 5. To deposit test tokens, request some from a test faucet (Instructions: https://medium.com/hellogold/adding-tokens-to-metamask-60b2fedd5bd9)
 6. In your terminal type `testrpc` in one window and run the application on a different window. (Link to download: https://truffleframework.com/docs/ganache/quickstart)
+7. `node server.js`
+8. `ganache-cli`
 
 ## Running the application
 
