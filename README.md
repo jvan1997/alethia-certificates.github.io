@@ -36,9 +36,10 @@ The build is minified and the filenames include the hashes.<br>
 
 ### React Components
 #### Creating a certificate:
-  * Uploading a certificate:
-* Viewing a certificate:
-  * Download:
+##### Uploading a certificate:
+    ![](/src/Gifs/Create.gif)
+#### Viewing a certificate:
+  ##### Download:
   ![](/src/Gifs/Download.gif)
   * Edit:
   ![](/src/Gifs/Edit.gif)
