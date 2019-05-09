@@ -102,14 +102,14 @@ class Edit extends Component {
                 <input class="shadow ml-14 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="institution"  type="text" name="institution"  onChange={this.handleChange}/>
                 </div>
                 <div class="flex justify-center col-md-6 items-center">
-                <p class="text-white font-fancy font-bold text-lg">Approval Date:</p>
+                <p class="text-white font-fancy font-bold text-lg">Approval Year:</p>
                 <input class="shadow ml-8 mt-2 mb-2 appearance-none font-fancy font-bold border rounded w-1/2 py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="date"  type="text" name="date"  onChange={this.handleChange}/>
                 </div>
             <div class="flex justify-left pl-4 col-md-6 items-center ">
                 <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
                 
                 <select class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={majors} onChange={this.handleChange} >	
-		        <option value="-1"> Select </option>
+		        <option value=""> Select </option>
                 <option value="BS Aerospace Engineering">Aerospace Engineering</option>
             <option value="BS Biomedical Engineering">Biomedical Engineering</option>
             <option value="BS Bioengineering Engineering">Biomedical Engineering</option>
@@ -167,7 +167,7 @@ class Edit extends Component {
             <p class="text-white font-fancy font-bold text-lg mr-16">Major:</p>
             
             <select class="block ml-6 h-8 w- pl-2 pr-1 font-fancy font-bold appearance-none bg-whiteborder border-purple-lighter text-black ml-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"  id="major" name="major" value={this.state.major} onChange={this.handleChange} >	
-		        <option value="-1"> Select </option>
+		        <option value=""> Select </option>
                 <option value="BS Aerospace Engineering">Aerospace Engineering</option>
             <option value="BS Biomedical Engineering">Biomedical Engineering</option>
             <option value="BS Bioengineering Engineering">Biomedical Engineering</option>
@@ -217,7 +217,7 @@ class Edit extends Component {
     }
   }
   firebaseApp.firestore().collection('approved').doc('voted').set({voted}).then((returns) =>{
-    alert("Certificate has been updated, you must get your certificiate re-verified");
+    alert("Certificate has been updated, you must get your certificate re-verified");
 })
   this.backTrack();
   }
