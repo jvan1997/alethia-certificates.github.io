@@ -129,8 +129,6 @@ The build is minified and the filenames include the hashes.<br>
 * **Vincent Diep** - *Integration with backend and frontend; Set up Server.*
 * **Jonathan Van** - *Designed and Implemented Frontend*
 
-## Dependencies
-
 ## Acknowledgments
 
 * Dr. Younghee Park
