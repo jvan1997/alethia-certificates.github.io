@@ -77,7 +77,7 @@ The build is minified and the filenames include the hashes.<br>
 ## Authors
 
 * **Jenil Thakker** - *Implemented Ethereum Blockchain into Alethia*
-* **Vincent Diep** - *Integration with backend and frontend; Set up Server.*PurpleBooth)
+* **Vincent Diep** - *Integration with backend and frontend; Set up Server.*
 * **Jonathan Van** - *Designed and Implemented Frontend*
 
 ## Dependencies
