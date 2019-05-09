@@ -13,6 +13,10 @@ Alethia is a platform for blockchain enabled certificates using Ethereum's Rikeb
 7. In your terminal, type `ganache-cli` in one window and run the application on a different window. 
 8. In your terminal, type `testrpc` in one window and run the application on a different window. (Link to download: https://truffleframework.com/docs/ganache/quickstart)
 
+### Video Demo of the application
+
+(Link to Video: https://youtu.be/Bqg9z-r6nUM)
+
 
 ## Running the application
 
@@ -81,10 +85,6 @@ The build is minified and the filenames include the hashes.<br>
     │   ├── verify.js                   # Verify the Certificate onto Ethereum
     │   └── vote.js                     # View one's status and verify other Certificates
     └── ...
-
-### Video Demo of React Components
-
-(Link to Video: https://youtu.be/Bqg9z-r6nUM)
 
 ### React Components
 * Creating a certificate:
