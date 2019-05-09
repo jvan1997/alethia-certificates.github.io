@@ -38,7 +38,7 @@ The build is minified and the filenames include the hashes.<br>
 
 ### Video Demo of React Components
 
-(Link to Video: https://metamask.io/)
+(Link to Video: https://www.youtube.com/watch?v=Bqg9z-r6nUM/)
 
 ### React Components
 * Creating a certificate:
