@@ -11,7 +11,6 @@ const campaignPath = path.resolve(__dirname,'contracts','Certificate.sol');
 const source = fs.readFileSync(campaignPath,'utf8');
 const output = solc.compile(source,1).contracts;
 
-console.log(output);
 fs.ensureDirSync(buildPath);
 for (contract in output) {
   fs.outputJsonSync(

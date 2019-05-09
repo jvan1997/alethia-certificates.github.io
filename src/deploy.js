@@ -16,22 +16,12 @@ const web3 = new Web3(provider);
 
 const deploy = async () => {
 
-  console.log(`web3 is ${util.inspect(web3)}`)
 
-  console.log("Starting to deploy...");
-  console.log(`web3.eth.getAccounts ${web3.eth.getAccounts}`)
-  // web3.eth.getAccounts().then(console.log)
   const accounts = await web3.eth.getAccounts();
-  console.log(`accounts is ${accounts}`)
-
-
-  console.log("Attempting to deploy from account", accounts[0]);
-
 
   const contractInstance = new web3.eth.Contract(JSON.parse(compiledFactory.interface))
 
   let deploy = contractInstance.deploy({ data: '0x' + compiledFactory.bytecode })
-  console.log(deploy)
 
   let promise = new Promise( (resolve, reject)=>{
     let data = {}
@@ -40,16 +30,13 @@ const deploy = async () => {
       reject(error)
     })
     .on('transactionHash', (transactionHash)=>{
-      console.log(`transactionHash is ${transactionHash}`)
       data.transactionHash = transactionHash
       
     })
     .on('confirmation', (confirmationNumber, receipt)=>{
-      console.log(confirmationNumber)
-      console.log(receipt)
+
     })
     .on('receipt', (receipt) =>{
-      console.log(`receipt is ${util.inspect(receipt)}`)
       
       data.receipt = receipt
 
@@ -64,10 +51,8 @@ const deploy = async () => {
 
   returnValues["fromAccount"] = accounts[0]
   returnValues["compiledFactory"] = compiledFactory
-  console.log(returnValues)
 
   let x = await  web3.eth.getTransaction(returnValues.transactionHash)
-  console.log(x)
 
   return returnValues
 

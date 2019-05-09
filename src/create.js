@@ -68,13 +68,9 @@ class Create extends Component {
         }
         this.authSubscription = firebaseApp.auth().onAuthStateChanged((user2) => {
         firebaseApp.firestore().collection('approved').doc('voted').get().then((doc) => {
-            console.log(user2.email);
-            console.log(doc);
           if (doc.exists) {
-                    console.log(doc.data()['voted']);
                     this.setState({voted:doc.data()['voted'], loading:false, currentUser:user2.email});
           } else {
-              console.log("null");
             this.setState({ voted: null });
           }
           
@@ -192,7 +188,6 @@ class Create extends Component {
     }
 
     this.setState({ showProgressBar:true, progressBarPercentage: 0, progressBarPercentageText: "Uploading...", progressBarStatus:'load'})
-    console.log(event)
 
     // Prepare information to be sent to server
     let relevantState
@@ -210,7 +205,6 @@ class Create extends Component {
     }
     else{
         if( this.state.file == undefined){
-            console.log('this state file is undefined')
             relevantState = { 
                 "name": this.state.name,
                 "surname": this.state.surname,
@@ -240,11 +234,8 @@ class Create extends Component {
     var xhr = new XMLHttpRequest()
     // Progress Bar Event Listener
     xhr.upload.addEventListener("progress", e=>{
-        console.log()
         if( e.lengthComputable){
             var percentComplete = Math.round(e.loaded * 100 / e.total)
-            console.log(xhr.getAllResponseHeaders())
-            console.log(xhr)
             this.setState({ progressBarPercentage: percentComplete/2 })
         }
         else{
@@ -257,9 +248,6 @@ class Create extends Component {
     // Handle server response
     xhr.onreadystatechange = function(){
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
-            console.log(xhr.getAllResponseHeaders())
-            console.log(xhr.responseText)
-        console.log("abc")
         delete relevantState.file
 
         self.timeout = setInterval(() => {
@@ -290,7 +278,6 @@ class Create extends Component {
                             clearInterval(self.timeout)
                             self.setState({ progressBarPercentage: 100, progressBarPercentageText:"Done!", progressBarStatus:'done' })
                             let voted = self.state.voted;
-                            console.log(voted);
                                 for (var i=voted.length-1; i>=0; i--) {
                                 if (voted[i] === self.state.currentUser) {
                                     voted.splice(i, 1);
@@ -310,7 +297,6 @@ class Create extends Component {
                 
             },
             err =>{
-                console.log(err)
                 self.setState({ progressBarPercentageText:"Error saving data", progressBarStatus:'error' })
             }
         
@@ -318,9 +304,6 @@ class Create extends Component {
         }
         // Server responds with error status
         if(this.readyState === XMLHttpRequest.DONE && this.status >= 400){
-            console.log(this.response)
-            console.log(this.getAllResponseHeaders())
-            console.log(this.responseText)
             switch(this.status){
                 case 400:
                 alert("No file submitted")
@@ -366,7 +349,6 @@ class Create extends Component {
   handlePDFSubmit(ev){
 
     fileSelect = ev.currentTarget.files
-    console.log(`fileSelect is ${fileSelect}`)
 
     // Handle user clicking x  when in file selection popup
     if( fileSelect.length == 0){

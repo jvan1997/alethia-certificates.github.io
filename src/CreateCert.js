@@ -99,8 +99,6 @@ class CreateCert extends Component{
 
     pdfLibraryLoaded(ev){
         pdfjsLib = window['pdfjs-dist/build/pdf']
-        console.log('pdflibloaded')
-        console.log(pdfjsLib)
     }
 
     /**
@@ -110,58 +108,40 @@ class CreateCert extends Component{
     async getPDFText(data){
         var loadingTask = pdfjsLib.getDocument(data);
         let pdf = await loadingTask.promise
-        console.log(pdf)
 
         let pdfText = ''
 
-        console.log(pdf.numPages)
         for(var i=1;i<=pdf.numPages;i++){
             let page = await pdf.getPage(i)
-            // console.log(page)
             let textContent = await page.getTextContent()
-            // console.log(textContent)
 
             pdfText = textContent.items.reduce( (acc,curr) => acc + curr.str +"\n", pdfText )
-            // for( var j=0; j<textContent.items.length;j++){
-            //     pdfText += textContent.items[j].str + "\n"
-            // }
         }
 
-        // console.log(pdfText)
         
         return pdfText
     }
 
     formSubmit(ev){
 
-        
-        console.log(pdfjsLib)
 
 
         fileSelect = ev.currentTarget.files
         this.setState({file:ev.currentTarget.files[0]},
             ()=>{
-                console.log(fileSelect)
 
 
                 let reader = new FileReader()
 
                 reader.onload = (e)=>{
-                    console.log(e.target.result)
                     let data = e.target.result
-                    console.log(data)
-
-
-
-        
+      
                     
                     
                    this.getPDFText(data)
                    .then( (text) =>{
-                    console.log(`text is ${text}`)
 
                     let strs = text.split("\n")
-                    console.log(strs)
                     let name = ""
                     let major = ""
 
@@ -171,12 +151,10 @@ class CreateCert extends Component{
                     for(var i=0;i<strs.length;i++){
                         if( strs[i].includes(nameToken)){
                             name = strs[i].split(nameToken)[1].trim()
-                            console.log(name)
                             this.setState({name:name})
                         }
                         if( strs[i].includes(majorToken)){
                             major = strs[i].split(majorToken)[1].trim()
-                            console.log(major)
                             this.setState({major:major})
                         }
 
@@ -187,9 +165,6 @@ class CreateCert extends Component{
                     
                 }
                 var file = fileSelect[0]
-                console.log(file)
-        
-                console.log( `state.file is ${this.state.file}`)
                 reader.readAsDataURL(this.state.file)
                 
                 
@@ -199,23 +174,12 @@ class CreateCert extends Component{
 
 
 
-        // open file and print to console
-
-        // var fr = new FileReader()
-        // fr.onload = (e)=> {
-        //     var res = e.target.result
-        //     console.log(res)
-        // }
-
-        // var txt = fr.readAsText(file)
         
     }
 
 
 
     handleChange(event) {
-        console.log("doing stuff");
-        console.log(event.target.value);
         this.setState({
             [event.target.name]:event.target.value
         });
@@ -224,9 +188,7 @@ class CreateCert extends Component{
       handleSubmit(event) {
         event.preventDefault();
         this.count += 1;	
-        console.log("this is count" + this.count);
         alert('Submitted\nName: ' + this.state.name + "\n" + "Units: " + this.state.units );
-        console.log(this.state.name + "where is this");
         
 
         fetch('http://httpbin.org/post',{
@@ -240,22 +202,8 @@ class CreateCert extends Component{
             
         })
         .then(data=>{
-            console.log(data)
-        })
-        // .then( data=>{
-        //     console.log(data)
-        // }
-        // )
 
-        // fetch('http://httpbin.org/get',{
-        //     method: "get",
-        
-        // })
-        // .then( res =>{
-        //     res.json()
-        //     console.log(res)
-        // })
-        
+        })        
     }
 }
 
