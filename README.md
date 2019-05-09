@@ -35,17 +35,16 @@ The build is minified and the filenames include the hashes.<br>
 ## Code Structure
 
 ### React Components
-#### Creating a certificate:
-##### Uploading a certificate:
-    ![](/src/Gifs/Create.gif)
-#### Viewing a certificate:
-  ##### Download:
+* Creating a certificate:
+  * Uploading a certificate:
+  ![](/src/Gifs/Create.gif)
+* Viewing a certificate:
+  * Download:
   ![](/src/Gifs/Download.gif)
   * Edit:
   ![](/src/Gifs/Edit.gif)
   * Vote:
     ![](/src/Gifs/UnverifiedVote.gif)
-
     ![](/src/Gifs/VerifiedVote.gif)
   * Verify:
   ![](/src/Gifs/Verify.gif)
