@@ -84,7 +84,7 @@ The build is minified and the filenames include the hashes.<br>
 
 ### Video Demo of React Components
 
-(Link to Video: https://www.youtube.com/watch?v=Bqg9z-r6nUM/)
+(Link to Video: https://youtu.be/Bqg9z-r6nUM)
 
 ### React Components
 * Creating a certificate:
@@ -120,11 +120,13 @@ The build is minified and the filenames include the hashes.<br>
 + Deploying a certificate:
   ![](/src/Gifs/ganache.gif)
 
-## Built With
+## Dependencies
 
 * [Firebase](https://github.com/firebase/) - Backend and Database storage.
 * [React](https://github.com/facebook/react) - Web Framework to render Alethia.
 * [TailwindCSS](https://github.com/tailwindcss/tailwindcss) - Styling Standard used for the Frontend.
+* [Solidity](https://solidity.readthedocs.io/en/v0.5.3/) - Programming Smart Contracts for Ethereum.
+* [Truffle](https://truffleframework.com/ganache) - Testing the blockchain based certificates.
 
 ## Authors
 
