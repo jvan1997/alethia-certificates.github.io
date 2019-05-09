@@ -39,6 +39,7 @@ The build is minified and the filenames include the hashes.<br>
   * Uploading a certificate:
 * Viewing a certificate:
   * Download:
+  ![](/src/Gifs/Download.gif)
   * Edit:
   * Vote:
   * Verify:
