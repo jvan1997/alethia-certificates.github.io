@@ -84,3 +84,9 @@ The build is minified and the filenames include the hashes.<br>
 
 ## Dependencies
 
+## Acknowledgments
+
+* Dr. Younghee Park
+* The other Advisor
+* Proessor Rod Fatoohi
+
