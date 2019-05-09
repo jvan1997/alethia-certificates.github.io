@@ -36,6 +36,50 @@ The build is minified and the filenames include the hashes.<br>
 
 ## Code Structure
 
+### Top level Alethia File layout
+
+    .
+    ├── node_modules                    # The node module dependencies
+    ├── public                          # Public files of Alethia
+    ├── src                             # Source files of Alethia
+    ├── tailwind.js                     # Tailwind js used to create tailwind.css/index.css
+    ├── package.json                    # List of dependencies
+    ├── server.js                       # Server file for Alethia
+    ├── LICENSE
+    └── README.md
+
+### Alethia src File layout
+
+    .
+    ├── ...
+    ├── src                             
+    │   ├── Backstuff                   # Ethereum related files go in here
+    │   ├── css                         # CSS files go in here
+    │   ├── Gifs                        # Gifs used for README go here
+        └── Images                      # Images used for Alethia go here
+    └── ...
+
+### Important Files in Alethia
+    .
+    ├── ...
+    ├── src                             
+    │   ├── App.js                      # Loads the home page
+    │   ├── bar.js                      # Navigation bar for Alethia
+    │   ├── create.js                   # Create and Upload Certificate
+        ├── edit.js                     # Edit Uploaded Certificate
+        ├── deploy.js                   # Deploy Certificate onto Ethereum
+        ├── firebase.js                 # Set up Firebase information
+        ├── functions.js                # Functions of Firebase
+        ├── index.js                    # Routing for the React pages
+        ├── keys.js                     # Generates the key value pair
+        ├── login.js                    # Login Authenticator Component
+        ├── profile.js                  # Profile Page to Interact with Certificate
+        ├── signUp.js                   # Sign Up the User
+        ├── verify.js                   # Verify the Certificate onto Ethereum
+        └── vote.js                     # View one's status and verify other Certificates
+
+    └── ...
+
 ### Video Demo of React Components
 
 (Link to Video: https://www.youtube.com/watch?v=Bqg9z-r6nUM/)
