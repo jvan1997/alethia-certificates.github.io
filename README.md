@@ -41,8 +41,12 @@ The build is minified and the filenames include the hashes.<br>
   * Download:
   ![](/src/Gifs/Download.gif)
   * Edit:
+  ![](/src/Gifs/Edit.gif)
   * Vote:
+    ![](/src/Gifs/Unverified Vote.gif)
+    ![](/src/Gifs/Verified Vote.gif)
   * Verify:
+  ![](/src/Gifs/Verify.gif)
 * About Alethia
   * Team: Jonathan Van, Jenil Thakker, Vincent Diep
   * How it works: Architecture and design for Alethia
